@@ -1,0 +1,153 @@
+[
+    {
+        "precio": 5500,
+        "off": 25,
+        "id": 1,
+        "title": "Final Fantasy VII",
+        "url": "https://i.pinimg.com/236x/68/f1/03/68f1034b40f599a9d1c975e632621ed8.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 10,
+        "tipo": "juego"
+    },
+    {
+        "precio": 3000,
+        "id": 2,
+        "title": "The Surge 2",
+        "url": "https://i.pinimg.com/236x/d0/d5/7c/d0d57c288997b6cd5f81ee92b53c07e6.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 6,
+        "tipo": "juego"
+    },
+    {
+        "precio": 5500,
+        "id": 3,
+        "title": "Narcos",
+        "url": "https://i.pinimg.com/236x/1b/32/e3/1b32e36591671838ba134dc7cf5153b0.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 23,
+        "tipo": "juego"
+    },
+    {
+        "precio": 4500,
+        "off": 25,
+        "id": 4,
+        "title": "Mad Max",
+        "url": "https://i.pinimg.com/236x/24/3a/c2/243ac2de81804ebd71823f358c152bde.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 33,
+        "tipo": "juego"
+    },
+    {
+        "precio": 8450,
+        "id": 5,
+        "title": "Last of Us",
+        "url": "https://i.pinimg.com/236x/71/2f/75/712f750f783b98bcd600243b74ad08d8--ps-games.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 1,
+        "tipo": "juego"
+    },
+    {
+        "precio": 4450,
+        "id": 6,
+        "title": "Street Fighter V",
+        "url": "https://i.pinimg.com/236x/b1/23/07/b12307f968ddc6c06f1cc06e1ebf6d73.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 11,
+        "tipo": "juego"
+    },
+    {
+        "precio": 6500,
+        "off": 15,
+        "id": 7,
+        "title": "Crysys HD",
+        "url": "https://i.pinimg.com/236x/84/5c/de/845cde142301e991ef4a409b11439a91.jpg",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 7,
+        "tipo": "juego"
+    },
+    {
+        "precio": 65000,
+        "off": 10,
+        "id": 8,
+        "title": "Silla Gamer Micro Bell y240",
+        "url": "https://castillo.com.ar/Image/0/500_500-501023041-1.jpg",
+        "descripcion": "Sillas gamer simil cuero premium",
+        "cantidad": 1,
+        "tipo": "silla"
+    },
+    {
+        "precio": 73000,
+        "id": 9,
+        "title": "Silla Gamer Micro Bell h200",
+        "url": "https://http2.mlstatic.com/D_NQ_NP_694084-MLA49772986453_042022-O.jpg",
+        "descripcion": "Sillas gamer simil cuero premium",
+        "cantidad": 4,
+        "tipo": "silla"
+    },
+    {
+        "precio": 89000,
+        "id": 10,
+        "title": "Silla Gamer Coller Master R1",
+        "url": "https://mla-s1-p.mlstatic.com/703039-MLA46950429424_082021-F.jpg",
+        "descripcion": "Sillas gamer simil cuero premium",
+        "cantidad": 8,
+        "tipo": "silla"
+    },
+    {
+        "precio": 55000,
+        "off": 10,
+        "id": 11,
+        "title": "Silla Gamer Creation RF-808",
+        "url": "https://d2r9epyceweg5n.cloudfront.net/stores/001/381/842/products/silla-gamer-creation1-b8cdb6ee1a251cd15b16636922147683-480-0.jpg",
+        "descripcion": "Sillas gamer simil cuero premium",
+        "cantidad": 1,
+        "tipo": "silla"
+    },
+    {
+        "precio": 175000,
+        "id": 12,
+        "title": "Pc Gamer",
+        "url": "https://http2.mlstatic.com/D_NQ_NP_837843-MLA53084471094_122022-W.jpg",
+        "descripcion": "i7 rtx 2060 6gb 512ssd",
+        "cantidad": 17,
+        "tipo": "computadora"
+    },
+    {
+        "precio": 150000,
+        "id": 13,
+        "title": "Pc Gamer",
+        "url": "https://s3-sa-east-1.amazonaws.com/saasargentina/GRxegTQIYfWR6jQBazrk/imagen",
+        "descripcion": "Ryzen 5 8gb RX 6700 10gb",
+        "cantidad": 7,
+        "tipo": "computadora"
+    },
+    {
+        "precio": 250000,
+        "off": 25,
+        "id": 14,
+        "title": "Notebook Gamer MSI",
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSViQtA9z2StiCsTmZDzpwx6VF7etyDD9DOsCtVbAakmwmIDy6QDuHNswffz0c8o9ere8&usqp=CAU",
+        "descripcion": "i7 rtx 2070 16gb 512 nvme",
+        "cantidad": 1,
+        "tipo": "computadora"
+    },
+    {
+        "precio": 190000,
+        "id": 15,
+        "title": "Notebook Gamer HP",
+        "url": "https://images.fravega.com/f300/a5576d802f4ab81ad4040e535689ce6c.jpg.webp",
+        "descripcion": "i5 rtx 2060 8gb 512 nvme",
+        "cantidad": 9,
+        "tipo": "computadora"
+    },
+    {
+        "precio": 190000,
+        "off": 10,
+        "id": 16,
+        "title": "Notebook Gamer Asus",
+        "url": "https://images.fravega.com/f300/d2376aeac8b69917957c5dba44f16131.jpg",
+        "descripcion": "i7 Gtx 1070 8gb 1tb",
+        "cantidad": 16,
+        "tipo": "computadora"
+    }
+]
