@@ -1,4 +1,4 @@
-import { IoSearchCircle } from "react-icons/io5";
+import { FcSearch } from "react-icons/fc";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 import { Link } from "react-router-dom";
@@ -24,21 +24,21 @@ const Navbar = () => {
     };
 
     return (
-        <div className="flex flex-row items-center justify-around">
+        <div className="flex flex-row items-center justify-around md:justify-around">
             <div className="w-24 h-24">
                 <Link to="/">
                     <img className="w-full h-full" src={xtremeLogo} alt="" />
                 </Link>
             </div>
-            <form className="relative mb-1">
+            <form className="relative mb-1 md:w-80 md:order-2 md:h-auto">
                 <input
-                    className="p-[3px] rounded-sm outline-none text-base"
+                    className="p-[3px] rounded-sm outline-none text-base md:w-full md:h-8"
                     type="text"
                     name="search"
                     placeholder="que estas buscando?"
                 />
-                <button>
-                    <IoSearchCircle className="text-colorMain text-3xl bg-white rounded-full absolute top-0 right-0" />
+                <button className="">
+                    <FcSearch className="text-colorMain text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
                 </button>
             </form>
             <button
@@ -48,7 +48,7 @@ const Navbar = () => {
                 <BurguerIcon openNavbar={openNavbar} />
             </button>
 
-            {/* MENU DESPLEGABLE */}
+            {/* ***** MENU DESPLEGABLE ******/}
             <div
                 className={`${
                     openNavbar
@@ -132,6 +132,101 @@ const Navbar = () => {
                         </li>
                     </Link>
                 </ul>
+            </div>
+
+            {/* *****MENU DESKTOP ***** */}
+
+            <ul
+                className={`hidden md:flex flex-row text-left gap-1 text-base text-white w-auto items-center `}
+            >
+                <Link to="/" onClick={handleClosenavbar}>
+                    <li className=" rounded-sm p-2 text-colorAgua">HOME</li>
+                </Link>
+
+                <ul
+                    onMouseEnter={() => setOpenProducts(true)}
+                    onMouseOut={() => setOpenProducts(false)}
+                    className="bg-colorOscuro overflow-hidden h-full bg-opacity-0 bg-clip-padding relative "
+                >
+                    <div
+                        onMouseEnter={() => setOpenProducts(true)}
+                        onMouseOut={() => setOpenProducts(false)}
+                        // onClick={handleOpenProducts}
+                        className="flex flex-row items-center hover:cursor-pointer"
+                    >
+                        <li
+                            onMouseEnter={() => setOpenProducts(true)}
+                            onMouseOut={() => setOpenProducts(false)}
+                            className={`${
+                                openProducts && "bg-colorCalido "
+                            } rounded-sm p-2 transition-all duration-300 `}
+                        >
+                            Productos
+                        </li>
+                        {/* <MdKeyboardArrowRight
+                            className={`${
+                                openProducts && "rotate-90 text-colorAgua"
+                            } text-3xl transition-all duration-300`}
+                        /> */}
+                    </div>
+                    <div
+                        onMouseEnter={() => setOpenProducts(true)}
+                        onMouseOut={() => setOpenProducts(false)}
+                        className={`${
+                            openProducts
+                                ? "max-h-full w-44  overflow-scroll"
+                                : "max-h-0 w-0 overflow-hidden "
+                        } transition-all fixed top-24 bg-colorOscuro/80  duration-500 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
+                    >
+                        <Link to="/productos/nieve">
+                            <li
+                                onMouseEnter={() => setOpenProducts(true)}
+                                onMouseOut={() => setOpenProducts(false)}
+                                className="bg-colorOscuro text-base hover:bg-colorCalido rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                onClick={handleClosenavbar}
+                            >
+                                Nieve
+                            </li>
+                        </Link>
+
+                        <Link to="/productos/montaña">
+                            <li
+                                onMouseEnter={() => setOpenProducts(true)}
+                                onMouseOut={() => setOpenProducts(false)}
+                                className="bg-colorOscuro hover:bg-colorCalido text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                onClick={handleClosenavbar}
+                            >
+                                Montaña
+                            </li>
+                        </Link>
+
+                        <Link to="/productos/acuaticos">
+                            <li
+                                onMouseEnter={() => setOpenProducts(true)}
+                                onMouseOut={() => setOpenProducts(false)}
+                                className="bg-colorOscuro hover:bg-colorCalido text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                onClick={handleClosenavbar}
+                            >
+                                Agua
+                            </li>
+                        </Link>
+                    </div>
+                </ul>
+
+                <Link to="/carrito" onClick={handleClosenavbar}>
+                    <li className="hover:bg-orangeMain rounded-sm p-2">
+                        Carrito
+                    </li>
+                </Link>
+            </ul>
+            <div
+                className="hidden md:block order-2"
+                to="/login"
+                onClick={handleClosenavbar}
+            >
+                <button className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3">
+                    Iniciar sesion
+                </button>
             </div>
         </div>
     );
