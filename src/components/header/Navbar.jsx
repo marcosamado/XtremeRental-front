@@ -1,0 +1,140 @@
+import { IoSearchCircle } from "react-icons/io5";
+import { MdKeyboardArrowRight } from "react-icons/md";
+
+import { Link } from "react-router-dom";
+import BurguerIcon from "./BurguerIcon";
+import xtremeLogo from "../../images/xtremeLogo.png";
+import { useState } from "react";
+
+const Navbar = () => {
+    const [openNavbar, setOpenNavbar] = useState(false);
+    const [openProducts, setOpenProducts] = useState(false);
+
+    const handleOpenNavbar = () => {
+        setOpenNavbar(!openNavbar);
+    };
+    const handleClosenavbar = (e) => {
+        setOpenNavbar(false);
+        setOpenProducts(false);
+        console.log(e.target);
+    };
+
+    const handleOpenProducts = () => {
+        setOpenProducts(!openProducts);
+    };
+
+    return (
+        <div className="flex flex-row items-center justify-around">
+            <div className="w-24 h-24">
+                <Link to="/">
+                    <img className="w-full h-full" src={xtremeLogo} alt="" />
+                </Link>
+            </div>
+            <form className="relative mb-1">
+                <input
+                    className="p-[3px] rounded-sm outline-none text-base"
+                    type="text"
+                    name="search"
+                    placeholder="que estas buscando?"
+                />
+                <button>
+                    <IoSearchCircle className="text-colorMain text-3xl bg-white rounded-full absolute top-0 right-0" />
+                </button>
+            </form>
+            <button
+                onClick={handleOpenNavbar}
+                className="flex flex-col md:hidden"
+            >
+                <BurguerIcon openNavbar={openNavbar} />
+            </button>
+
+            {/* MENU DESPLEGABLE */}
+            <div
+                className={`${
+                    openNavbar
+                        ? "max-h-full overflow-scroll py-5"
+                        : "max-h-0 overflow-hidden py-0"
+                } bg-colorOscuro/80 min-w-full fixed right-0 top-24 transition-all duration-500 md:hidden px-3 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
+            >
+                <div className={` flex flex-col gap-2 `}>
+                    <div to="/login" onClick={handleClosenavbar}>
+                        <button className="text-white border w-full rounded-md text-xl py-1 bg-colorCalido border-colorCalido">
+                            Iniciar sesion
+                        </button>
+                    </div>
+                    <div to="/registro" onClick={handleClosenavbar}>
+                        <button className="text-white border w-full rounded-md text-xl py-1">
+                            Registrarse
+                        </button>
+                    </div>
+                </div>
+                <ul
+                    className={`flex flex-col text-left gap-1 text-xl text-white mt-5`}
+                >
+                    <Link to="/" onClick={handleClosenavbar}>
+                        <li className=" rounded-sm p-2 ">HOME</li>
+                    </Link>
+
+                    <ul className="bg-colorOscuro overflow-hidden w-full h-full bg-opacity-0 bg-clip-padding">
+                        <div
+                            onClick={handleOpenProducts}
+                            className="flex flex-row justify-between items-center"
+                        >
+                            <li
+                                className={`${
+                                    openProducts && "text-colorAgua "
+                                } rounded-sm p-2 transition-all duration-300`}
+                            >
+                                Productos
+                            </li>
+                            <MdKeyboardArrowRight
+                                className={`${
+                                    openProducts && "rotate-90 text-colorAgua"
+                                } text-3xl transition-all duration-300`}
+                            />
+                        </div>
+                        <div
+                            className={`${
+                                openProducts ? "h-32 py-1" : "h-0 py-0"
+                            }  transition-all duration-300`}
+                        >
+                            <Link to="/productos/nieve">
+                                <li
+                                    className="bg-colorOscuro text-base hover:bg-orangeMain rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                    onClick={handleClosenavbar}
+                                >
+                                    Nieve
+                                </li>
+                            </Link>
+
+                            <Link to="/productos/montaña">
+                                <li
+                                    className="bg-colorOscuro hover:bg-orangeMain text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                    onClick={handleClosenavbar}
+                                >
+                                    Montaña
+                                </li>
+                            </Link>
+
+                            <Link to="/productos/acuaticos">
+                                <li
+                                    className="bg-colorOscuro hover:bg-orangeMain text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
+                                    onClick={handleClosenavbar}
+                                >
+                                    Agua
+                                </li>
+                            </Link>
+                        </div>
+                    </ul>
+                    <Link to="/carrito" onClick={handleClosenavbar}>
+                        <li className="hover:bg-orangeMain rounded-sm p-2">
+                            Carrito
+                        </li>
+                    </Link>
+                </ul>
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;
