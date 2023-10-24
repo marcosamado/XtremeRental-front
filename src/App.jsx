@@ -3,7 +3,7 @@ import { AiOutlineAliwangwang } from "react-icons/ai";
 
 const App = () => {
     return (
-        <div className="container ml-auto mr-auto flex flex-row justify-around flex-wrap  sm:flex-col gap-10 p-10 items-center bg-slate-200">
+        <div className="container ml-auto mr-auto flex flex-row justify-around flex-wrap sm:flex-col gap-10 p-10 items-center bg-slate-200">
             {/* Y SE IMPLEMENTA COMO UN COMPONENTE  */}
 
             <AiOutlineAliwangwang className="text-9xl text-blue-900 shadow-lg shadow-slate-700 rounded-full p-7 bg-white" />
