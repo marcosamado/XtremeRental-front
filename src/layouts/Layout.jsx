@@ -1,23 +1,23 @@
-import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import { Outlet } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Navbar from '../components/header/Navbar';
 
 const Layout = () => {
-    return (
-        <div>
-            <div>
-                <Header />
-            </div>
+  return (
+    <div>
+      <header className="h-24 bg-colorOscuro overflow-visible sticky top-0 z-50">
+        <Navbar />
+      </header>
 
-            <main>
-                <Outlet />
-            </main>
+      <main className=" min-h-screen">
+        <Outlet />
+      </main>
 
-            <footer>
-                <Footer />
-            </footer>
-        </div>
-    );
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  );
 };
 
 export default Layout;
