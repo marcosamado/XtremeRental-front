@@ -3,64 +3,64 @@
         "precio": 5500,
         "off": 25,
         "id": 1,
-        "title": "foto1",
+        "title": "Tabla ski Fischer Ranger",
         "url": "https://cdn.create.vista.com/api/media/small/166572454/stock-photo-skier-skiing-downhill-in-high-mountains",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 10,
-        "tipo": "juego"
+        "tipo": "nieve"
     },
     {
         "precio": 3000,
         "id": 2,
-        "title": "foto2",
+        "title": "Botas ski Fischer RC one",
         "url": "https://img.freepik.com/fotos-premium/climber-sube-montana-hermoso-paisaje-concepto-estilo-vida-activo-ai-generativa_888418-2107.jpg?w=1380",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 6,
-        "tipo": "juego"
+        "tipo": "nieve"
     },
     {
         "precio": 5500,
         "id": 3,
-        "title": "foto3",
+        "title": "Bastones Alaska Z Speed Trail Aluminio Plegable",
         "url": "https://www.sentirsebella.cl/wp-content/uploads/2017/05/nieve.jpg",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 23,
-        "tipo": "juego"
+        "tipo": "montaña"
     },
     {
         "precio": 5500,
         "id": 4,
-        "title": "foto4",
+        "title": "Mochila Deuter Aircontact Core 60+10 Unisex",
         "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 23,
-        "tipo": "juego"
+        "tipo": "montaña"
     },
     {
         "precio": 5500,
         "id": 5,
-        "title": "foto4",
+        "title": "Traje neoprene salomon x25",
         "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 23,
-        "tipo": "juego"
+        "tipo": "agua"
     },
     {
         "precio": 5500,
         "id": 6,
-        "title": "foto4",
+        "title": "Tabal surf Rip Curl",
         "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 23,
-        "tipo": "juego"
+        "tipo": "agua"
     },
     {
         "precio": 5500,
         "id": 7,
-        "title": "foto4",
+        "title": "Short de baño Rusty",
         "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
         "descripcion": "Juegos de Playstation 4",
-        "cantidad": 23,
-        "tipo": "juego"
+        "cantidad": 0,
+        "tipo": "agua"
     }
 ]

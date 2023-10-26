@@ -18,12 +18,22 @@ export const ProductCard = ({
 
     return (
         // <Link to={`${id}`}>
-        <div className="border-b p-5 flex flex-row gap-8 items-center">
-            <img className="w-24 h-24 md:w-32 md:h-32" src={url} alt={title} />
-            <div className="flex flex-col px-3 gap-2">
-                <h2 className=" text-base font-light ">{title}</h2>
-                <div>
-                    <select onChange={handleValue} name="select">
+        <div className="border-b p-2 flex flex-row gap-8 items-center ">
+            <div className="w-40 h-24 sm:h-28 md:w-80 md:h-40">
+                <Link>
+                    <img className="w-full h-full " src={url} alt={title} />
+                </Link>
+            </div>
+            <div className="flex flex-col px-3 gap-2 w-80 md:w-full">
+                <h2 className=" text-sm font-light md:text-lg">
+                    <Link to="">{title}</Link>
+                </h2>
+                <div className="flex flex-row items-center justify-normal gap-3">
+                    <select
+                        className="border border-gray-500 outline-none rounded-sm"
+                        onChange={handleValue}
+                        name="select"
+                    >
                         <option defaultValue={1} value={1}>
                             1 Día
                         </option>
@@ -33,11 +43,14 @@ export const ProductCard = ({
                         <option value={5}>5 Días</option>
                         <option value={6}>6 Días</option>
                     </select>
-                    <p>{nuevoPrecio}</p>
-                    <button className="w-auto h-auto bg-colorCalido text-white p-2 rounded-md">
-                        Reservar
-                    </button>
+                    <div>
+                        <span>$ </span>
+                        <span>{nuevoPrecio}</span>
+                    </div>
                 </div>
+                <button className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md">
+                    Reservar
+                </button>
             </div>
         </div>
         // </Link>

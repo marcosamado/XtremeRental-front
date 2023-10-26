@@ -10,7 +10,7 @@ const ProductsMountainPage = () => {
 
     return (
         <div className="w-full p-5 bg-gray-300 ">
-            <section className="container mr-auto ml-auto max-w-full rounded-sm bg-white">
+            <section className="container mr-auto ml-auto max-w-3xl rounded-sm bg-white">
                 {data.map((product) => (
                     <ProductCard key={product.id} {...product} />
                 ))}
