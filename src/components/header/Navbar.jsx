@@ -3,7 +3,7 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
-import xtremeLogo from '../../images/xtremeLogo.png';
+import xtremeLogo from '/logo.png';
 import { useState } from 'react';
 
 const Navbar = () => {
