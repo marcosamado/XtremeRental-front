@@ -1,9 +1,9 @@
-import React from "react";
-import Carrusel from "../components/Home/Carrusel";
+import React from 'react';
+import Carrusel from '../components/Home/Carrusel';
 
 const HomePage = () => {
     return (
-        <div className=""> 
+        <div className="">
             <section className="ml-12 mr-12">
                 <h2 className="font-bold text-colorCalido text-center text-xl mb-5 mt-5 ">
                     CATEGORIAS
@@ -29,13 +29,6 @@ const HomePage = () => {
 
             <h2 className="font-bold text-colorCalido text-center text-xl mt-6 mb-6">
                 PRODUCTOS DESTACADOS
-            </h2>
-            <section className="mb-8">
-                <Carrusel></Carrusel>
-            </section>
-
-            <h2 className="font-bold text-colorCalido text-center text-xl mt-6 mb-6">
-                OFERTAS
             </h2>
             <section className="mb-8">
                 <Carrusel></Carrusel>
