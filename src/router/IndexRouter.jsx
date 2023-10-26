@@ -1,18 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
-import Layout from "../layouts/Layout";
+import Layout from '../layouts/Layout';
 
-import HomePage from "../pages/HomePage";
-import ProductsSnowPage from "../pages/ProductsSnowPage";
-import ProductsWaterPage from "../pages/ProductsWaterPage";
-import ProductsMountainPage from "../pages/ProductsMountainPage";
-import ProductDetailPage from "../pages/ProductDetailPage";
-import AdminPage from "../pages/AdminPage";
-import CartPage from "../pages/CartPage";
+import HomePage from '../pages/HomePage';
+import ProductsSnowPage from '../pages/ProductsSnowPage';
+import ProductsWaterPage from '../pages/ProductsWaterPage';
+import ProductsMountainPage, {
+    getProducts,
+} from '../pages/ProductsMountainPage';
+import ProductDetailPage from '../pages/ProductDetailPage';
+import AdminPage from '../pages/AdminPage';
+import CartPage from '../pages/CartPage';
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/',
         element: <Layout />,
         children: [
             {
@@ -20,32 +22,33 @@ export const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "/productos",
+                path: '/productos',
                 children: [
                     {
-                        path: "nieve",
+                        path: 'nieve',
                         element: <ProductsSnowPage />,
                     },
                     {
-                        path: "acuaticos",
+                        path: 'acuaticos',
                         element: <ProductsWaterPage />,
                     },
                     {
-                        path: "montaña",
+                        path: 'montaña',
                         element: <ProductsMountainPage />,
+                        loader: getProducts,
                     },
                     {
-                        path: ":id",
+                        path: ':id',
                         element: <ProductDetailPage />,
                     },
                 ],
             },
             {
-                path: "/administrador",
+                path: '/administrador',
                 element: <AdminPage />,
             },
             {
-                path: "/carrito",
+                path: '/carrito',
                 element: <CartPage />,
             },
         ],

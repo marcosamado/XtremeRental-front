@@ -29,12 +29,38 @@
     },
     {
         "precio": 5500,
-        "id": 3,
+        "id": 4,
+        "title": "foto4",
+        "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 23,
+        "tipo": "juego"
+    },
+    {
+        "precio": 5500,
+        "id": 5,
+        "title": "foto4",
+        "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 23,
+        "tipo": "juego"
+    },
+    {
+        "precio": 5500,
+        "id": 6,
+        "title": "foto4",
+        "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
+        "descripcion": "Juegos de Playstation 4",
+        "cantidad": 23,
+        "tipo": "juego"
+    },
+    {
+        "precio": 5500,
+        "id": 7,
         "title": "foto4",
         "url": "https://img.freepik.com/foto-gratis/hermoso-dia-invierno_181624-28871.jpg?t=st=1698021866~exp=1698022466~hmac=2f5f1262b0383753d19ff09a82d5302266652013d558fd617327e96656d01cfd",
         "descripcion": "Juegos de Playstation 4",
         "cantidad": 23,
         "tipo": "juego"
     }
-    
 ]
