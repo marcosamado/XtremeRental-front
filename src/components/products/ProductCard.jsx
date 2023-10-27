@@ -17,16 +17,15 @@ export const ProductCard = ({
     };
 
     return (
-        <Link to={`${id}`}>
         <div className="border-b p-2 flex flex-row gap-8 items-center ">
             <div className="w-40 h-24 sm:h-28 md:w-80 md:h-40">
-                <Link>
+                <Link to={`${id}`}>
                     <img className="w-full h-full " src={url} alt={title} />
                 </Link>
             </div>
             <div className="flex flex-col px-3 gap-2 w-80 md:w-full">
                 <h2 className=" text-sm font-light md:text-lg">
-                    <Link to="">{title}</Link>
+                    <Link to={`${id}`}>{title}</Link>
                 </h2>
                 <div className="flex flex-row items-center justify-normal gap-3">
                     <select
@@ -53,6 +52,5 @@ export const ProductCard = ({
                 </button>
             </div>
         </div>
-        </Link>
     );
 };

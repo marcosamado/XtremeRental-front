@@ -33,14 +33,14 @@ export const router = createBrowserRouter([
                         element: <ProductsWaterPage />,
                     },
                     {
-                        path: 'montana',
+                        path: 'montaña',
                         element: <ProductsMountainPage />,
                         loader: getProducts,
                     },
                     {
-                        path: ':id',
+                        path: 'montaña/:id',
                         element: <ItemDetailPage />,
-                        loader: getProducts
+                        loader: getProducts,
                     },
                 ],
             },
