@@ -5,7 +5,7 @@ const HomePage = () => {
     return (
         <div className="bg-gradient-to-b from-red-100 to-sky-100"> 
 
-        <section className='mx-72 p-5'>
+        <section className='lg:mx-72 p-5'>
         <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
         <div className="h-44 w-full  md:flex">
             <div className="bg-[url('https://imagenes.elpais.com/resizer/r6ELDzucn7tMT9H9pkABv2TZWrA=/1960x1103/filters:focal(671x333:681x343)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SRYQACBQBBCO7ADQSE3A3GUSBI.jpg')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
