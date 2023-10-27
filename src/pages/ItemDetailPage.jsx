@@ -24,7 +24,7 @@ export const ItemDetailPage = () => {
     return (
         <>
             <div className="bg-white flex flex-col max-w-4xl mx-auto">
-                <div className="flex flex-row">
+                <div className="flex flex-row max-w-5xl border-2 rounded-md mt-4">
                     <ProductPictures
                         data={data[idProduct]}
                         setCurrentPicture={setCurrentPicture}
@@ -41,16 +41,21 @@ export const ItemDetailPage = () => {
                     </div>
                     <div className="flex-2">
                         <div className="border-2 p-5 m-4 rounded-md flex flex-col gap-3">
-                            <h2>{title}</h2>
-                            <p>{precio}</p>
+                            <h2 className="text-xl">{title}</h2>
+                            <p className="text-xl">${precio}</p>
                             {cantidad > 1 && <p>Cantidad: {cantidad}</p>}
-                            <button>Reservar</button>
-                            <button>Agregar al carrito</button>
+                            <button className="w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
+                                Reservar
+                            </button>
+                            <button className="w-28 h-8 bg-sky-500 text-xs text-white px-2 py-1 rounded-md">
+                                Agregar al carrito
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h3>{descripcion}</h3>
+                    <h3 className=" text-xl mb-4">Descripcion del producto:</h3>
+                    <h3 className=" text-xl">{descripcion}</h3>
                 </div>
             </div>
         </>
