@@ -1,4 +1,4 @@
-import { FcSearch } from 'react-icons/fc';
+import { BiSearch } from 'react-icons/bi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
@@ -36,13 +36,14 @@ const Navbar = () => {
             </div>
             <form className="relative mb-1 md:w-80 md:order-2 md:h-auto">
                 <input
-                    className="p-[3px] rounded-sm outline-none text-base md:w-full md:h-8"
+                    className="p-[5px] rounded-sm outline-none text-sm md:w-full md:h-8"
                     type="text"
                     name="search"
-                    placeholder="¿Que estas buscando?"
+                    placeholder="¿Que buscas?"
+                    maxLength={15}
                 />
                 <button className="">
-                    <FcSearch className="text-colorMain text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
+                    <BiSearch className="text-gray-400 w-8 text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
                 </button>
             </form>
             <button
@@ -66,11 +67,6 @@ const Navbar = () => {
                             Iniciar sesion
                         </button>
                     </div>
-                    {/* <div to="/registro" onClick={handleClosenavbar}>
-                        <button className="text-white border w-full rounded-md text-xl py-1">
-                            Registrarse
-                        </button>
-                    </div> */}
                 </div>
                 <ul
                     className={`flex flex-col text-left gap-1 text-xl text-white mt-5`}

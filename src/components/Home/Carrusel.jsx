@@ -101,6 +101,14 @@ const Carrusel = () => {
                     spaceBetween: 30,
                 },
                 1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1300: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+                1600: {
                     slidesPerView: 5,
                     spaceBetween: 30,
                 },
