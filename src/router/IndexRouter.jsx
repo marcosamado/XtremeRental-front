@@ -8,7 +8,7 @@ import ProductsWaterPage from '../pages/ProductsWaterPage';
 import ProductsMountainPage, {
     getProducts,
 } from '../pages/ProductsMountainPage';
-import ProductDetailPage from '../pages/ProductDetailPage';
+import { ItemDetailPage } from '../pages/ItemDetailPage';
 import AdminPage from '../pages/AdminPage';
 import CartPage from '../pages/CartPage';
 
@@ -33,13 +33,14 @@ export const router = createBrowserRouter([
                         element: <ProductsWaterPage />,
                     },
                     {
-                        path: 'montaña',
+                        path: 'montana',
                         element: <ProductsMountainPage />,
                         loader: getProducts,
                     },
                     {
                         path: ':id',
-                        element: <ProductDetailPage />,
+                        element: <ItemDetailPage />,
+                        loader: getProducts
                     },
                 ],
             },

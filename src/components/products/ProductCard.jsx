@@ -17,7 +17,7 @@ export const ProductCard = ({
     };
 
     return (
-        // <Link to={`${id}`}>
+        <Link to={`${id}`}>
         <div className="border-b p-2 flex flex-row gap-8 items-center ">
             <div className="w-40 h-24 sm:h-28 md:w-80 md:h-40">
                 <Link>
@@ -53,6 +53,6 @@ export const ProductCard = ({
                 </button>
             </div>
         </div>
-        // </Link>
+        </Link>
     );
 };

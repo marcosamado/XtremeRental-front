@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import { ProductCard } from '../components/products/ProductCard';
 
 const ProductsMountainPage = () => {
