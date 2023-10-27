@@ -3,11 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../layouts/Layout';
 
 import HomePage from '../pages/HomePage';
-import ProductsSnowPage from '../pages/ProductsSnowPage';
-import ProductsWaterPage from '../pages/ProductsWaterPage';
-import ProductsMountainPage, {
-    getProducts,
-} from '../pages/ProductsMountainPage';
+import ProductsPage, { getProducts } from '../pages/ProductsPage';
 import { ItemDetailPage } from '../pages/ItemDetailPage';
 import AdminPage from '../pages/AdminPage';
 import CartPage from '../pages/CartPage';
@@ -25,20 +21,12 @@ export const router = createBrowserRouter([
                 path: '/productos',
                 children: [
                     {
-                        path: 'nieve',
-                        element: <ProductsSnowPage />,
-                    },
-                    {
-                        path: 'acuaticos',
-                        element: <ProductsWaterPage />,
-                    },
-                    {
-                        path: 'montaña',
-                        element: <ProductsMountainPage />,
+                        path: '',
+                        element: <ProductsPage />,
                         loader: getProducts,
                     },
                     {
-                        path: 'montaña/:id',
+                        path: ':id',
                         element: <ItemDetailPage />,
                         loader: getProducts,
                     },

@@ -1,7 +1,7 @@
 import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import { ProductCard } from '../components/products/ProductCard';
 
-const ProductsMountainPage = () => {
+const ProductsPage = () => {
     const { data } = useLoaderData();
     const navigation = useNavigation();
     console.log(navigation.state);
@@ -33,4 +33,4 @@ export const getProducts = async () => {
     return { data };
 };
 
-export default ProductsMountainPage;
+export default ProductsPage;

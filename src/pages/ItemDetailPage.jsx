@@ -9,7 +9,6 @@ export const ItemDetailPage = () => {
     const { data } = useLoaderData();
 
     const navigation = useNavigation();
-    console.log(navigation.state);
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
@@ -60,7 +59,6 @@ export const ItemDetailPage = () => {
 
 export const getProducts = async () => {
     const res = await fetch('../src/fakeApi/apiProductos.json');
-
     if (!res.ok)
         throw {
             status: res.status,

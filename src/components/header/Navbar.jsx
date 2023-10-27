@@ -98,7 +98,7 @@ const Navbar = () => {
                                 openProducts ? 'h-32 py-1' : 'h-0 py-0'
                             }  transition-all duration-300`}
                         >
-                            <Link to="/productos/nieve">
+                            <Link to="/productos?tipo=nieve">
                                 <li
                                     className="bg-colorOscuro text-base hover:bg-orangeMain rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
                                     onClick={handleClosenavbar}
@@ -107,7 +107,7 @@ const Navbar = () => {
                                 </li>
                             </Link>
 
-                            <Link to="/productos/montaña">
+                            <Link to="/productos?tipo=montaña">
                                 <li
                                     className="bg-colorOscuro hover:bg-orangeMain text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
                                     onClick={handleClosenavbar}
@@ -116,7 +116,7 @@ const Navbar = () => {
                                 </li>
                             </Link>
 
-                            <Link to="/productos/acuaticos">
+                            <Link to="/productos?tipo=acuaticos">
                                 <li
                                     className="bg-colorOscuro hover:bg-orangeMain text-base rounded-sm py-2 indent-3 bg-opacity-10 bg-clip-padding border-b border-r border-colorAgua"
                                     onClick={handleClosenavbar}
@@ -178,7 +178,7 @@ const Navbar = () => {
                                 : 'max-h-0 w-0 overflow-hidden '
                         } transition-all fixed top-24 bg-colorOscuro/80  duration-500 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
                     >
-                        <Link to="/productos/nieve">
+                        <Link to="/productos?tipo=nieve">
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
@@ -189,7 +189,7 @@ const Navbar = () => {
                             </li>
                         </Link>
 
-                        <Link to="/productos/montaña">
+                        <Link to="/productos?tipo=montaña">
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
@@ -200,7 +200,7 @@ const Navbar = () => {
                             </li>
                         </Link>
 
-                        <Link to="/productos/acuaticos">
+                        <Link to="/productos?tipo=acuaticos">
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
