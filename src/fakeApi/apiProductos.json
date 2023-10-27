@@ -3,20 +3,60 @@
         "precio": 5500,
         "off": 25,
         "id": 1,
-        "title": "Tabla ski Fischer Ranger",
-        "url": "https://cdn.create.vista.com/api/media/small/166572454/stock-photo-skier-skiing-downhill-in-high-mountains",
-        "descripcion": "Juegos de Playstation 4",
+        "title": "Tabla ski Fischer RC one green",
+        "url": "https://universoventura.vteximg.com.br/arquivos/ids/183219-500-500/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419.jpg?v=637297590970200000",
+        "descripcion": "Tabla de ski Ficher RC one color verde, ideal para principiantes del deporte",
         "cantidad": 10,
-        "tipo": "nieve"
+        "tipo": "nieve",
+        "images": [
+            {
+                "id": 1,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/183219-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419.jpg?v=637297590970200000"
+            },
+            {
+                "id": 2,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/183220-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-2.jpg?v=637297591064400000"
+            },
+            {
+                "id": 3,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/183221-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-3.jpg?v=637297591143500000"
+            },
+            {
+                "id": 4,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/183222-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-4.jpg?v=637297591226930000"
+            }
+        ]
     },
     {
         "precio": 3000,
         "id": 2,
-        "title": "Botas ski Fischer RC one",
-        "url": "https://img.freepik.com/fotos-premium/climber-sube-montana-hermoso-paisaje-concepto-estilo-vida-activo-ai-generativa_888418-2107.jpg?w=1380",
-        "descripcion": "Juegos de Playstation 4",
+        "title": "Antiparras Electric Kleveland II",
+        "url": "https://universoventura.vteximg.com.br/arquivos/ids/202753-500-500/Antiparras-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Moss-Auburn-Gold---Low-Light-EG3122300.jpg?v=638179455945730000",
+        "descripcion": "Antiparras Electric Kleveland Tornasoladas",
         "cantidad": 6,
-        "tipo": "nieve"
+        "tipo": "nieve",
+        "images": [
+            {
+                "id": 1,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/202753-600-600/Antiparras-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Moss-Auburn-Gold---Low-Light-EG3122300.jpg?v=638179455945730000"
+            },
+            {
+                "id": 2,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/202754-600-600/Antiparras-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Moss-Auburn-Gold---Low-Light-EG3122300-1.jpg?v=638179456008800000"
+            },
+            {
+                "id": 3,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/202755-600-600/Antiparras-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Moss-Auburn-Gold---Low-Light-EG3122300-3.jpg?v=638179456101770000"
+            },
+            {
+                "id": 4,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/202756-600-600/Antiparras-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Moss-Auburn-Gold---Low-Light-EG3122300-2.jpg?v=638179456186800000"
+            },
+            {
+                "id": 5,
+                "path": "https://universoventura.vteximg.com.br/arquivos/ids/202757-600-600/Antiparra-Electric-Kleveland-II-Ski-Snowboard---Lente-Matte-Stealth-Grey-Bird---Low-Light-EG3122200-5.jpg?v=638179456273170000"
+            }
+        ]
     },
     {
         "precio": 5500,

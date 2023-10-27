@@ -5,7 +5,7 @@ import Navbar from '../components/header/Navbar';
 const Layout = () => {
     return (
         <div>
-            <header className="h-24 bg-colorOscuro overflow-visible sticky top-0 z-50">
+            <header className="h-24 bg-colorOscuro overflow-visible sticky top-0 z-50 shadow-md shadow-black/50">
                 <Navbar />
             </header>
 
