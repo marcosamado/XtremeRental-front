@@ -3,7 +3,7 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
-import xtremeLogo from '../../images/xtremeLogo.png';
+import xtremeLogo from '/logo.png';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
                     className="p-[3px] rounded-sm outline-none text-base md:w-full md:h-8"
                     type="text"
                     name="search"
-                    placeholder="que estas buscando?"
+                    placeholder="¿Que estas buscando?"
                 />
                 <button className="">
                     <FcSearch className="text-colorMain text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
