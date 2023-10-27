@@ -9,6 +9,8 @@ export default {
                 colorAgua : "rgb(59,143,203)",
                 colorMontaña : "rgb(245,117,46)",
                 colorCalido :"rgb(237,41,66)",
+                colorNeutro: "rgb(217,217,217)",
+                colorClaro: "rgb(249,246,246)"
             },
             fontFamily: {
                 roboto: "roboto",
