@@ -5,8 +5,11 @@ import Layout from '../layouts/Layout';
 import HomePage from '../pages/HomePage';
 import ProductsPage, { getProducts } from '../pages/ProductsPage';
 import { ItemDetailPage } from '../pages/ItemDetailPage';
-import AdminPage from '../pages/AdminPage';
+
 import CartPage from '../pages/CartPage';
+import LayoutAdmin from '../layouts/LayoutAdmin';
+import ManageProductsPage from '../pages/ManageProductsPage';
+import AddProductPage from '../pages/AddProductPage';
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +37,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/administrador',
-                element: <AdminPage />,
+                element: <LayoutAdmin />,
+                children: [
+                    {
+                        // path: 'productos',
+                        index: true,
+                        element: <ManageProductsPage />,
+                        loader: getProducts,
+                    },
+                    {
+                        path: 'agregarproducto',
+                        element: <AddProductPage />,
+                    },
+                ],
             },
             {
                 path: '/carrito',

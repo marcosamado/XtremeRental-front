@@ -9,6 +9,8 @@ import { useState } from 'react';
 const Navbar = () => {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
+    // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
+    const [userAdmin, setUserAdmin] = useState(true);
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);
@@ -218,6 +220,13 @@ const Navbar = () => {
                         Carrito
                     </li>
                 </Link>
+                {userAdmin && (
+                    <Link to="/administrador" onClick={handleClosenavbar}>
+                        <li className="hover:bg-orangeMain rounded-sm p-2">
+                            Admin
+                        </li>
+                    </Link>
+                )}
             </ul>
             <div
                 className="hidden md:block order-2"

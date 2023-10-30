@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 import { useNavigation } from 'react-router-dom';
-// import { getItemById } from "../../api/getItemById";
 import ProductPictures from '../components/products/ProductPictures';
 
 export const ItemDetailPage = () => {
