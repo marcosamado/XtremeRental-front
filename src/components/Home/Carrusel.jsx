@@ -79,6 +79,17 @@ const cards = [
     },
 ];
 
+function randomCards(array) {
+    const randomCards = [...array];
+    for (let i = randomCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [randomCards[i], randomCards[j]] = [randomCards[j], randomCards[i]];
+    }
+    return randomCards;
+}
+
+const randomArray = randomCards(cards).slice(0, 10);
+
 const Carrusel = () => {
     return (
         <Swiper
@@ -114,7 +125,7 @@ const Carrusel = () => {
                 },
             }}
         >
-            {cards.map((item) => (
+            {randomArray.map((item) => (
                 <SwiperSlide key={item.id}>
                     <Card {...item} />
                 </SwiperSlide>
