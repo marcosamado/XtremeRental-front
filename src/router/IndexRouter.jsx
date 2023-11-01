@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout';
 
 import HomePage from '../pages/HomePage';
 import ProductsPage, { getProducts } from '../pages/ProductsPage';
-import { ItemDetailPage } from '../pages/ItemDetailPage';
+import ItemDetailPage, { getProductById } from '../pages/ItemDetailPage';
 
 import CartPage from '../pages/CartPage';
 import LayoutAdmin from '../layouts/LayoutAdmin';
@@ -31,7 +31,9 @@ export const router = createBrowserRouter([
                     {
                         path: ':id',
                         element: <ItemDetailPage />,
-                        loader: getProducts,
+                        loader: ({ params }) => {
+                            return getProductById(params.id);
+                        },
                     },
                 ],
             },

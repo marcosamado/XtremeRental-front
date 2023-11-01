@@ -9,7 +9,7 @@ const ProductsPage = () => {
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
     return (
-        <div className="w-full p-5 bg-gradient-to-r from-red-100 to-sky-100">
+        <div className="w-full p-5 bg-gradient-to-r from-red-100 to-sky-100 min-h-screen">
             <section className="container mr-auto ml-auto max-w-3xl rounded-sm bg-white">
                 {data.map((product) => (
                     <ProductCard key={product.id} {...product} />

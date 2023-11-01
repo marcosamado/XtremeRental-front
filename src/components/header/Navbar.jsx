@@ -18,7 +18,6 @@ const Navbar = () => {
     const handleClosenavbar = (e) => {
         setOpenNavbar(false);
         setOpenProducts(false);
-        console.log(e.target);
     };
 
     const handleOpenProducts = () => {
