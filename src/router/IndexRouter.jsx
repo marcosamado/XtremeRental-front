@@ -40,8 +40,8 @@ export const router = createBrowserRouter([
                 element: <LayoutAdmin />,
                 children: [
                     {
-                        // index: true,
-                        path: 'productos',
+                        index: true,
+                        // path: 'productos',
                         element: <ManageProductsPage />,
                         loader: getProducts,
                     },

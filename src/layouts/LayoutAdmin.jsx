@@ -12,7 +12,8 @@ const LayoutAdmin = () => {
                 <nav>
                     <ul className="flex flex-col gap-2">
                         <NavLink
-                            to="productos"
+                            end
+                            to="/administrador"
                             className={({ isActive }) =>
                                 isActive
                                     ? 'bg-white/5 text-colorCalido text-base indent-1 p-3'

@@ -7,6 +7,7 @@ const ManageProductsPage = () => {
     const navigation = useNavigation();
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
+    data.map((product) => console.log(product));
     return (
         <div className="container max-w-3xl mx-auto py-10">
             {data.map((product) => (

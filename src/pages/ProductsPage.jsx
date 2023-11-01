@@ -20,7 +20,7 @@ const ProductsPage = () => {
 };
 
 export const getProducts = async () => {
-    const res = await fetch('../src/fakeApi/apiProductos.json');
+    const res = await fetch('http://localhost:8080/productos');
 
     if (!res.ok)
         throw {
