@@ -4,7 +4,6 @@ export default {
     theme: {
         extend: {
             colors: {
-                colorMain: "rgb(237,41,46)",
                 colorOscuro : "rgb(23,23,23)",
                 colorAgua : "rgb(59,143,203)",
                 colorMontaña : "rgb(245,117,46)",
