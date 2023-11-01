@@ -18,8 +18,8 @@ export const ProductCard = ({
     };
 
     return (
-        <div className="border-b p-2 flex flex-row gap-8 items-center ">
-            <div className="w-40 h-24 sm:h-28 md:w-80 md:h-40">
+        <div className="border-b p-2 flex flex-row gap-5 items-center ">
+            <div className="w-[155px] max-w-36 h-28">
                 <Link to={`/productos/${id}`}>
                     <img
                         className="w-full h-full "
