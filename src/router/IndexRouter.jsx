@@ -50,6 +50,7 @@ export const router = createBrowserRouter([
                     {
                         path: 'agregarproducto',
                         element: <AddProductPage />,
+                        loader: getProducts,
                     },
                 ],
             },

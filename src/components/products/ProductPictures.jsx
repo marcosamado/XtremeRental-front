@@ -1,9 +1,36 @@
-const ProductPictures = ({ data, setCurrentPicture }) => {
+const ProductPictures = ({ setCurrentPicture }) => {
+    let array = [
+        {
+            images: [
+                {
+                    id: 1,
+                    path: 'https://universoventura.vteximg.com.br/arquivos/ids/183219-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419.jpg?v=637297590970200000',
+                },
+                {
+                    id: 2,
+                    path: 'https://universoventura.vteximg.com.br/arquivos/ids/183220-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-2.jpg?v=637297591064400000',
+                },
+                {
+                    id: 3,
+                    path: 'https://universoventura.vteximg.com.br/arquivos/ids/183221-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-3.jpg?v=637297591143500000',
+                },
+                {
+                    id: 4,
+                    path: 'https://universoventura.vteximg.com.br/arquivos/ids/183221-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-3.jpg?v=637297591143500000',
+                },
+                {
+                    id: 5,
+                    path: 'https://universoventura.vteximg.com.br/arquivos/ids/183221-600-600/Tablas-de-Ski-Fischer-RC-One-73-Allride---Fijaciones-RS11-GW-PR-Hombre-Green-A09419-3.jpg?v=637297591143500000',
+                },
+            ],
+        },
+    ];
+
     let newProducts = [];
-    if (data.images.length > 5) {
-        newProducts = data.images.slice(0, 5);
+    if (array[0].images.length > 5) {
+        newProducts = array[0].images.slice(0, 5);
     } else {
-        newProducts = data.images;
+        newProducts = array[0].images;
     }
 
     const handleMouseEnter = (index) => {
@@ -12,7 +39,7 @@ const ProductPictures = ({ data, setCurrentPicture }) => {
     };
 
     return (
-        <div className="flex flex-col gap-2 p-3">
+        <div className="flex flex-row md:flex-col gap-2 p-3 order-2 md:order-1">
             {newProducts.map((picture, index) => (
                 <div
                     onMouseEnter={() => {
