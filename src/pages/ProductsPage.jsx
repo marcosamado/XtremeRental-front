@@ -9,8 +9,8 @@ const ProductsPage = () => {
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
     return (
-        <div className="w-full p-5 bg-gradient-to-r from-red-100 to-sky-100">
-            <section className="container mr-auto ml-auto max-w-3xl rounded-sm bg-white">
+        <div className="w-full p-5 bg-gradient-to-r from-red-100 to-sky-100 min-h-screen">
+            <section className="w-full mr-auto ml-auto max-w-3xl rounded-sm bg-white">
                 {data.map((product) => (
                     <ProductCard key={product.id} {...product} />
                 ))}
@@ -20,7 +20,7 @@ const ProductsPage = () => {
 };
 
 export const getProducts = async () => {
-    const res = await fetch('../src/fakeApi/apiProductos.json');
+    const res = await fetch('http://localhost:8080/productos');
 
     if (!res.ok)
         throw {

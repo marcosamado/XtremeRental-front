@@ -2,30 +2,35 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const ProductCard = ({
-    url,
-    precio,
+    precioPorHora,
     id,
-    descripcion,
-    cantidad,
-    title,
+    descripcionProducto,
+    imagenPrincipal,
+    stock,
+    nombreProducto,
+    categoria,
 }) => {
-    const [nuevoPrecio, setNuevoPrecio] = useState(precio);
+    const [nuevoPrecio, setNuevoPrecio] = useState(precioPorHora);
     const handleValue = (event) => {
         console.log(event.target.value);
-        const nuevoPrecio = precio * event.target.value;
+        const nuevoPrecio = precioPorHora * event.target.value;
         setNuevoPrecio(nuevoPrecio);
     };
 
     return (
-        <div className="border-b p-2 flex flex-row gap-8 items-center ">
-            <div className="w-40 h-24 sm:h-28 md:w-80 md:h-40">
+        <div className="border-b p-2 flex flex-row gap-5 items-center ">
+            <div className="w-[155px] max-w-36 h-28">
                 <Link to={`/productos/${id}`}>
-                    <img className="w-full h-full " src={url} alt={title} />
+                    <img
+                        className="w-full h-full "
+                        src={imagenPrincipal}
+                        alt={nombreProducto}
+                    />
                 </Link>
             </div>
             <div className="flex flex-col px-3 gap-2 w-80 md:w-full">
                 <h2 className=" text-sm font-light md:text-lg">
-                    <Link to={`/productos/${id}`}>{title}</Link>
+                    <Link to={`/productos/${id}`}>{nombreProducto}</Link>
                 </h2>
                 <div className="flex flex-row items-center justify-normal gap-3">
                     <select
