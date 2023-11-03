@@ -179,7 +179,7 @@ const Navbar = () => {
                                 : 'max-h-0 w-0 overflow-hidden '
                         } transition-all fixed top-24 bg-colorOscuro/80  duration-500 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
                     >
-                        <Link to="/productos?tipo=nieve">
+                        <Link to="/productos?tipo=nieve&page=1">
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}

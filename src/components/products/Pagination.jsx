@@ -1,7 +1,10 @@
 import { IconButton, Typography } from '@material-tailwind/react';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import { usePageContext } from '../../context/pageContext';
 
-export function Pagination({ pages, setActive, active }) {
+export function Pagination({ pages }) {
+    const { active, setActive } = usePageContext();
+
     const next = () => {
         if (active === pages) return;
 
