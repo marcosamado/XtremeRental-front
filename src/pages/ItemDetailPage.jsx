@@ -15,8 +15,8 @@ const ItemDetailPage = () => {
     const [currentPicture, setCurrentPicture] = useState(0);
 
     return (
-        <>
-            <div className=" bg-gradient-to-r from-red-100 to-sky-100 flex flex-col md:max-w-4xl mx-auto">
+        <div className="">
+            <div className="bg-gradient-to-r from-red-100 to-cyan-50 flex flex-col md:max-w-4xl mx-auto shadow-2xl shadow-black md:p-10">
                 <div className="flex flex-row justify-between items-center">
                     <h2 className="text-xl p-3 font-bold flex-grow">
                         {data.nombreProducto}
@@ -54,7 +54,7 @@ const ItemDetailPage = () => {
                             <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
                                 Reservar
                             </button>
-                            <button className="md:w-28 h-8 bg-sky-500 text-xs text-white px-2 py-1 rounded-md">
+                            <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
                                 Agregar al carrito
                             </button>
                         </div>
@@ -67,7 +67,7 @@ const ItemDetailPage = () => {
                     <h3 className=" text-xl">{data.descripcionProducto}</h3>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
