@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <div className="bg-gradient-to-b from-red-100 to-sky-100">
             <section className="mx-auto p-5 max-w-7xl">
-                <Link to={`/productos?tipo=acuaticos&page=${active}`}>
+                <Link to={`/productos?tipo=acuaticos`}>
                     <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                         <div className="h-44 w-full  md:flex">
                             <div className="bg-[url('https://imagenes.elpais.com/resizer/r6ELDzucn7tMT9H9pkABv2TZWrA=/1960x1103/filters:focal(671x333:681x343)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SRYQACBQBBCO7ADQSE3A3GUSBI.jpg')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
@@ -25,7 +25,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </Link>
-                <Link to={`/productos?tipo=montaña&page=${active}`}>
+                <Link to={`/productos?tipo=montaña`}>
                     <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                         <div className="h-44 w-full  md:flex">
                             <div className="bg-[url('https://img.freepik.com/foto-gratis/persona-pie-cima-exito-mochilero-cima-montana-generado-ia_188544-61274.jpg?w=1380&t=st=1698289368~exp=1698289968~hmac=d014b82c8d3fc9dd6928cab9d152ec84c03bb53598505e42f8cb2d279a7d04a8')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
@@ -41,7 +41,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </Link>
-                <Link to={`/productos?tipo=nieve&page=${active}`}>
+                <Link to={`/productos?tipo=nieve`}>
                     <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                         <div className="h-44 w-full  md:flex">
                             <div className="bg-[url('https://www.sentirsebella.cl/wp-content/uploads/2017/05/nieve.jpg')] w-full h-52 bg-cover bg-no-repeat "></div>

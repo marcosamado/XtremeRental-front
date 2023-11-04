@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
 import { useState } from 'react';
+import { usePageContext } from '../../context/pageContext';
 
 const Navbar = () => {
+    const { active } = usePageContext();
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
@@ -179,7 +181,7 @@ const Navbar = () => {
                                 : 'max-h-0 w-0 overflow-hidden '
                         } transition-all fixed top-24 bg-colorOscuro/80  duration-500 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
                     >
-                        <Link to="/productos?tipo=nieve&page=1">
+                        <Link to={`/productos?tipo=nieve`}>
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
@@ -190,7 +192,7 @@ const Navbar = () => {
                             </li>
                         </Link>
 
-                        <Link to="/productos?tipo=montaña">
+                        <Link to={`/productos?tipo=montaña`}>
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
@@ -201,7 +203,7 @@ const Navbar = () => {
                             </li>
                         </Link>
 
-                        <Link to="/productos?tipo=acuaticos">
+                        <Link to={`/productos?tipo=acuaticos`}>
                             <li
                                 onMouseEnter={() => setOpenProducts(true)}
                                 onMouseOut={() => setOpenProducts(false)}
