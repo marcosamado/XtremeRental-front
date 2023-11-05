@@ -5,6 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import Card from './Card';
+import { useLoaderData } from 'react-router-dom';
 
 const cards = [
     {
@@ -91,6 +92,10 @@ function randomCards(array) {
 const randomArray = randomCards(cards).slice(0, 10);
 
 const Carrusel = () => {
+    const { data } = useLoaderData();
+
+    console.log(data);
+
     return (
         <Swiper
             className="relative"
@@ -125,7 +130,7 @@ const Carrusel = () => {
                 },
             }}
         >
-            {randomArray.map((item) => (
+            {data.map((item) => (
                 <SwiperSlide key={item.id}>
                     <Card {...item} />
                 </SwiperSlide>

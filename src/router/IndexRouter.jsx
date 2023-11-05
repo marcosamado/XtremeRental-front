@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import Layout from '../layouts/Layout';
 
-import HomePage from '../pages/HomePage';
+import HomePage, { getProductsRandom } from '../pages/HomePage';
 import ProductsPage, { getProducts } from '../pages/ProductsPage';
 import ItemDetailPage, { getProductById } from '../pages/ItemDetailPage';
 
@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />,
+                loader: getProductsRandom,
             },
             {
                 path: '/productos',
