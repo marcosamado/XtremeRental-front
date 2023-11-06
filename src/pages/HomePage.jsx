@@ -71,33 +71,33 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const getProductsRandom = async () => {
-    const res = await fetch('http://localhost:8080/productos');
+// export const getProductsRandom = async () => {
+//     const res = await fetch('http://localhost:8080/productos');
 
-    if (!res.ok)
-        throw {
-            status: res.status,
-            statusText: 'No Encontrado',
-        };
+//     if (!res.ok)
+//         throw {
+//             status: res.status,
+//             statusText: 'No Encontrado',
+//         };
 
-    const allProducts = await res.json();
-    const randomProducts = getRandomProducts(allProducts, 10);
+//     const allProducts = await res.json();
+//     const randomProducts = getRandomProducts(allProducts, 10);
 
-    return { data: randomProducts };
-};
+//     return { data: randomProducts };
+// };
 
-function getRandomProducts(allProducts, count) {
-    const randomIndexes = [];
-    const randomProducts = [];
+// function getRandomProducts(allProducts, count) {
+//     const randomIndexes = [];
+//     const randomProducts = [];
 
-    while (randomIndexes.length < count) {
-        const randomIndex = Math.floor(Math.random() * allProducts.length);
+//     while (randomIndexes.length < count) {
+//         const randomIndex = Math.floor(Math.random() * allProducts.length);
 
-        if (!randomIndexes.includes(randomIndex)) {
-            randomIndexes.push(randomIndex);
-            randomProducts.push(allProducts[randomIndex]);
-        }
-    }
+//         if (!randomIndexes.includes(randomIndex)) {
+//             randomIndexes.push(randomIndex);
+//             randomProducts.push(allProducts[randomIndex]);
+//         }
+//     }
 
-    return randomProducts;
-}
+//     return randomProducts;
+// }

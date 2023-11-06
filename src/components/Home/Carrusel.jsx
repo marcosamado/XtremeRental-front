@@ -130,7 +130,7 @@ const Carrusel = () => {
                 },
             }}
         >
-            {data.map((item) => (
+            {randomArray.map((item) => (
                 <SwiperSlide key={item.id}>
                     <Card {...item} />
                 </SwiperSlide>
