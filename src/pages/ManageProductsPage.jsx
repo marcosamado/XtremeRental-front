@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 
 const ManageProductsPage = () => {
@@ -7,7 +7,33 @@ const ManageProductsPage = () => {
     const navigation = useNavigation();
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
-    data.map((product) => console.log(product));
+
+    const handleClick = (id) => {
+        eliminarProducto(id);
+    };
+
+    const eliminarProducto = async (id) => {
+        const settings = {
+            method: 'DELETE',
+        };
+
+        try {
+            const res = await fetch(
+                `http://localhost:8080/productos/${id}`,
+                settings,
+            );
+            if (!res.ok) {
+                // Crear un objeto de error personalizado con estado y ok
+                const error = new Error('error al eliminar producto');
+                error.status = res.status;
+                error.ok = false;
+                throw error;
+            }
+        } catch (error) {
+            throw new Error('Error al eliminar producto');
+        }
+    };
+
     return (
         <div className="container max-w-3xl mx-auto py-10">
             {data.map((product) => (
@@ -39,7 +65,10 @@ const ManageProductsPage = () => {
                         <button className="bg-colorAgua text-white p-2 text-base text-center rounded-md">
                             Modificar
                         </button>
-                        <button className="bg-colorCalido text-white p-2 text-center rounded-md">
+                        <button
+                            onClick={() => handleClick(product.id)}
+                            className="bg-colorCalido text-white p-2 text-center rounded-md"
+                        >
                             Eliminar
                         </button>
                     </div>

@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useLoaderData} from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { useRef } from 'react';
 
-
-
 const AddProductPage = () => {
-
     const { data } = useLoaderData();
+    const [imgFile, setImgFile] = useState([]);
 
     function validaciones(nombre, descripcion, cantidad, precio, imagen) {
         // if (nombre.trim().length < 4 || nombre.trim().length > 20 )  {
@@ -29,85 +27,87 @@ const AddProductPage = () => {
 
     const [datosForm, setDatosForm] = useState({
         nombreProducto: '',
-        descriptionProducto: '',
+        descripcionProducto: '',
         stock: 0,
         precioPorHora: 0,
-        imagenes: "",
+        imagenes: [],
         categoria: 'nieve',
     });
 
-    // console.log(datosForm.imagenes);
-    // console.log(imgRef);
+    const handleChangeImg = (event) => {
+        setImgFile(event.target.files);
+    };
 
-    const { nombreProducto, descriptionProducto, stock, precioPorHora, imagenes, categoria } =
-        datosForm;
-
-        const postImage = async (ffile) => {
-            
-            const file = ffile;
-    
-            console.log(file);
-    
-            // if (!file) throw new Error("No hay ningúna imagen para subir");
-            const formData = new FormData();
-            // formData.append("bucketName", "1023c04-grupo3xr");
-            // formData.append("filePath", "/Users");
-            formData.append("file", file);
-            try {
-                const res = await fetch(
-                    `http://localhost:8080/assets/upload`,
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                );
-                if (!res.ok) {
-                    // Crear un objeto de error personalizado con estado y ok
-                    const error = new Error("Error en al subir las imagenes");
-                    error.status = res.status;
-                    error.ok = false;
-                    throw error;
-                }
-                const data = await res.json();
-                console.log(data);
-                return data;
-            } catch (error) {
-                throw new Error("Error al subir las imagenes");
+    const {
+        nombreProducto,
+        descripcionProducto,
+        stock,
+        precioPorHora,
+        imagenes,
+        categoria,
+    } = datosForm;
+    const postImage = async (imgFile) => {
+        // if (!file) throw new Error("No hay ningúna imagen para subir");
+        const formData = new FormData();
+        // formData.append("bucketName", "1023c04-grupo3xr");
+        // formData.append("filePath", "/Users");
+        formData.append('file', imgFile[0]);
+        try {
+            const res = await fetch(`http://localhost:8080/assets/upload`, {
+                method: 'POST',
+                body: formData,
+            });
+            if (!res.ok) {
+                // Crear un objeto de error personalizado con estado y ok
+                const error = new Error('Error en al subir las imagenes');
+                error.status = res.status;
+                error.ok = false;
+                throw error;
             }
-        };
+            const data = await res.json();
+            console.log(data);
+            return data;
+        } catch (error) {
+            throw new Error('Error al subir las imagenes');
+        }
+    };
 
-    const handleClick = (e, imgRef) => {
-        e.preventDefault();
-
-        postImage(imgRef);
-
-    }
-
+    const handleClick = async () => {
+        const resImg = await postImage(imgFile);
+        const array = [resImg];
+        setDatosForm({ ...datosForm, imagenes: array });
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const res = validaciones(nombreProducto, descriptionProducto, stock, precioPorHora, imagenes);
-
-        // if (!title.trim() || !description.trim()) {
-        // return setError("hay un errorcito")
-        // setDatosForm({
-        //     ...datosForm,
-        // });
-
-        postImage(imgRef);
+        console.log('holis');
+        const res = validaciones(
+            nombreProducto,
+            descripcionProducto,
+            stock,
+            precioPorHora,
+            imagenes,
+        );
 
         if (res) {
-            console.log(nombreProducto, descriptionProducto, stock, precioPorHora, imagenes, categoria);
+            // console.log(
+            //     nombreProducto,
+            //     descripcionProducto,
+            //     stock,
+            //     precioPorHora,
+            //     imagenes,
+            //     categoria,
+            // );
 
             const payload = {
-                nombreProducto: nombreProducto,
-                descripcionProducto: descriptionProducto,
-                stock: stock,
-                precioPorHora: precioPorHora,
-                imagenes: imagenes,
-                categoria: categoria,
+                nombreProducto,
+                descripcionProducto,
+                stock,
+                precioPorHora,
+                imagenes,
+                categoria,
             };
 
+            // console.log(payload);
 
             const url = 'http://localhost:8080/productos';
             const settings = {
@@ -118,20 +118,19 @@ const AddProductPage = () => {
                 body: JSON.stringify(payload),
             };
 
-            // 
-    
+            //
+
             fetch(url, settings)
                 .then((response) => response.json())
                 .then((data) => {
-                    window.alert('Producto agregado correctamente');
+                    // window.alert('Producto agregado correctamente');
                     console.log(data);
                 });
         } else {
-            console.log("error submit");
+            console.log('error submit');
         }
+    };
 
-    }
-    
     const handleChange = (event) => {
         const { name, value } = event.target;
         setDatosForm({
@@ -140,10 +139,8 @@ const AddProductPage = () => {
         });
     };
 
-
-
     return (
-        <div className='bg-gradient-to-b from-red-100 to-sky-100 min-h-screen'>
+        <div className="bg-gradient-to-b from-red-100 to-sky-100 min-h-screen">
             <h1 className="text-center font-bold text-3xl p-10">
                 Agregar Producto
             </h1>
@@ -151,7 +148,12 @@ const AddProductPage = () => {
                 onSubmit={handleSubmit}
                 className="container flex flex-col gap-3 max-w-md mx-auto items-center"
             >
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="title">Nombre del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="title"
+                >
+                    Nombre del producto
+                </label>
                 <input
                     type="text"
                     name="nombreProducto"
@@ -160,17 +162,27 @@ const AddProductPage = () => {
                     value={nombreProducto}
                     onChange={handleChange}
                 />
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="description">Descripcion del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="description"
+                >
+                    Descripcion del producto
+                </label>
                 <input
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     // placeholder="Descripcion del producto"
-                    name="descriptionProducto"
-                    value={descriptionProducto}
+                    name="descripcionProducto"
+                    value={descripcionProducto}
                     onChange={handleChange}
                     // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="cantidad">Stock del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="cantidad"
+                >
+                    Stock del producto
+                </label>
                 <input
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
@@ -180,7 +192,12 @@ const AddProductPage = () => {
                     onChange={handleChange}
                     // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="precio">Precio por hora del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="precio"
+                >
+                    Precio por hora del producto
+                </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     // placeholder="Precio del producto"
@@ -189,17 +206,25 @@ const AddProductPage = () => {
                     onChange={handleChange}
                     // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="imgMain">Imagen del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="imgMain"
+                >
+                    Imagen del producto
+                </label>
                 <input
-                    type='file' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
+                    type="file"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     // placeholder="Link de la imagen"
                     name="imagenes"
-                    value={imagenes}
-                    onChange={handleChange}
+                    files={imagenes}
+                    onChange={handleChangeImg}
                     ref={imgRef}
                     // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
-                <button onClick={handleClick}>subir imagen</button>
+                <button type="button" onClick={handleClick}>
+                    subir imagen
+                </button>
                 {/* <div className="form-check mb-3">
                     <input
                         type="checkbox"
@@ -211,7 +236,12 @@ const AddProductPage = () => {
                     />
                     <label htmlFor="input-check">Dar Prioridad</label>
                 </div> */}
-                <label className="block  text-gray-700 text-lg font-bold " htmlFor="category">Categoria del producto</label>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="category"
+                >
+                    Categoria del producto
+                </label>
                 <select
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     name="categoria"
@@ -235,7 +265,6 @@ const AddProductPage = () => {
     );
 };
 
-
 export const getProducts = async () => {
     const res = await fetch('http://localhost:8080/productos');
 
@@ -249,7 +278,5 @@ export const getProducts = async () => {
 
     return { data };
 };
-
-
 
 export default AddProductPage;
