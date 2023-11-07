@@ -5,7 +5,7 @@ export const ProductCard = ({
     precioPorHora,
     id,
     descripcionProducto,
-    imagenPrincipal,
+    imagenes,
     stock,
     nombreProducto,
     categoria,
@@ -16,6 +16,7 @@ export const ProductCard = ({
         const nuevoPrecio = precioPorHora * event.target.value;
         setNuevoPrecio(nuevoPrecio);
     };
+    console.log(imagenes);
 
     return (
         <div className="border-b p-2 flex flex-row gap-5 items-center ">
@@ -23,7 +24,7 @@ export const ProductCard = ({
                 <Link to={`/productos/${id}`}>
                     <img
                         className="w-full h-full "
-                        src={imagenPrincipal}
+                        src={imagenes[0].imagenUrl}
                         alt={nombreProducto}
                     />
                 </Link>

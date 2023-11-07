@@ -18,7 +18,7 @@ const ManageProductsPage = () => {
                     <div className="w-32 h-20">
                         <img
                             className="w-full h-full "
-                            src={product.imagenPrincipal}
+                            src={product.imagenes[0].imagenUrl}
                             alt={product.nombreProducto}
                         />
                     </div>
