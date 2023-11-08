@@ -39,8 +39,13 @@ const LayoutAdmin = () => {
                     </ul>
                 </nav>
             </div>
-            <div className="w-auto flex-1 ">
+            <div className="w-auto flex-1 sm:hidden md:block">
                 <Outlet />
+            </div>
+            <div className="w-auto flex flex-1 items-center justify-center align-middle md:hidden">
+                <h1 className="self-center  border-2 bg-colorCalido p-3 text-white text-2xl border-black ">
+                    PANEL ADMINISTRADOR NO DISPONIBLE EN DISPOSITIVOS MOBILE
+                </h1>
             </div>
         </div>
     );

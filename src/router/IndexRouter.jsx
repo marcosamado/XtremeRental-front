@@ -10,6 +10,7 @@ import CartPage from '../pages/CartPage';
 import LayoutAdmin from '../layouts/LayoutAdmin';
 import ManageProductsPage from '../pages/ManageProductsPage';
 import AddProductPage from '../pages/AddProductPage';
+import RegisterPage from '../pages/RegisterPage';
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: '/carrito',
                 element: <CartPage />,
+            },
+            {
+                path: '/registro',
+                element: <RegisterPage />,
             },
         ],
     },

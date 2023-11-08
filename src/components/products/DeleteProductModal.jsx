@@ -5,22 +5,18 @@ import {
     DialogBody,
     DialogFooter,
 } from '@material-tailwind/react';
-import { useState } from 'react';
 
-export function DeleteProductModal() {
-    const [size, setSize] = useState(null);
-
-    const handleOpen = (value) => setSize(value);
-
+export function DeleteProductModal({
+    handleOpen,
+    size,
+    id,
+    handleClick,
+    nombreProducto,
+}) {
     return (
         <>
-            <div className="mb-3 flex gap-3">
-                <Button onClick={() => handleOpen('xs')} variant="gradient">
-                    Open Dialog XS
-                </Button>
-            </div>
             <Dialog open={size === 'xs'} size={'xs'} handler={handleOpen}>
-                <DialogHeader>Eliminar - PRODUCTO NOMBRE</DialogHeader>
+                <DialogHeader>Eliminar - {nombreProducto}</DialogHeader>
                 <DialogBody>Seguro quieres hacerlo ?</DialogBody>
                 <DialogFooter>
                     <Button
@@ -34,7 +30,10 @@ export function DeleteProductModal() {
                     <Button
                         variant="gradient"
                         color="green"
-                        onClick={() => handleOpen(null)}
+                        onClick={() => {
+                            handleOpen(null);
+                            handleClick(id);
+                        }}
                     >
                         <span>Confirm</span>
                     </Button>
