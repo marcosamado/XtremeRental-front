@@ -6,6 +6,7 @@ import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
 import { useState } from 'react';
 import { usePageContext } from '../../context/pageContext';
+import { LoginModal } from '../Home/LoginModal';
 
 const Navbar = () => {
     const { active } = usePageContext();
@@ -66,9 +67,7 @@ const Navbar = () => {
             >
                 <div className={` flex flex-col gap-2 `}>
                     <div to="/login" onClick={handleClosenavbar}>
-                        <button className="text-white border w-full rounded-md text-xl py-1 bg-colorCalido border-colorCalido">
-                            Iniciar sesion
-                        </button>
+                        <LoginModal>Iniciar sesion</LoginModal>
                     </div>
                 </div>
                 <ul
@@ -231,13 +230,11 @@ const Navbar = () => {
             </ul>
             <div
                 className="hidden md:block order-2"
-                to="/login"
                 onClick={handleClosenavbar}
             >
-                <button className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3">
-                    Iniciar sesion
-                </button>
+                <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
             </div>
+            {/* <LoginModal></LoginModal> */}
         </div>
     );
 };
