@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { useLoaderData, useNavigation, useRevalidator } from 'react-router-dom';
+import AdminProductCard from '../components/products/AdminProductCard';
+import { DeleteProductModal } from '../components/products/deleteProductModal';
 
 const ManageProductsPage = () => {
     const { data } = useLoaderData();
+    const revalidator = useRevalidator();
 
     const navigation = useNavigation();
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
+    console.log(revalidator);
     const handleClick = (id) => {
         eliminarProducto(id);
     };
@@ -16,65 +19,39 @@ const ManageProductsPage = () => {
         const settings = {
             method: 'DELETE',
         };
-
         try {
             const res = await fetch(
                 `http://localhost:8080/productos/${id}`,
                 settings,
             );
             if (!res.ok) {
-                // Crear un objeto de error personalizado con estado y ok
-                const error = new Error('error al eliminar producto');
-                error.status = res.status;
-                error.ok = false;
-                throw error;
+                // Manejo específico del error si es necesario
+                const errorData = await res.json();
+                console.error('Error al eliminar producto:', errorData);
+                // Puedes lanzar un nuevo error personalizado si es necesario
+                throw new Error('Error al eliminar producto');
             }
+            revalidator.revalidate();
         } catch (error) {
-            throw new Error('Error al eliminar producto');
+            // Aquí puedes manejar el error de manera adecuada
+            console.log('Error inesperado:', error);
         }
     };
 
     return (
-        <div className="container max-w-3xl mx-auto py-10">
-            {data.map((product) => (
-                <div
-                    key={product.id}
-                    className="border p-2 flex flex-row gap-8 items-center max-w-5xl"
-                >
-                    <div className="w-32 h-20">
-                        <img
-                            className="w-full h-full "
-                            src={product.imagenes[0].imagenUrl}
-                            alt={product.nombreProducto}
-                        />
-                    </div>
-                    <div className="flex flex-col px-3 gap-2 w-80 md:w-full">
-                        <h2 className=" text-sm font-medium md:text-lg">
-                            {product.nombreProducto}
-                        </h2>
-                        <p>id: {product.id}</p>
-                        <p className="">Stock disponible: {product.stock}</p>
-                        <div className="flex flex-row items-center justify-normal gap-3">
-                            <div>
-                                <span>$ </span>
-                                <span>{product.precioPorHora}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <button className="bg-colorAgua text-white p-2 text-base text-center rounded-md">
-                            Modificar
-                        </button>
-                        <button
-                            onClick={() => handleClick(product.id)}
-                            className="bg-colorCalido text-white p-2 text-center rounded-md"
-                        >
-                            Eliminar
-                        </button>
-                    </div>
-                </div>
-            ))}
-        </div>
+        <>
+            <div className="container max-w-3xl mx-auto py-10">
+                {data.map((product) => (
+                    <AdminProductCard
+                        key={product.id}
+                        {...product}
+                        handleClick={handleClick}
+                        revalidator={revalidator}
+                    />
+                ))}
+            </div>
+            <DeleteProductModal />
+        </>
     );
 };
 
