@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
 import { useState } from 'react';
-import { usePageContext } from '../../context/pageContext';
+import { usePageContext } from '../../context/PageContext.jsx';
 import { LoginModal } from '../Home/LoginModal';
 
 const Navbar = () => {

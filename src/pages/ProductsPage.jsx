@@ -3,7 +3,7 @@ import { ProductCard } from '../components/products/ProductCard';
 import { Pagination } from '../components/products/Pagination';
 import { useState } from 'react';
 import queryString from 'query-string';
-import { usePageContext } from '../context/pageContext';
+import { usePageContext } from '../context/PageContext';
 
 const ProductsPage = () => {
     const { active, setActive } = usePageContext();

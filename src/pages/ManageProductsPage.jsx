@@ -1,6 +1,5 @@
 import { useLoaderData, useNavigation, useRevalidator } from 'react-router-dom';
 import AdminProductCard from '../components/products/AdminProductCard';
-import { DeleteProductModal } from '../components/products/deleteProductModal';
 import { LoadingSpinner } from '../components/products/LoadingSpinner';
 
 const ManageProductsPage = () => {

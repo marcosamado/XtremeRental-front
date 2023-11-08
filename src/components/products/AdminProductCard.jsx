@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { LoadingSpinner } from './LoadingSpinner';
-import { DeleteProductModal } from './deleteProductModal';
+import { DeleteProductModal } from './DeleteProductModal';
 
 const AdminProductCard = ({
     id,

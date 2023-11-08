@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router/IndexRouter.jsx';
 
 import { ThemeProvider } from '@material-tailwind/react';
-import PageProvider from './context/pageContext.jsx';
+import PageProvider from './context/PageContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
