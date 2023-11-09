@@ -67,7 +67,7 @@ const Navbar = () => {
             >
                 <div className={` flex flex-col gap-2 `}>
                     <div to="/login" onClick={handleClosenavbar}>
-                        <LoginModal>Iniciar sesion</LoginModal>
+                        <LoginModal />
                     </div>
                 </div>
                 <ul

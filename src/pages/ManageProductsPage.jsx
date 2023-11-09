@@ -25,15 +25,13 @@ const ManageProductsPage = () => {
                 settings,
             );
             if (!res.ok) {
-                // Manejo específico del error si es necesario
                 const errorData = await res.json();
                 console.error('Error al eliminar producto:', errorData);
-                // Puedes lanzar un nuevo error personalizado si es necesario
+
                 throw new Error('Error al eliminar producto');
             }
             revalidator.revalidate();
         } catch (error) {
-            // Aquí puedes manejar el error de manera adecuada
             console.log('Error inesperado:', error);
         }
     };

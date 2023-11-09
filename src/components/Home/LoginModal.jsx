@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
     Button,
     Dialog,
@@ -10,9 +10,10 @@ import {
     Input,
     Checkbox,
 } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 
 export function LoginModal() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
     return (
@@ -46,7 +47,7 @@ export function LoginModal() {
                         </Typography>
                         <Input label="Email" size="lg" />
                         <Typography className="-mb-2" variant="h6">
-                            Password
+                            Contraseña
                         </Typography>
                         <Input label="Password" size="lg" />
                         <div className="-ml-2.5 -mt-3">
@@ -62,20 +63,17 @@ export function LoginModal() {
                             iniciar sesion
                         </Button>
                         <Typography
-                            variant="small"
-                            className="mt-4 flex justify-center"
+                            variant="h6"
+                            className="mt-4 flex justify-center gap-1"
                         >
                             No estas registrado?
-                            <Typography
-                                as="a"
-                                href="#signup"
-                                variant="small"
-                                color="blue-gray"
-                                className="ml-1 font-bold"
+                            <Link
                                 onClick={handleOpen}
+                                to="/registro"
+                                className="font-bold text-colorOscuro"
                             >
-                                crear cuenta
-                            </Typography>
+                                Crear Cuenta
+                            </Link>
                         </Typography>
                     </CardFooter>
                 </Card>
