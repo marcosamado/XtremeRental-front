@@ -11,6 +11,7 @@ import LayoutAdmin from '../layouts/LayoutAdmin';
 import ManageProductsPage from '../pages/ManageProductsPage';
 import AddProductPage from '../pages/AddProductPage';
 import RegisterPage from '../pages/RegisterPage';
+import ManageUsersPage from '../pages/ManageUsersPage';
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
                         path: 'agregarproducto',
                         element: <AddProductPage />,
                         loader: getProducts,
+                    },
+                    {
+                        path: 'usuarios',
+                        element: <ManageUsersPage />,
                     },
                 ],
             },

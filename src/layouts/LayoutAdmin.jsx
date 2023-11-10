@@ -23,9 +23,7 @@ const LayoutAdmin = () => {
                                         : 'text-white text-base indent-1 p-3 '
                                 }
                             >
-                                {/* <li className="text-white text-xl indent-1 p-3 hover:text-white"> */}
-                                Gestionar Productos
-                                {/* </li> */}
+                                Gestion de Productos
                             </NavLink>
                             <NavLink
                                 to="agregarproducto"
@@ -35,9 +33,17 @@ const LayoutAdmin = () => {
                                         : 'text-white text-base indent-1 p-3 '
                                 }
                             >
-                                {/* <li className="text-white text-xl indent-1 p-3  hover:text-white "> */}
                                 Agregar Producto
-                                {/* </li> */}
+                            </NavLink>
+                            <NavLink
+                                to="usuarios"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? 'bg-white/5 text-colorCalido text-base indent-1 p-3'
+                                        : 'text-white text-base indent-1 p-3 '
+                                }
+                            >
+                                Gestion de usuarios
                             </NavLink>
                         </ul>
                     </nav>

@@ -7,6 +7,7 @@ import xtremeLogo from '/logo.png';
 import { useContext, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
+import UserAvatar from './userAvatar.jsx';
 
 const Navbar = () => {
     const { authUser, setAuthUser } = useContext(UserContext);
@@ -68,9 +69,13 @@ const Navbar = () => {
                 } bg-colorOscuro/80 min-w-full fixed right-0 top-24 transition-all duration-500 md:hidden px-3 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
             >
                 <div className={` flex flex-col gap-2 `}>
-                    <div to="/login" onClick={handleClosenavbar}>
-                        <LoginModal />
-                    </div>
+                    {authUser ? (
+                        <UserAvatar />
+                    ) : (
+                        <div className="max-w-fit" onClick={handleClosenavbar}>
+                            <LoginModal />
+                        </div>
+                    )}
                 </div>
                 <ul
                     className={`flex flex-col text-left gap-1 text-xl text-white mt-5`}
@@ -230,7 +235,7 @@ const Navbar = () => {
                 onClick={handleClosenavbar}
             >
                 {authUser ? (
-                    true
+                    <UserAvatar />
                 ) : (
                     <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
                 )}
