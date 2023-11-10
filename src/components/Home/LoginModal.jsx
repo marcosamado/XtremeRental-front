@@ -63,7 +63,7 @@ export function LoginModal() {
                         <Typography className="-mb-2" variant="h6">
                             Contraseña
                         </Typography>
-                        <Input label="Password" size="lg" />
+                        <Input type="password" label="Password" size="lg" />
                         <div className="-ml-2.5 -mt-3">
                             <Checkbox label="Remember Me" />
                         </div>

@@ -7,7 +7,7 @@ function UserProvider(props) {
 
     const [datosUser, setDatosUser] = useState({});
 
-    const [userAdmin, setUserAdmin] = useState(false);
+    const [userAdmin, setUserAdmin] = useState(true);
 
     return (
         <UserContext.Provider

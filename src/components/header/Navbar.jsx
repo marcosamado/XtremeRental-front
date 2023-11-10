@@ -14,8 +14,6 @@ const Navbar = () => {
         useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
-    // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
-    // const [userAdmin, setUserAdmin] = useState(true);
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);

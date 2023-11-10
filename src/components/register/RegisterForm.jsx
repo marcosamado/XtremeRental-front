@@ -4,7 +4,8 @@ import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export function RegisterForm() {
-    const { setAuthUser, setDatosUser, datosUser } = useContext(UserContext);
+    const { setAuthUser, setDatosUser, datosUser, setUserAdmin } =
+        useContext(UserContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         nombreDeUsuario: '',
@@ -97,6 +98,10 @@ export function RegisterForm() {
                 .then((data) => {
                     setDatosUser(data);
                 });
+            setAuthUser(true);
+            datosUser.esAdmin && setUserAdmin(true);
+
+            navigate('/');
 
             setFormData({
                 nombreDeUsuario: '',
@@ -107,14 +112,9 @@ export function RegisterForm() {
                 validarcontrasena: '',
                 esAdmin: false,
             });
-
-            setAuthUser(true);
-
-            navigate('/');
         }
     };
 
-    console.log(datosUser);
     return (
         <Card
             className="p-5 self-center shadow-md shadow-black "

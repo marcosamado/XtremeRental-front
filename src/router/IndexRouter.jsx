@@ -11,7 +11,7 @@ import LayoutAdmin from '../layouts/LayoutAdmin';
 import ManageProductsPage from '../pages/ManageProductsPage';
 import AddProductPage from '../pages/AddProductPage';
 import RegisterPage from '../pages/RegisterPage';
-import ManageUsersPage from '../pages/ManageUsersPage';
+import ManageUsersPage, { getUsers } from '../pages/ManageUsersPage';
 import ProtectedRoute from '../pages/ProtectedRoute';
 
 export const router = createBrowserRouter([
@@ -63,6 +63,7 @@ export const router = createBrowserRouter([
                             {
                                 path: 'usuarios',
                                 element: <ManageUsersPage />,
+                                loader: getUsers,
                             },
                         ],
                     },
