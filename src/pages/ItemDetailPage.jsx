@@ -36,7 +36,7 @@ const ItemDetailPage = () => {
                             <img
                                 className="w-full h-full object-contain"
                                 // src={images[currentPicture].path}
-                                src={data.imagenes[currentPicture].imagenUrl}
+                                src={data.imagenes[currentPicture].url}
                                 alt={data.nombreProducto}
                             />
                         </div>

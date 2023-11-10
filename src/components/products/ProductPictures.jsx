@@ -51,7 +51,7 @@ const ProductPictures = ({ setCurrentPicture, data }) => {
                 >
                     <img
                         className="w-full h-full object-contain"
-                        src={picture.imagenUrl}
+                        src={picture.url}
                         alt={`image-for-picture-${picture.id}`}
                     />
                 </div>

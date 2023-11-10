@@ -9,7 +9,7 @@ const Card = ({ nombreProducto, precioPorHora, imagenes, id }) => {
                     <img
                         className="w-full h-full"
                         // className="w-full h-60 p-8 rounded-t-lg"
-                        src={imagenes[0].imagenUrl}
+                        src={imagenes[0].url}
                         alt={nombreProducto}
                     />
                 </div>

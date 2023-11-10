@@ -23,7 +23,7 @@ const AdminProductCard = ({
                 <div className="w-32 h-20">
                     <img
                         className="w-full h-full "
-                        src={imagenes[0]?.imagenUrl}
+                        src={imagenes[0]?.url}
                         alt={nombreProducto}
                     />
                 </div>
