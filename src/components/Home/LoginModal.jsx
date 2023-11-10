@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React, { useContext } from 'react';
 import {
     Button,
     Dialog,
@@ -10,11 +11,22 @@ import {
     Input,
     Checkbox,
 } from '@material-tailwind/react';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export function LoginModal() {
-    const [open, setOpen] = useState(false);
+    const { authUser, setAuthUser } = useContext(UserContext);
+    const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
+
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        handleOpen();
+        setAuthUser(true);
+        navigate('/');
+    };
 
     return (
         <>
@@ -57,7 +69,7 @@ export function LoginModal() {
                     <CardFooter className="pt-0">
                         <Button
                             variant="gradient"
-                            onClick={handleOpen}
+                            onClick={handleLogin}
                             fullWidth
                         >
                             iniciar sesion

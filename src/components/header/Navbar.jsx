@@ -4,12 +4,12 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
-import { useState } from 'react';
-import { usePageContext } from '../../context/PageContext.jsx';
+import { useContext, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
+import { UserContext } from '../../context/UserContext.jsx';
 
 const Navbar = () => {
-    const { active } = usePageContext();
+    const { authUser, setAuthUser } = useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
@@ -26,6 +26,8 @@ const Navbar = () => {
     const handleOpenProducts = () => {
         setOpenProducts(!openProducts);
     };
+
+    console.log(authUser);
 
     return (
         <div className="flex flex-row items-center justify-around md:justify-around md:max-w-5xl md:mx-auto">
@@ -165,11 +167,6 @@ const Navbar = () => {
                         >
                             Productos
                         </li>
-                        {/* <MdKeyboardArrowRight
-                            className={`${
-                                openProducts && "rotate-90 text-colorAgua"
-                            } text-3xl transition-all duration-300`}
-                        /> */}
                     </div>
                     <div
                         onMouseEnter={() => setOpenProducts(true)}
@@ -232,9 +229,12 @@ const Navbar = () => {
                 className="hidden md:block order-2"
                 onClick={handleClosenavbar}
             >
-                <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
+                {authUser ? (
+                    true
+                ) : (
+                    <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
+                )}
             </div>
-            {/* <LoginModal></LoginModal> */}
         </div>
     );
 };
