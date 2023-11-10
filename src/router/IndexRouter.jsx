@@ -12,6 +12,7 @@ import ManageProductsPage from '../pages/ManageProductsPage';
 import AddProductPage from '../pages/AddProductPage';
 import RegisterPage from '../pages/RegisterPage';
 import ManageUsersPage from '../pages/ManageUsersPage';
+import ProtectedRoute from '../pages/ProtectedRoute';
 
 export const router = createBrowserRouter([
     {
@@ -41,23 +42,29 @@ export const router = createBrowserRouter([
                 ],
             },
             {
-                path: '/administrador',
-                element: <LayoutAdmin />,
+                path: '/',
+                element: <ProtectedRoute />,
                 children: [
                     {
-                        index: true,
-                        // path: 'productos',
-                        element: <ManageProductsPage />,
-                        loader: getProducts,
-                    },
-                    {
-                        path: 'agregarproducto',
-                        element: <AddProductPage />,
-                        loader: getProducts,
-                    },
-                    {
-                        path: 'usuarios',
-                        element: <ManageUsersPage />,
+                        path: '/administrador',
+                        element: <LayoutAdmin />,
+                        children: [
+                            {
+                                index: true,
+                                // path: 'productos',
+                                element: <ManageProductsPage />,
+                                loader: getProducts,
+                            },
+                            {
+                                path: 'agregarproducto',
+                                element: <AddProductPage />,
+                                loader: getProducts,
+                            },
+                            {
+                                path: 'usuarios',
+                                element: <ManageUsersPage />,
+                            },
+                        ],
                     },
                 ],
             },

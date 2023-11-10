@@ -5,7 +5,7 @@ import { LuLogOut } from 'react-icons/lu';
 import { UserContext } from '../../context/UserContext';
 
 const UserAvatar = () => {
-    const { setAuthUser } = useContext(UserContext);
+    const { setAuthUser, setUserAdmin } = useContext(UserContext);
     return (
         <div className="flex flex-row justify-center items-center gap-2">
             <div className="flex flex-col gap-2 justify-center items-center">
@@ -14,7 +14,12 @@ const UserAvatar = () => {
             </div>
             <div className="flex flex-row gap-3 justify-center items-center">
                 <IoMdSettings className="text-white text-3xl" />
-                <button onClick={() => setAuthUser(false)}>
+                <button
+                    onClick={() => {
+                        setAuthUser(false);
+                        setUserAdmin(false);
+                    }}
+                >
                     <LuLogOut className="text-white text-2xl" />
                 </button>
             </div>

@@ -10,11 +10,12 @@ import { UserContext } from '../../context/UserContext.jsx';
 import UserAvatar from './userAvatar.jsx';
 
 const Navbar = () => {
-    const { authUser, setAuthUser } = useContext(UserContext);
+    const { authUser, setAuthUser, userAdmin, setUserAdmin } =
+        useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
-    const [userAdmin, setUserAdmin] = useState(true);
+    // const [userAdmin, setUserAdmin] = useState(true);
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);
@@ -27,8 +28,6 @@ const Navbar = () => {
     const handleOpenProducts = () => {
         setOpenProducts(!openProducts);
     };
-
-    console.log(authUser);
 
     return (
         <div className="flex flex-row items-center justify-around md:justify-around md:max-w-5xl md:mx-auto">

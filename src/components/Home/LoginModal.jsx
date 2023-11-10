@@ -16,7 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export function LoginModal() {
-    const { authUser, setAuthUser } = useContext(UserContext);
+    const { authUser, setAuthUser, setUserAdmin, datosUser } =
+        useContext(UserContext);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
@@ -24,6 +25,7 @@ export function LoginModal() {
 
     const handleLogin = () => {
         handleOpen();
+        datosUser.esAdmin && setUserAdmin(true);
         setAuthUser(true);
         navigate('/');
     };

@@ -1,36 +1,124 @@
-import {
-    Card,
-    Input,
-    Checkbox,
-    Button,
-    Typography,
-} from '@material-tailwind/react';
-import { useState } from 'react';
+import { Card, Input, Button, Typography } from '@material-tailwind/react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export function RegisterForm() {
+    const { setAuthUser, setDatosUser, datosUser } = useContext(UserContext);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        nombreDeUsuario: '',
         nombre: '',
+        apellido: '',
         email: '',
-        contraseña: '',
-        validarContraseña: '',
+        contrasena: '',
+        validarcontrasena: '',
+        esAdmin: false,
+    });
+    const [error, setError] = useState({
+        errorPassword: '',
+        erroresvalidaciones: '',
     });
 
-    const { nombre, email, contraseña, validarContraseña } = formData;
+    const {
+        nombreDeUsuario,
+        nombre,
+        apellido,
+        email,
+        contrasena,
+        validarcontrasena,
+    } = formData;
 
     const handleChange = (e) => {
+        setError({
+            errorPassword: '',
+            erroresvalidaciones: '',
+        });
         const { value, name } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Hola');
+
+        validaciones(
+            nombreDeUsuario,
+            nombre,
+            apellido,
+            contrasena,
+            validarcontrasena,
+        );
     };
 
+    const validaciones = (
+        nombreDeUsuario,
+        nombre,
+        apellido,
+        contrasena,
+        validarcontrasena,
+    ) => {
+        if (contrasena !== validarcontrasena) {
+            setError({
+                ...error,
+                errorPassword: 'Las contraseñas no coinciden',
+            });
+        } else if (
+            nombreDeUsuario.trim().length < 3 ||
+            nombre.trim().length < 3 ||
+            apellido.trim().length < 3
+        ) {
+            setError({
+                ...error,
+                erroresvalidaciones:
+                    'Algunos de los datos ingresados son incorrectos',
+            });
+            return;
+        } else {
+            const payload = {
+                nombreDeUsuario,
+                nombre,
+                apellido,
+                email,
+                contrasena,
+                esAdmin: true,
+            };
+
+            const url = 'http://localhost:8080/usuarios';
+            const settings = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            };
+
+            fetch(url, settings)
+                .then((response) => response.json())
+                .then((data) => {
+                    setDatosUser(data);
+                });
+
+            setFormData({
+                nombreDeUsuario: '',
+                nombre: '',
+                apellido: '',
+                email: '',
+                contrasena: '',
+                validarcontrasena: '',
+                esAdmin: false,
+            });
+
+            setAuthUser(true);
+
+            navigate('/');
+        }
+    };
+
+    console.log(datosUser);
     return (
         <Card
             className="p-5 self-center shadow-md shadow-black "
-            color="transparent"
+            color="white"
             shadow={false}
         >
             <Typography variant="h4" color="blue-gray">
@@ -49,11 +137,33 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
+                        Nombre de usuario
+                    </Typography>
+                    <Input
+                        required
+                        size="lg"
+                        placeholder="Nombre de usuario"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900 "
+                        autoComplete="new-password"
+                        name="nombreDeUsuario"
+                        type="text"
+                        value={nombreDeUsuario}
+                        onChange={handleChange}
+                        labelProps={{
+                            className: 'before:content-none after:content-none',
+                        }}
+                    />
+                    <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="-mb-3"
+                    >
                         Nombre
                     </Typography>
                     <Input
+                        required
                         size="lg"
-                        placeholder="nombre y apellido"
+                        placeholder="nombre"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         autoComplete="new-password"
                         name="nombre"
@@ -69,9 +179,31 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
+                        Apellido
+                    </Typography>
+                    <Input
+                        required
+                        size="lg"
+                        placeholder="apellido"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                        autoComplete="new-password"
+                        name="apellido"
+                        type="text"
+                        value={apellido}
+                        onChange={handleChange}
+                        labelProps={{
+                            className: 'before:content-none after:content-none',
+                        }}
+                    />
+                    <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="-mb-3"
+                    >
                         Email
                     </Typography>
                     <Input
+                        required
                         size="lg"
                         placeholder="name@mail.com"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -89,16 +221,19 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
-                        contraseña
+                        contrasena
                     </Typography>
                     <Input
+                        required
+                        minLength={3}
+                        maxLength={10}
                         size="lg"
                         placeholder="********"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         autoComplete="new-password"
-                        name="contraseña"
+                        name="contrasena"
                         type="password"
-                        value={contraseña}
+                        value={contrasena}
                         onChange={handleChange}
                         labelProps={{
                             className: 'before:content-none after:content-none',
@@ -109,25 +244,37 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
-                        Confirmar contraseña
+                        Confirmar contrasena
                     </Typography>
                     <Input
+                        required
+                        minLength={3}
+                        maxLength={10}
                         size="lg"
                         placeholder="********"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         autoComplete="new-password"
-                        name="validarContraseña"
+                        name="validarcontrasena"
                         type="password"
-                        value={validarContraseña}
+                        value={validarcontrasena}
                         onChange={handleChange}
                         labelProps={{
                             className: 'before:content-none after:content-none',
                         }}
                     />
                 </div>
-                <p>ERRO ERRRO ERRRO</p>
+                {error.errorPassword && (
+                    <p className="text-center p-2  text-colorCalido rounded-md mt-4">
+                        {error.errorPassword}
+                    </p>
+                )}
+                {error.erroresvalidaciones && (
+                    <p className="text-center p-2 text-colorCalido rounded-md mt-4">
+                        {error.erroresvalidaciones}
+                    </p>
+                )}
 
-                <Button type="submit" className="mt-6" fullWidth>
+                <Button type="submit" className="mt-6 bg-colorAgua" fullWidth>
                     Registar Usuario
                 </Button>
             </form>
