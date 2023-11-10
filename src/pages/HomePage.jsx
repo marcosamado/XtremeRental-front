@@ -1,7 +1,6 @@
 import React from 'react';
 import Carrusel from '../components/Home/Carrusel';
 import { Link } from 'react-router-dom';
-import { usePageContext } from '../context/PageContext';
 
 const HomePage = () => {
     return (
