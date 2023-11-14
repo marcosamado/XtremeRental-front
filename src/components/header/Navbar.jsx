@@ -7,7 +7,7 @@ import xtremeLogo from '/logo.png';
 import { useContext, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
-import UserAvatar from './userAvatar.jsx';
+import UserAvatar from './UserAvatar.jsx';
 
 const Navbar = () => {
     const { authUser, setAuthUser, userAdmin, setUserAdmin } =
