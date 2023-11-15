@@ -1,20 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { UserEditModal } from '../components/admin/UserEditModal';
 
 const ManageUsersPage = () => {
     const { data } = useLoaderData();
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen((cur) => !cur);
+
+    const [mostrarForm, setMostrarForm] = useState(false);
+
+    const [formData, setFormData] = useState({
+        nombreDeUsuario: '',
+        nombre: '',
+        apellido: '',
+        email: '',
+        contrasena: '',
+        validarcontrasena: '',
+        esAdmin: false,
+    });
+
+    const {
+        nombreDeUsuario,
+        nombre,
+        apellido,
+        email,
+        contrasena,
+        validarcontrasena,
+    } = formData;
+
     console.log(data);
     return (
-        <div className="">
+        <div className="  min-h-screen p-2">
             {data.map((user) => (
-                <ul key={user.id} className="flex flex-col border-2 p-5">
-                    <li>Id: {user.id}</li>
-                    <li>Usuario: {user.nombreDeUsuario}</li>
-                    <li>Nombre: {user.nombre}</li>
-                    <li>Apellido: {user.apellido}</li>
-                    <li>Email: {user.email}</li>
-                    <li>es Administrador: {user.esAdmin ? 'si' : 'no'}</li>
-                </ul>
+                <>
+                    <div className="flex flex-row justify-between border shadow-md mt-2 p-2">
+                        <ul key={user.id} className="flex gap-3 p-5">
+                            <li>
+                                <span className=" font-bold">Usuario:</span>{' '}
+                                {user.nombreDeUsuario}
+                            </li>
+                            <li>
+                                <span className=" font-bold">Id: </span>
+                                {user.id}
+                            </li>
+                            <li>
+                                <span className=" font-bold">Nombre: </span>
+                                {user.nombre}
+                            </li>
+                            <li>
+                                <span className=" font-bold">Apellido: </span>
+                                {user.apellido}
+                            </li>
+                            <li>
+                                <span className=" font-bold">Email: </span>
+                                {user.email}
+                            </li>
+                            <li>
+                                <span className=" font-bold">
+                                    Administrador:{' '}
+                                </span>
+                                {user.esAdmin ? 'si' : 'no'}
+                            </li>
+                        </ul>
+                        <button
+                            className="bg-colorAgua text-white p-2 text-base text-center rounded-md h-10 self-center"
+                            onClick={handleOpen}
+                        >
+                            Gestionar
+                        </button>
+                    </div>
+                    <div>
+                        <UserEditModal handleOpen={handleOpen} open={open} />
+                    </div>
+                </>
             ))}
         </div>
     );
