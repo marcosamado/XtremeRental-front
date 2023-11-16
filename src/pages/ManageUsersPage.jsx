@@ -5,75 +5,75 @@ import { UserEditModal } from '../components/admin/UserEditModal';
 const ManageUsersPage = () => {
     const { data } = useLoaderData();
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen((cur) => !cur);
+    // const [open, setOpen] = useState(false);
+    // const handleOpen = () => setOpen((cur) => !cur);
 
-    const [mostrarForm, setMostrarForm] = useState(false);
+    // const [formData, setFormData] = useState({
+    //     nombreDeUsuario: '',
+    //     nombre: '',
+    //     apellido: '',
+    //     email: '',
+    //     contrasena: '',
+    //     validarcontrasena: '',
+    //     esAdmin: false,
+    // });
 
-    const [formData, setFormData] = useState({
-        nombreDeUsuario: '',
-        nombre: '',
-        apellido: '',
-        email: '',
-        contrasena: '',
-        validarcontrasena: '',
-        esAdmin: false,
-    });
-
-    const {
-        nombreDeUsuario,
-        nombre,
-        apellido,
-        email,
-        contrasena,
-        validarcontrasena,
-    } = formData;
+    // const {
+    //     nombreDeUsuario,
+    //     nombre,
+    //     apellido,
+    //     email,
+    //     contrasena,
+    //     validarcontrasena,
+    // } = formData;
 
     console.log(data);
     return (
         <div className="  min-h-screen p-2">
             {data.map((user) => (
-                <>
+                <div key={user.id}>
                     <div className="flex flex-row justify-between border shadow-md mt-2 p-2">
-                        <ul key={user.id} className="flex gap-3 p-5">
-                            <li>
-                                <span className=" font-bold">Usuario:</span>{' '}
-                                {user.nombreDeUsuario}
-                            </li>
-                            <li>
-                                <span className=" font-bold">Id: </span>
-                                {user.id}
-                            </li>
-                            <li>
-                                <span className=" font-bold">Nombre: </span>
-                                {user.nombre}
-                            </li>
-                            <li>
-                                <span className=" font-bold">Apellido: </span>
-                                {user.apellido}
-                            </li>
-                            <li>
-                                <span className=" font-bold">Email: </span>
-                                {user.email}
-                            </li>
-                            <li>
-                                <span className=" font-bold">
-                                    Administrador:{' '}
-                                </span>
-                                {user.esAdmin ? 'si' : 'no'}
-                            </li>
-                        </ul>
+                        <table className="table-auto">
+                            <tbody>
+                                <tr>
+                                    <td className="font-bold">Usuario:</td>
+                                    <td>{user.nombreDeUsuario}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold pr-4">Id:</td>
+                                    <td>{user.id}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold pr-4">Nombre:</td>
+                                    <td>{user.nombre}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold pr-4">
+                                        Apellido:
+                                    </td>
+                                    <td>{user.apellido}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold pr-4">Email:</td>
+                                    <td>{user.email}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold pr-4">
+                                        Administrador:
+                                    </td>
+                                    <td>{user.esAdmin ? 'si' : 'no'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <button
-                            className="bg-colorAgua text-white p-2 text-base text-center rounded-md h-10 self-center"
-                            onClick={handleOpen}
+                            className={`bg-colorAgua text-white text-xs p-1 text-center rounded-md h-10 self-center ${
+                                user.esAdmin && 'bg-colorCalido'
+                            }`}
                         >
-                            Gestionar
+                            {user.esAdmin ? 'Quitar admin' : 'Hacer admin'}
                         </button>
                     </div>
-                    <div>
-                        <UserEditModal handleOpen={handleOpen} open={open} />
-                    </div>
-                </>
+                </div>
             ))}
         </div>
     );

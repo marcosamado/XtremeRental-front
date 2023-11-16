@@ -13,13 +13,6 @@ const ProductsPage = () => {
     const { tipo } = queryString.parse(search);
 
     //Logica Pagination
-    const itemsPerPage = 5;
-    const totalPages = Math.ceil(data.length / itemsPerPage);
-    const [pages, setPages] = useState(totalPages);
-
-    const firstIndex = (active - 1) * itemsPerPage;
-    const lastIndex = firstIndex + itemsPerPage;
-
     let filterData = [];
     if (tipo === 'nieve')
         filterData = data.filter((product) => product.categoria === 'nieve');
@@ -27,6 +20,13 @@ const ProductsPage = () => {
         filterData = data.filter((product) => product.categoria === 'montaña');
     if (tipo === 'acuaticos')
         filterData = data.filter((product) => product.categoria === 'agua');
+
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const [pages, setPages] = useState(totalPages);
+
+    const firstIndex = (active - 1) * itemsPerPage;
+    const lastIndex = firstIndex + itemsPerPage;
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 

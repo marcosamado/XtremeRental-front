@@ -81,7 +81,7 @@ export function RegisterForm() {
                 apellido,
                 email,
                 contrasena,
-                esAdmin: true,
+                esAdmin: false,
             };
 
             const url = 'http://localhost:8080/usuarios';

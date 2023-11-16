@@ -24,7 +24,7 @@ export const ProductCard = ({
                 <Link to={`/productos/${id}`}>
                     <img
                         className="w-full h-full "
-                        src={imagenes[0].url}
+                        src={imagenes[0]?.url}
                         alt={nombreProducto}
                     />
                 </Link>
