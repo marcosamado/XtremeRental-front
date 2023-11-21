@@ -7,13 +7,16 @@ import xtremeLogo from '/logo.png';
 import { useContext, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
-import UserAvatar from './UserAvatar.jsx';
+
+import UserAvatar from './userAvatar.jsx';
 
 const Navbar = () => {
     const { authUser, setAuthUser, userAdmin, setUserAdmin } =
         useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
+
+    const token = localStorage.getItem('jwt');
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);
@@ -66,7 +69,7 @@ const Navbar = () => {
                 } bg-colorOscuro/80 min-w-full fixed right-0 top-24 transition-all duration-500 md:hidden px-3 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
             >
                 <div className={` flex flex-col gap-2 `}>
-                    {authUser ? (
+                    {token ? (
                         <UserAvatar />
                     ) : (
                         <div className="max-w-fit" onClick={handleClosenavbar}>
@@ -231,7 +234,7 @@ const Navbar = () => {
                 className="hidden md:block order-2"
                 onClick={handleClosenavbar}
             >
-                {authUser ? (
+                {token ? (
                     <UserAvatar />
                 ) : (
                     <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>

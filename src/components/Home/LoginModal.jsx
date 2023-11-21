@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
     Button,
     Dialog,
@@ -18,17 +18,71 @@ import { Link } from 'react-router-dom';
 export function LoginModal() {
     const { authUser, setAuthUser, setUserAdmin, datosUser } =
         useContext(UserContext);
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen((cur) => !cur);
-
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [loginData, setLoginData] = useState({
+        username: '',
+        password: '',
+    });
+    const [errorLogin, setErrorLogin] = useState(false);
 
-    const handleLogin = () => {
-        handleOpen();
-        datosUser.esAdmin && setUserAdmin(true);
-        setAuthUser(true);
-        navigate('/');
+    const { username, password } = loginData;
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setLoginData({ ...loginData, [name]: value });
+
+        setErrorLogin(false);
     };
+
+    const handleLogin = async () => {
+        try {
+            const data = await authLogin(loginData);
+
+            if (data) {
+                authLogin(loginData);
+
+                handleOpen();
+
+                navigate('/');
+            } else {
+            }
+        } catch (error) {
+            console.error('Error al manejar el inicio de sesión:', error);
+        }
+    };
+
+    const authLogin = async (payload) => {
+        const url = 'http://localhost:8080/auth/login';
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        };
+
+        try {
+            const response = await fetch(url, settings);
+
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+
+            const data = await response.json();
+            localStorage.setItem('jwt', JSON.stringify(data));
+            setAuthUser(true);
+
+            return data;
+        } catch (error) {
+            console.error('Error en la autenticación:', error);
+            setErrorLogin(true);
+
+            throw error;
+        }
+    };
+
+    const handleOpen = () => setOpen((cur) => !cur);
 
     return (
         <>
@@ -56,35 +110,47 @@ export function LoginModal() {
                         >
                             Ingresa tus datos
                         </Typography>
-                        <Typography className="-mb-2" variant="h6">
-                            Email
-                        </Typography>
-                        <Input label="Email" size="lg" />
-                        <Typography className="-mb-2" variant="h6">
-                            Contraseña
-                        </Typography>
-                        <Input type="password" label="Password" size="lg" />
-                        <div className="-ml-2.5 -mt-3">
-                            <Checkbox label="Remember Me" />
-                        </div>
+                        {/* <Typography className="-mb-2" variant="h6"></Typography> */}
+                        <Input
+                            name="username"
+                            value={username}
+                            onChange={handleChange}
+                            label="Nombre de usuario"
+                            size="lg"
+                        />
+                        {/* <Typography className="-mb-2" variant="h6"></Typography> */}
+                        <Input
+                            name="password"
+                            value={password}
+                            onChange={handleChange}
+                            type="password"
+                            label="Password"
+                            size="lg"
+                        />
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button
                             variant="gradient"
                             onClick={handleLogin}
                             fullWidth
+                            color="red"
                         >
                             iniciar sesion
                         </Button>
+                        {errorLogin && (
+                            <Typography className="flex justify-center mt-5 text-colorCalido">
+                                Los datos son incorrectos
+                            </Typography>
+                        )}
                         <Typography
                             variant="h6"
-                            className="mt-4 flex justify-center gap-1"
+                            className="mt-4 flex justify-center gap-1 "
                         >
                             No estas registrado?
                             <Link
                                 onClick={handleOpen}
                                 to="/registro"
-                                className="font-bold text-colorOscuro"
+                                className="font-bold text-colorAgua"
                             >
                                 Crear Cuenta
                             </Link>

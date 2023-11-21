@@ -16,6 +16,7 @@ const UserAvatar = () => {
                 <IoMdSettings className="text-white text-3xl" />
                 <button
                     onClick={() => {
+                        localStorage.removeItem('jwt');
                         setAuthUser(false);
                         setUserAdmin(false);
                     }}

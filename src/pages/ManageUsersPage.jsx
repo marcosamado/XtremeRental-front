@@ -36,12 +36,12 @@ const ManageUsersPage = () => {
                         <table className="table-auto">
                             <tbody>
                                 <tr>
-                                    <td className="font-bold">Usuario:</td>
-                                    <td>{user.nombreDeUsuario}</td>
-                                </tr>
-                                <tr>
                                     <td className="font-bold pr-4">Id:</td>
                                     <td>{user.id}</td>
+                                </tr>
+                                <tr>
+                                    <td className="font-bold">Usuario:</td>
+                                    <td>{user.username}</td>
                                 </tr>
                                 <tr>
                                     <td className="font-bold pr-4">Nombre:</td>
@@ -61,13 +61,19 @@ const ManageUsersPage = () => {
                                     <td className="font-bold pr-4">
                                         Administrador:
                                     </td>
-                                    <td>{user.esAdmin ? 'si' : 'no'}</td>
+                                    <td>
+                                        {user.role === 'USER'
+                                            ? 'USER'
+                                            : 'ADMIN'}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <button
-                            className={`bg-colorAgua text-white text-xs p-1 text-center rounded-md h-10 self-center ${
-                                user.esAdmin && 'bg-colorCalido'
+                            className={` text-white text-xs p-1 text-center rounded-md h-10 self-center ${
+                                user.role == 'USER'
+                                    ? 'bg-colorAgua'
+                                    : 'bg-colorCalido'
                             }`}
                         >
                             {user.esAdmin ? 'Quitar admin' : 'Hacer admin'}

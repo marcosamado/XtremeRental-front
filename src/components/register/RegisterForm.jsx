@@ -8,27 +8,20 @@ export function RegisterForm() {
         useContext(UserContext);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        nombreDeUsuario: '',
+        username: '',
         nombre: '',
         apellido: '',
         email: '',
-        contrasena: '',
-        validarcontrasena: '',
-        esAdmin: false,
+        password: '',
+        validarPassword: '',
     });
     const [error, setError] = useState({
         errorPassword: '',
         erroresvalidaciones: '',
     });
 
-    const {
-        nombreDeUsuario,
-        nombre,
-        apellido,
-        email,
-        contrasena,
-        validarcontrasena,
-    } = formData;
+    const { username, nombre, apellido, email, password, validarPassword } =
+        formData;
 
     const handleChange = (e) => {
         setError({
@@ -42,29 +35,23 @@ export function RegisterForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        validaciones(
-            nombreDeUsuario,
-            nombre,
-            apellido,
-            contrasena,
-            validarcontrasena,
-        );
+        validaciones(username, nombre, apellido, password, validarPassword);
     };
 
     const validaciones = (
-        nombreDeUsuario,
+        username,
         nombre,
         apellido,
-        contrasena,
-        validarcontrasena,
+        password,
+        validarPassword,
     ) => {
-        if (contrasena !== validarcontrasena) {
+        if (password !== validarPassword) {
             setError({
                 ...error,
                 errorPassword: 'Las contraseñas no coinciden',
             });
         } else if (
-            nombreDeUsuario.trim().length < 3 ||
+            username.trim().length < 3 ||
             nombre.trim().length < 3 ||
             apellido.trim().length < 3
         ) {
@@ -76,15 +63,14 @@ export function RegisterForm() {
             return;
         } else {
             const payload = {
-                nombreDeUsuario,
+                username,
                 nombre,
                 apellido,
                 email,
-                contrasena,
-                esAdmin: false,
+                password,
             };
 
-            const url = 'http://localhost:8080/usuarios';
+            const url = 'http://localhost:8080/auth/register';
             const settings = {
                 method: 'POST',
                 headers: {
@@ -96,21 +82,19 @@ export function RegisterForm() {
             fetch(url, settings)
                 .then((response) => response.json())
                 .then((data) => {
-                    setDatosUser(data);
+                    localStorage.setItem('jwt', JSON.stringify(data));
                 });
             setAuthUser(true);
             datosUser.esAdmin && setUserAdmin(true);
 
             navigate('/');
-
             setFormData({
-                nombreDeUsuario: '',
+                username: '',
                 nombre: '',
                 apellido: '',
                 email: '',
-                contrasena: '',
-                validarcontrasena: '',
-                esAdmin: false,
+                password: '',
+                validarPassword: '',
             });
         }
     };
@@ -145,9 +129,9 @@ export function RegisterForm() {
                         placeholder="Nombre de usuario"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900 "
                         autoComplete="new-password"
-                        name="nombreDeUsuario"
+                        name="username"
                         type="text"
-                        value={nombreDeUsuario}
+                        value={username}
                         onChange={handleChange}
                         labelProps={{
                             className: 'before:content-none after:content-none',
@@ -221,7 +205,7 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
-                        contrasena
+                        Contraseña
                     </Typography>
                     <Input
                         required
@@ -231,9 +215,9 @@ export function RegisterForm() {
                         placeholder="********"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         autoComplete="new-password"
-                        name="contrasena"
+                        name="password"
                         type="password"
-                        value={contrasena}
+                        value={password}
                         onChange={handleChange}
                         labelProps={{
                             className: 'before:content-none after:content-none',
@@ -244,7 +228,7 @@ export function RegisterForm() {
                         color="blue-gray"
                         className="-mb-3"
                     >
-                        Confirmar contrasena
+                        Confirmar contraseña
                     </Typography>
                     <Input
                         required
@@ -254,9 +238,9 @@ export function RegisterForm() {
                         placeholder="********"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         autoComplete="new-password"
-                        name="validarcontrasena"
+                        name="validarPassword"
                         type="password"
-                        value={validarcontrasena}
+                        value={validarPassword}
                         onChange={handleChange}
                         labelProps={{
                             className: 'before:content-none after:content-none',
