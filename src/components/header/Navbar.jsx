@@ -15,6 +15,8 @@ const Navbar = () => {
         useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
+    const [searchData, setSearchData] = useState('');
+    // const [data, setData] = useState({});
 
     const token = localStorage.getItem('jwt');
 
@@ -30,6 +32,32 @@ const Navbar = () => {
         setOpenProducts(!openProducts);
     };
 
+    const handleChange = (event) => {
+        setSearchData(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        getSearch(searchData);
+    };
+
+    const getSearch = async (search) => {
+        const url = `http://localhost:8080/productos/busqueda/${search}`;
+        const settings = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        fetch(url, settings)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
+    };
+
     return (
         <div className="flex flex-row items-center justify-around md:justify-around md:max-w-5xl md:mx-auto">
             <div className="w-24 h-24">
@@ -41,15 +69,19 @@ const Navbar = () => {
                     />
                 </Link>
             </div>
-            <form className="relative mb-1 md:w-80 md:order-2 md:h-auto">
+            <form
+                onSubmit={handleSubmit}
+                className="relative mb-1 md:w-80 md:order-2 md:h-auto"
+            >
                 <input
+                    onChange={handleChange}
                     className="p-[5px] rounded-sm outline-none text-sm md:w-full md:h-8"
                     type="text"
                     name="search"
                     placeholder="¿Que buscas?"
                     maxLength={15}
                 />
-                <button className="">
+                <button className="" type="submit">
                     <BiSearch className="text-gray-400 w-8 text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
                 </button>
             </form>
