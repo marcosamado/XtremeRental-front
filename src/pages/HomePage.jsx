@@ -1,11 +1,8 @@
 import React from 'react';
 import Carrusel from '../components/Home/Carrusel';
 import { Link } from 'react-router-dom';
-import { usePageContext } from '../context/pageContext';
 
 const HomePage = () => {
-    const { active } = usePageContext();
-
     return (
         <div className="bg-gradient-to-b from-red-100 to-sky-100">
             <section className="mx-auto p-5 max-w-7xl">
@@ -70,34 +67,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// export const getProductsRandom = async () => {
-//     const res = await fetch('http://localhost:8080/productos');
-
-//     if (!res.ok)
-//         throw {
-//             status: res.status,
-//             statusText: 'No Encontrado',
-//         };
-
-//     const allProducts = await res.json();
-//     const randomProducts = getRandomProducts(allProducts, 10);
-
-//     return { data: randomProducts };
-// };
-
-// function getRandomProducts(allProducts, count) {
-//     const randomIndexes = [];
-//     const randomProducts = [];
-
-//     while (randomIndexes.length < count) {
-//         const randomIndex = Math.floor(Math.random() * allProducts.length);
-
-//         if (!randomIndexes.includes(randomIndex)) {
-//             randomIndexes.push(randomIndex);
-//             randomProducts.push(allProducts[randomIndex]);
-//         }
-//     }
-
-//     return randomProducts;
-// }

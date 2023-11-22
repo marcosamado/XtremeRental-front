@@ -4,16 +4,21 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
-import { useState } from 'react';
-import { usePageContext } from '../../context/pageContext';
+import { useContext, useEffect, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
+import { UserContext } from '../../context/UserContext.jsx';
+
+import UserAvatar from './userAvatar.jsx';
 
 const Navbar = () => {
-    const { active } = usePageContext();
+    const { authUser, setAuthUser, userAdmin, setUserAdmin, datosUser } =
+        useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
-    // ESTO ES PARA AUTENTICAR SI EL USUARIO ES ADMIN O NO , y DEBE IR EN UN CONTEXT
-    const [userAdmin, setUserAdmin] = useState(true);
+    const [searchData, setSearchData] = useState('');
+
+    const token = localStorage.getItem('jwt');
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);
@@ -27,6 +32,40 @@ const Navbar = () => {
         setOpenProducts(!openProducts);
     };
 
+    const handleChange = (event) => {
+        setTimeout(() => {
+            setSearchData(event.target.value);
+        }, 3000);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // getSearch(searchData);
+    };
+
+    useEffect(() => {
+        if (searchData.length >= 3) {
+            getSearch(searchData);
+        }
+    }, [searchData]);
+
+    const getSearch = async (search) => {
+        const url = `http://localhost:8080/productos/busqueda/${search}`;
+        const settings = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        fetch(url, settings)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
+    };
+
     return (
         <div className="flex flex-row items-center justify-around md:justify-around md:max-w-5xl md:mx-auto">
             <div className="w-24 h-24">
@@ -38,15 +77,19 @@ const Navbar = () => {
                     />
                 </Link>
             </div>
-            <form className="relative mb-1 md:w-80 md:order-2 md:h-auto">
+            <form
+                onSubmit={handleSubmit}
+                className="relative mb-1 md:w-80 md:order-2 md:h-auto"
+            >
                 <input
+                    onChange={handleChange}
                     className="p-[5px] rounded-sm outline-none text-sm md:w-full md:h-8"
                     type="text"
                     name="search"
                     placeholder="¿Que buscas?"
                     maxLength={15}
                 />
-                <button className="">
+                <button className="" type="submit">
                     <BiSearch className="text-gray-400 w-8 text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
                 </button>
             </form>
@@ -66,9 +109,13 @@ const Navbar = () => {
                 } bg-colorOscuro/80 min-w-full fixed right-0 top-24 transition-all duration-500 md:hidden px-3 bg-opacity-60 bg-clip-padding backdrop-blur-md`}
             >
                 <div className={` flex flex-col gap-2 `}>
-                    <div to="/login" onClick={handleClosenavbar}>
-                        <LoginModal>Iniciar sesion</LoginModal>
-                    </div>
+                    {token ? (
+                        <UserAvatar />
+                    ) : (
+                        <div className="max-w-fit" onClick={handleClosenavbar}>
+                            <LoginModal />
+                        </div>
+                    )}
                 </div>
                 <ul
                     className={`flex flex-col text-left gap-1 text-xl text-white mt-5`}
@@ -133,6 +180,13 @@ const Navbar = () => {
                             Carrito
                         </li>
                     </Link>
+                    {user?.role === 'ADMIN' && (
+                        <Link to="/administrador" onClick={handleClosenavbar}>
+                            <li className="hover:bg-orangeMain rounded-sm p-2">
+                                Admin
+                            </li>
+                        </Link>
+                    )}
                 </ul>
             </div>
 
@@ -165,11 +219,6 @@ const Navbar = () => {
                         >
                             Productos
                         </li>
-                        {/* <MdKeyboardArrowRight
-                            className={`${
-                                openProducts && "rotate-90 text-colorAgua"
-                            } text-3xl transition-all duration-300`}
-                        /> */}
                     </div>
                     <div
                         onMouseEnter={() => setOpenProducts(true)}
@@ -220,7 +269,7 @@ const Navbar = () => {
                         Carrito
                     </li>
                 </Link>
-                {userAdmin && (
+                {user?.role === 'ADMIN' && (
                     <Link to="/administrador" onClick={handleClosenavbar}>
                         <li className="hover:bg-orangeMain rounded-sm p-2">
                             Admin
@@ -232,11 +281,12 @@ const Navbar = () => {
                 className="hidden md:block order-2"
                 onClick={handleClosenavbar}
             >
-                <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3">
-                    
-                </LoginModal>
+                {token ? (
+                    <UserAvatar />
+                ) : (
+                    <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
+                )}
             </div>
-            {/* <LoginModal></LoginModal> */}
         </div>
     );
 };

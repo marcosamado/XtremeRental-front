@@ -79,7 +79,7 @@ const AddProductPage = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('holis');
+
         const res = validaciones(
             nombreProducto,
             descripcionProducto,
@@ -89,15 +89,6 @@ const AddProductPage = () => {
         );
 
         if (res) {
-            // console.log(
-            //     nombreProducto,
-            //     descripcionProducto,
-            //     stock,
-            //     precioPorHora,
-            //     imagenes,
-            //     categoria,
-            // );
-
             const payload = {
                 nombreProducto,
                 descripcionProducto,
@@ -106,8 +97,6 @@ const AddProductPage = () => {
                 imagenes,
                 categoria,
             };
-
-            // console.log(payload);
 
             const url = 'http://localhost:8080/productos';
             const settings = {
@@ -157,7 +146,6 @@ const AddProductPage = () => {
                 <input
                     type="text"
                     name="nombreProducto"
-                    // placeholder="Titulo del producto"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     value={nombreProducto}
                     onChange={handleChange}
@@ -171,11 +159,9 @@ const AddProductPage = () => {
                 <input
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
-                    // placeholder="Descripcion del producto"
                     name="descripcionProducto"
                     value={descripcionProducto}
                     onChange={handleChange}
-                    // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
                 <label
                     className="block  text-gray-700 text-lg font-bold "
@@ -186,11 +172,9 @@ const AddProductPage = () => {
                 <input
                     type="text"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
-                    // placeholder="Stock del producto"
                     name="stock"
                     value={stock}
                     onChange={handleChange}
-                    // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
                 <label
                     className="block  text-gray-700 text-lg font-bold "
@@ -200,11 +184,9 @@ const AddProductPage = () => {
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
-                    // placeholder="Precio del producto"
                     name="precioPorHora"
                     value={precioPorHora}
                     onChange={handleChange}
-                    // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
                 <label
                     className="block  text-gray-700 text-lg font-bold "
@@ -215,27 +197,15 @@ const AddProductPage = () => {
                 <input
                     type="file"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
-                    // placeholder="Link de la imagen"
                     name="imagenes"
                     files={imagenes}
                     onChange={handleChangeImg}
                     ref={imgRef}
-                    // onChange={event => setDatosForm({...datosForm, description: event.target.value})}
                 />
                 <button type="button" onClick={handleClick}>
                     subir imagen
                 </button>
-                {/* <div className="form-check mb-3">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        name="priority"
-                        id="input-check"
-                        checked={priority}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="input-check">Dar Prioridad</label>
-                </div> */}
+
                 <label
                     className="block  text-gray-700 text-lg font-bold "
                     htmlFor="category"
@@ -247,7 +217,6 @@ const AddProductPage = () => {
                     name="categoria"
                     value={categoria}
                     onChange={handleChange}
-                    // onChange={event => setDatosForm({...datosForm, state: event.target.value})}
                 >
                     <option value="nieve">Nieve</option>
                     <option value="montaña">montaña</option>

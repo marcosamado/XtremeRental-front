@@ -1,7 +1,7 @@
 import { BsFillCartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
-const Card = ({ nombreProducto, precioPorHora, imagenPrincipal, id }) => {
+const Card = ({ nombreProducto, precioPorHora, imagenes, id }) => {
     return (
         <div className="relative flex flex-col mb-10 h-auto mx-auto max-w-xs justify-center items-center bg-white border border-gray-700 rounded-lg shadow ">
             <Link to={`/productos/${id}`}>
@@ -9,7 +9,7 @@ const Card = ({ nombreProducto, precioPorHora, imagenPrincipal, id }) => {
                     <img
                         className="w-full h-full"
                         // className="w-full h-60 p-8 rounded-t-lg"
-                        src={imagenPrincipal}
+                        src={imagenes[0]?.url}
                         alt={nombreProducto}
                     />
                 </div>

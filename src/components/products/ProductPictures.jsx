@@ -1,4 +1,4 @@
-const ProductPictures = ({ setCurrentPicture }) => {
+const ProductPictures = ({ setCurrentPicture, data }) => {
     let array = [
         {
             images: [
@@ -25,12 +25,13 @@ const ProductPictures = ({ setCurrentPicture }) => {
             ],
         },
     ];
+    console.log(data.imagenes);
 
     let newProducts = [];
-    if (array[0].images.length > 5) {
-        newProducts = array[0].images.slice(0, 5);
+    if (data.imagenes.length > 5) {
+        newProducts = data.imagenes.slice(0, 5);
     } else {
-        newProducts = array[0].images;
+        newProducts = data.imagenes;
     }
 
     const handleMouseEnter = (index) => {
@@ -50,7 +51,7 @@ const ProductPictures = ({ setCurrentPicture }) => {
                 >
                     <img
                         className="w-full h-full object-contain"
-                        src={picture.path}
+                        src={picture.url}
                         alt={`image-for-picture-${picture.id}`}
                     />
                 </div>

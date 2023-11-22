@@ -29,20 +29,21 @@ const ItemDetailPage = () => {
                     <ProductPictures
                         setCurrentPicture={setCurrentPicture}
                         currentPicture={currentPicture}
+                        data={data}
                     />
                     <div className="flex-1 flex justify-center order-1">
                         <div className=" w-48 h-[260px] md:w-96 md:h-[520px] ">
                             <img
                                 className="w-full h-full object-contain"
                                 // src={images[currentPicture].path}
-                                src={data.imagenPrincipal}
-                                alt={data.nombreProducto}
+                                src={data?.imagenes[currentPicture]?.url}
+                                alt={data?.nombreProducto}
                             />
                         </div>
                     </div>
 
                     <div className="flex-2 order-2 ">
-                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-3">
+                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-3 md:h-[450px]">
                             <p className="text-2xl md:text-xl font-bold">
                                 ${data.precioPorHora}
                             </p>

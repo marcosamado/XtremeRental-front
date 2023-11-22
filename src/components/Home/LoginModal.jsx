@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState } from 'react';
+import { useContext } from 'react';
 import {
     Button,
     Dialog,
@@ -10,9 +11,94 @@ import {
     Input,
     Checkbox,
 } from '@material-tailwind/react';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function LoginModal() {
-    const [open, setOpen] = React.useState(false);
+    const { authUser, setAuthUser, setUserAdmin, datosUser, setDatosUser } =
+        useContext(UserContext);
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [loginData, setLoginData] = useState({
+        username: '',
+        password: '',
+    });
+    const [errorLogin, setErrorLogin] = useState(false);
+
+    const { username, password } = loginData;
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setLoginData({ ...loginData, [name]: value });
+
+        setErrorLogin(false);
+    };
+
+    const handleLogin = async () => {
+        try {
+            const data = await authLogin(loginData);
+
+            if (data) {
+                authLogin(loginData);
+
+                handleOpen();
+
+                navigate('/');
+            } else {
+            }
+        } catch (error) {
+            console.error('Error al manejar el inicio de sesión:', error);
+        }
+    };
+
+    const authLogin = async (payload) => {
+        const url = 'http://localhost:8080/auth/login';
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        };
+
+        try {
+            const response = await fetch(url, settings);
+
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+
+            const data = await response.json();
+            setDatosUser({
+                username: data.username,
+                nombre: data.nombre,
+                apellido: data.apellido,
+                email: data.email,
+                role: data.role,
+            });
+            localStorage.setItem(
+                'user',
+                JSON.stringify({
+                    username: data.username,
+                    nombre: data.nombre,
+                    apellido: data.apellido,
+                    email: data.email,
+                    role: data.role,
+                }),
+            );
+            localStorage.setItem('jwt', JSON.stringify(data.token));
+            setAuthUser(true);
+
+            return data;
+        } catch (error) {
+            console.error('Error en la autenticación:', error);
+            setErrorLogin(true);
+
+            throw error;
+        }
+    };
+
     const handleOpen = () => setOpen((cur) => !cur);
 
     return (
@@ -41,41 +127,50 @@ export function LoginModal() {
                         >
                             Ingresa tus datos
                         </Typography>
-                        <Typography className="-mb-2" variant="h6">
-                            Email
-                        </Typography>
-                        <Input label="Email" size="lg" />
-                        <Typography className="-mb-2" variant="h6">
-                            Password
-                        </Typography>
-                        <Input label="Password" size="lg" />
-                        <div className="-ml-2.5 -mt-3">
-                            <Checkbox label="Remember Me" />
-                        </div>
+                        {/* <Typography className="-mb-2" variant="h6"></Typography> */}
+                        <Input
+                            name="username"
+                            value={username}
+                            onChange={handleChange}
+                            label="Nombre de usuario"
+                            size="lg"
+                        />
+                        {/* <Typography className="-mb-2" variant="h6"></Typography> */}
+                        <Input
+                            name="password"
+                            value={password}
+                            onChange={handleChange}
+                            type="password"
+                            label="Password"
+                            size="lg"
+                        />
                     </CardBody>
                     <CardFooter className="pt-0">
                         <Button
                             variant="gradient"
-                            onClick={handleOpen}
+                            onClick={handleLogin}
                             fullWidth
+                            color="red"
                         >
                             iniciar sesion
                         </Button>
+                        {errorLogin && (
+                            <Typography className="flex justify-center mt-5 text-colorCalido">
+                                Los datos son incorrectos
+                            </Typography>
+                        )}
                         <Typography
-                            variant="small"
-                            className="mt-4 flex justify-center"
+                            variant="h6"
+                            className="mt-4 flex justify-center gap-1 "
                         >
                             No estas registrado?
-                            <Typography
-                                as="a"
-                                href="#signup"
-                                variant="small"
-                                color="blue-gray"
-                                className="ml-1 font-bold"
+                            <Link
                                 onClick={handleOpen}
+                                to="/registro"
+                                className="font-bold text-colorAgua"
                             >
-                                crear cuenta
-                            </Typography>
+                                Crear Cuenta
+                            </Link>
                         </Typography>
                     </CardFooter>
                 </Card>
