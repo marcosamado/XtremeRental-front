@@ -232,7 +232,9 @@ const Navbar = () => {
                 className="hidden md:block order-2"
                 onClick={handleClosenavbar}
             >
-                <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3"></LoginModal>
+                <LoginModal className="text-white border w-auto rounded-md text-xs py-2 bg-colorCalido border-colorCalido px-3">
+                    
+                </LoginModal>
             </div>
             {/* <LoginModal></LoginModal> */}
         </div>
