@@ -4,21 +4,21 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
 
 import UserAvatar from './userAvatar.jsx';
 
 const Navbar = () => {
-    const { authUser, setAuthUser, userAdmin, setUserAdmin } =
+    const { authUser, setAuthUser, userAdmin, setUserAdmin, datosUser } =
         useContext(UserContext);
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     const [searchData, setSearchData] = useState('');
-    // const [data, setData] = useState({});
 
     const token = localStorage.getItem('jwt');
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const handleOpenNavbar = () => {
         setOpenNavbar(!openNavbar);
@@ -33,14 +33,22 @@ const Navbar = () => {
     };
 
     const handleChange = (event) => {
-        setSearchData(event.target.value);
+        setTimeout(() => {
+            setSearchData(event.target.value);
+        }, 3000);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        getSearch(searchData);
+        // getSearch(searchData);
     };
+
+    useEffect(() => {
+        if (searchData.length >= 3) {
+            getSearch(searchData);
+        }
+    }, [searchData]);
 
     const getSearch = async (search) => {
         const url = `http://localhost:8080/productos/busqueda/${search}`;
@@ -172,6 +180,13 @@ const Navbar = () => {
                             Carrito
                         </li>
                     </Link>
+                    {user?.role === 'ADMIN' && (
+                        <Link to="/administrador" onClick={handleClosenavbar}>
+                            <li className="hover:bg-orangeMain rounded-sm p-2">
+                                Admin
+                            </li>
+                        </Link>
+                    )}
                 </ul>
             </div>
 
@@ -254,7 +269,7 @@ const Navbar = () => {
                         Carrito
                     </li>
                 </Link>
-                {userAdmin && (
+                {user?.role === 'ADMIN' && (
                     <Link to="/administrador" onClick={handleClosenavbar}>
                         <li className="hover:bg-orangeMain rounded-sm p-2">
                             Admin

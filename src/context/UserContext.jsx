@@ -5,7 +5,9 @@ export const UserContext = createContext();
 function UserProvider(props) {
     const [authUser, setAuthUser] = useState(false);
 
-    const [datosUser, setDatosUser] = useState({});
+    const [datosUser, setDatosUser] = useState(
+        localStorage.getItem('user') || {},
+    );
 
     const [userAdmin, setUserAdmin] = useState(true);
 

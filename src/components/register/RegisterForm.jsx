@@ -82,10 +82,18 @@ export function RegisterForm() {
             fetch(url, settings)
                 .then((response) => response.json())
                 .then((data) => {
-                    localStorage.setItem('jwt', JSON.stringify(data));
+                    setDatosUser({
+                        username: data.username,
+                        nombre: data.nombre,
+                        apellido: data.apellido,
+                        email: data.email,
+                        role: data.role,
+                    });
+                    localStorage.setItem('user', JSON.stringify(data));
+                    localStorage.setItem('jwt', JSON.stringify(data.token));
                 });
             setAuthUser(true);
-            datosUser.esAdmin && setUserAdmin(true);
+            datosUser.role === 'ADMIN' && setUserAdmin(true);
 
             navigate('/');
             setFormData({

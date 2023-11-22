@@ -62,7 +62,7 @@ const ManageUsersPage = () => {
                                         Administrador:
                                     </td>
                                     <td>
-                                        {user.role === 'USER'
+                                        {user?.role === 'USER'
                                             ? 'USER'
                                             : 'ADMIN'}
                                     </td>
@@ -71,12 +71,14 @@ const ManageUsersPage = () => {
                         </table>
                         <button
                             className={` text-white text-xs p-1 text-center rounded-md h-10 self-center ${
-                                user.role == 'USER'
+                                user?.role === 'USER'
                                     ? 'bg-colorAgua'
                                     : 'bg-colorCalido'
                             }`}
                         >
-                            {user.esAdmin ? 'Quitar admin' : 'Hacer admin'}
+                            {user?.role === 'ADMIN'
+                                ? 'Quitar admin'
+                                : 'Hacer admin'}
                         </button>
                     </div>
                 </div>

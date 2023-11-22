@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export function LoginModal() {
-    const { authUser, setAuthUser, setUserAdmin, datosUser } =
+    const { authUser, setAuthUser, setUserAdmin, datosUser, setDatosUser } =
         useContext(UserContext);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -70,7 +70,24 @@ export function LoginModal() {
             }
 
             const data = await response.json();
-            localStorage.setItem('jwt', JSON.stringify(data));
+            setDatosUser({
+                username: data.username,
+                nombre: data.nombre,
+                apellido: data.apellido,
+                email: data.email,
+                role: data.role,
+            });
+            localStorage.setItem(
+                'user',
+                JSON.stringify({
+                    username: data.username,
+                    nombre: data.nombre,
+                    apellido: data.apellido,
+                    email: data.email,
+                    role: data.role,
+                }),
+            );
+            localStorage.setItem('jwt', JSON.stringify(data.token));
             setAuthUser(true);
 
             return data;
