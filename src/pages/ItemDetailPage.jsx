@@ -1,7 +1,9 @@
 import { useState } from 'react';
-
+import { MdLabel } from 'react-icons/md';
+import { TbColorSwatch } from 'react-icons/tb';
 import { useLoaderData } from 'react-router-dom';
 import { useNavigation } from 'react-router-dom';
+import { GiRolledCloth } from 'react-icons/gi';
 import ProductPictures from '../components/products/ProductPictures';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -66,6 +68,31 @@ const ItemDetailPage = () => {
                         Descripcion del producto:
                     </h3>
                     <h3 className=" text-xl">{data.descripcionProducto}</h3>
+                </div>
+                <div className="border-2 p-5 m-4 rounded-md flex flex-col gap-3 bg-white">
+                    <h3 className=" text-xl mb-4 font-bold">
+                        Caracteristicas del Producto:
+                    </h3>
+                    <div className="flex flex-row items-center gap-2">
+                        <MdLabel />
+                        <p className="text-base">
+                            Marca: <span className="text-gray-600">Prada</span>
+                        </p>
+                    </div>
+                    <div className="flex flex-row items-center gap-2">
+                        <TbColorSwatch />
+                        <p className=" text-base">
+                            Color: <span className="text-gray-600">Azul</span>
+                        </p>
+                    </div>
+
+                    <div className="flex flex-row items-center gap-2">
+                        <GiRolledCloth />
+                        <p className=" text-base">
+                            Material:{' '}
+                            <span className="text-gray-600">fibra</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
