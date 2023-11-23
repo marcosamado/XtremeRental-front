@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
 
-import UserAvatar from './userAvatar.jsx';
+import UserAvatar from './UserAvatar.jsx';
 
 const Navbar = () => {
     const { authUser, setAuthUser, userAdmin, setUserAdmin, datosUser } =
@@ -16,6 +16,7 @@ const Navbar = () => {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     const [searchData, setSearchData] = useState('');
+    const [searchedData, setSearchedData] = useState([]);
 
     const token = localStorage.getItem('jwt');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -61,9 +62,7 @@ const Navbar = () => {
 
         fetch(url, settings)
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-            });
+            .then((response) => setSearchedData(response.results));
     };
 
     return (
