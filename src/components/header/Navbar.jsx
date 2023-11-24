@@ -16,6 +16,7 @@ const Navbar = () => {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     const [searchData, setSearchData] = useState('');
+    const [filterProducts, setFilterProducts] = useState([]);
 
     const token = localStorage.getItem('jwt');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -70,7 +71,7 @@ const Navbar = () => {
         fetch(url, settings)
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                setFilterProducts(response);
             });
     };
 
@@ -100,6 +101,29 @@ const Navbar = () => {
                 <button className="" type="submit">
                     <BiSearch className="text-gray-400 w-8 text-2xl absolute top-1 right-0 border-l-2 md:w-9" />
                 </button>
+                <div
+                    className={`${
+                        (filterProducts === 0) & 'hidden '
+                    }bg-white fixed w-[174px] z-50 rounded`}
+                >
+                    {filterProducts?.map((product) => (
+                        <div
+                            key={product.id}
+                            className="flex flex-row items-center gap-2 rounded border-2 border-gray-400"
+                        >
+                            <div className="w-9 h-9">
+                                <img
+                                    className=""
+                                    src={product.imagenes[0].url}
+                                    alt={product.nombreProducto}
+                                />
+                            </div>
+                            <p className="text-sm p-2">
+                                {product.nombreProducto}
+                            </p>
+                        </div>
+                    ))}
+                </div>
             </form>
             <button
                 onClick={handleOpenNavbar}
