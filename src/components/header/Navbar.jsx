@@ -1,22 +1,21 @@
 import { BiSearch } from 'react-icons/bi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BurguerIcon from './BurguerIcon';
 import xtremeLogo from '/logo.png';
 import { useContext, useEffect, useState } from 'react';
 import { LoginModal } from '../Home/LoginModal';
 import { UserContext } from '../../context/UserContext.jsx';
-
 import UserAvatar from './UserAvatar.jsx';
 
 const Navbar = () => {
     const { authUser, setAuthUser, userAdmin, setUserAdmin, datosUser } =
         useContext(UserContext);
+    const navigate = useNavigate();
     const [openNavbar, setOpenNavbar] = useState(false);
     const [openProducts, setOpenProducts] = useState(false);
     const [searchData, setSearchData] = useState('');
-    const [searchedData, setSearchedData] = useState([]);
 
     const token = localStorage.getItem('jwt');
     const user = JSON.parse(localStorage.getItem('user'));
@@ -34,21 +33,29 @@ const Navbar = () => {
     };
 
     const handleChange = (event) => {
-        setTimeout(() => {
-            setSearchData(event.target.value);
-        }, 3000);
+        setSearchData((event.target.name = event.target.value));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // getSearch(searchData);
+        if (searchData.length === 0) return;
+
+        navigate(`/productos/busqueda?search=${searchData}`);
+        setSearchData('');
+        location.reload();
     };
 
     useEffect(() => {
+        let timeoutId;
+
         if (searchData.length >= 3) {
-            getSearch(searchData);
+            timeoutId = setTimeout(() => {
+                getSearch(searchData);
+            }, 1000);
         }
+
+        return () => clearTimeout(timeoutId);
     }, [searchData]);
 
     const getSearch = async (search) => {
@@ -62,7 +69,9 @@ const Navbar = () => {
 
         fetch(url, settings)
             .then((response) => response.json())
-            .then((response) => setSearchedData(response.results));
+            .then((response) => {
+                console.log(response);
+            });
     };
 
     return (
@@ -84,7 +93,7 @@ const Navbar = () => {
                     onChange={handleChange}
                     className="p-[5px] rounded-sm outline-none text-sm md:w-full md:h-8"
                     type="text"
-                    name="search"
+                    value={searchData}
                     placeholder="¿Que buscas?"
                     maxLength={15}
                 />

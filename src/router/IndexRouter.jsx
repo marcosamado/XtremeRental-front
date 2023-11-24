@@ -13,6 +13,7 @@ import AddProductPage from '../pages/AddProductPage';
 import RegisterPage from '../pages/RegisterPage';
 import ManageUsersPage, { getUsers } from '../pages/ManageUsersPage';
 import ProtectedRoute from '../pages/ProtectedRoute';
+import SearchedProductsPage from '../pages/SearchedProductsPage';
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
                         loader: ({ params }) => {
                             return getProductById(params.id);
                         },
+                    },
+                    {
+                        path: 'busqueda',
+                        element: <SearchedProductsPage />,
                     },
                 ],
             },
