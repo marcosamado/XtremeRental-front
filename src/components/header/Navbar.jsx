@@ -44,6 +44,7 @@ const Navbar = () => {
 
         navigate(`/productos/busqueda?search=${searchData}`);
         setSearchData('');
+
         location.reload();
     };
 
@@ -53,7 +54,7 @@ const Navbar = () => {
         if (searchData.length >= 3) {
             timeoutId = setTimeout(() => {
                 getSearch(searchData);
-            }, 1000);
+            }, 0);
         }
 
         return () => clearTimeout(timeoutId);
@@ -103,25 +104,29 @@ const Navbar = () => {
                 </button>
                 <div
                     className={`${
-                        (filterProducts === 0) & 'hidden '
-                    }bg-white fixed w-[174px] z-50 rounded`}
+                        filterProducts === 0 ||
+                        (searchData.length < 3 && 'hidden')
+                    } bg-white fixed w-[170px] z-50  md:w-80 `}
                 >
                     {filterProducts?.map((product) => (
-                        <div
+                        <Link
+                            onClick={() => setSearchData('')}
                             key={product.id}
-                            className="flex flex-row items-center gap-2 rounded border-2 border-gray-400"
+                            to={`/productos/${product.id}`}
                         >
-                            <div className="w-9 h-9">
-                                <img
-                                    className=""
-                                    src={product.imagenes[0].url}
-                                    alt={product.nombreProducto}
-                                />
+                            <div className="flex flex-row items-center gap-2  border-b border-gray-400 shadow-md shadow-gray-300 md:hover:bg-blue-gray-100/50">
+                                <div className="w-11 h-11 p-2 md:w-16 md:h-16 ">
+                                    <img
+                                        className=""
+                                        src={product.imagenes[0].url}
+                                        alt={product.nombreProducto}
+                                    />
+                                </div>
+                                <p className="text-sm p-2 md:text-lg font-medium">
+                                    {product.nombreProducto}
+                                </p>
                             </div>
-                            <p className="text-sm p-2">
-                                {product.nombreProducto}
-                            </p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </form>

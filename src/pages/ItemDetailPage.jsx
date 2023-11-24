@@ -15,7 +15,21 @@ const ItemDetailPage = () => {
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
     const [currentPicture, setCurrentPicture] = useState(0);
+    const [bookingDate, setBookingDate] = useState({
+        startDate: '',
+        endDate: '',
+    });
+    const { startDate, endDate } = bookingDate;
+    // const hoy = new Date().toISOString().split('T')[0];
+    // const fechaMaxima = new Date();
+    // fechaMaxima.setDate(fechaMaxima.getDate() + 30);
+    // const maximo = fechaMaxima.toISOString().split('T')[0];
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setBookingDate({ ...bookingDate, [name]: value });
+    };
 
+    console.log(bookingDate);
     return (
         <div className="">
             <div className="bg-gradient-to-r from-red-100 to-cyan-50 flex flex-col md:max-w-4xl mx-auto shadow-2xl shadow-black md:p-10">
@@ -45,21 +59,50 @@ const ItemDetailPage = () => {
                     </div>
 
                     <div className="flex-2 order-2 ">
-                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-3 md:h-[450px]">
-                            <p className="text-2xl md:text-xl font-bold">
-                                ${data.precioPorHora}
+                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-5 md:h-[450px]">
+                            <p className="text-sm font-semibold">
+                                <span>Precio por Dia: </span>
+                                <span>${data.precioPorHora}</span>
                             </p>
                             {data.stock > 1 && (
-                                <p className="text-xl">
+                                <p className="text-sm font-semibold">
                                     Cantidad: {data.stock}
                                 </p>
                             )}
-                            <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
-                                Reservar
-                            </button>
-                            <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
-                                Agregar al carrito
-                            </button>
+                            <label
+                                className="text-sm font-bold"
+                                htmlFor="startDate"
+                            >
+                                Fecha de retiro
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                type="date"
+                                name="startDate"
+                                value={startDate}
+                            />
+                            <label
+                                className="text-sm font-bold"
+                                htmlFor="endDate"
+                            >
+                                Fecha de devolucion
+                            </label>
+                            <input
+                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                onChange={handleChange}
+                                type="date"
+                                name="endDate"
+                                value={endDate}
+                            />
+                            <div className="flex flex-col gap-2 md:mt-10 md:justify-center md:items-center">
+                                <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
+                                    Reservar
+                                </button>
+                                <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
+                                    Agregar al carrito
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
