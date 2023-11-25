@@ -14,6 +14,8 @@ import RegisterPage from '../pages/RegisterPage';
 import ManageUsersPage, { getUsers } from '../pages/ManageUsersPage';
 import ProtectedRoute from '../pages/ProtectedRoute';
 import SearchedProductsPage from '../pages/SearchedProductsPage';
+import UserProfilePage from '../pages/UserProfilePage';
+import ProtectedRouteUser from '../pages/ProtectedRouteUser';
 
 export const router = createBrowserRouter([
     {
@@ -71,6 +73,16 @@ export const router = createBrowserRouter([
                                 loader: getUsers,
                             },
                         ],
+                    },
+                ],
+            },
+            {
+                path: '/',
+                element: <ProtectedRouteUser />,
+                children: [
+                    {
+                        path: '/usuario/:userName',
+                        element: <UserProfilePage />,
                     },
                 ],
             },
