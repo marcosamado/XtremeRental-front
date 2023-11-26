@@ -23,9 +23,9 @@ const UserAvatar = () => {
                     onClick={() => {
                         localStorage.removeItem('jwt');
                         localStorage.removeItem('user');
-                        setAuthUser(false);
-                        setUserAdmin(false);
+
                         setDatosUser({});
+                        location.reload();
                     }}
                 >
                     <LuLogOut className="text-white text-2xl" />

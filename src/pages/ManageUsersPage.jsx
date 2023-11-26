@@ -1,33 +1,44 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router-dom';
 import { UserEditModal } from '../components/admin/UserEditModal';
 
 const ManageUsersPage = () => {
     const { data } = useLoaderData();
+    const revalidator = useRevalidator();
 
-    // const [open, setOpen] = useState(false);
-    // const handleOpen = () => setOpen((cur) => !cur);
+    const handleRoleClick = (user) => {
+        let userRole = user.role;
 
-    // const [formData, setFormData] = useState({
-    //     nombreDeUsuario: '',
-    //     nombre: '',
-    //     apellido: '',
-    //     email: '',
-    //     contrasena: '',
-    //     validarcontrasena: '',
-    //     esAdmin: false,
-    // });
+        if (userRole === 'admin') {
+            userRole = 'user';
+        } else {
+            userRole = 'admin';
+        }
 
-    // const {
-    //     nombreDeUsuario,
-    //     nombre,
-    //     apellido,
-    //     email,
-    //     contrasena,
-    //     validarcontrasena,
-    // } = formData;
+        cambiarAdmin(user.username, userRole);
+    };
 
-    console.log(data);
+    const cambiarAdmin = async (username, role) => {
+        const settings = {
+            method: 'POST',
+        };
+        try {
+            const res = await fetch(
+                `http://localhost:8080/${role}/${username}`,
+                settings,
+            );
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error('Error al intentar cambiar el rol:', errorData);
+
+                throw new Error('Error al cambiar el rol');
+            }
+            revalidator.revalidate();
+        } catch (error) {
+            console.log('Error inesperado:', error);
+        }
+    };
+
     return (
         <div className="  min-h-screen p-2">
             {data.map((user) => (
@@ -70,6 +81,7 @@ const ManageUsersPage = () => {
                             </tbody>
                         </table>
                         <button
+                            onClick={() => handleRoleClick(user)}
                             className={` text-white text-xs p-1 text-center rounded-md h-10 self-center ${
                                 user?.role === 'USER'
                                     ? 'bg-colorAgua'
