@@ -37,7 +37,7 @@ const AddProductPage = () => {
     const handleChangeImg = (event) => {
         setImgFile(event.target.files);
     };
-
+    console.log(imgFile);
     const {
         nombreProducto,
         descripcionProducto,
@@ -196,6 +196,7 @@ const AddProductPage = () => {
                 </label>
                 <input
                     type="file"
+                    multiple
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
                     name="imagenes"
                     files={imagenes}

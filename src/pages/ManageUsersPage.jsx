@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router-dom';
 import { UserEditModal } from '../components/admin/UserEditModal';
+import { LoadingSpinner } from '../components/products/LoadingSpinner';
 
 const ManageUsersPage = () => {
     const { data } = useLoaderData();
     const revalidator = useRevalidator();
 
     const handleRoleClick = (user) => {
-        let userRole = user.role;
+        let userRole = user.role.toLowerCase();
 
         if (userRole === 'admin') {
             userRole = 'user';
-        } else {
+        } else if (userRole === 'user') {
             userRole = 'admin';
         }
-
+        console.log(userRole);
         cambiarAdmin(user.username, userRole);
     };
 
@@ -24,7 +25,7 @@ const ManageUsersPage = () => {
         };
         try {
             const res = await fetch(
-                `http://localhost:8080/${role}/${username}`,
+                `http://localhost:8080/usuarios/${role}/${username}`,
                 settings,
             );
             if (!res.ok) {
@@ -41,6 +42,15 @@ const ManageUsersPage = () => {
 
     return (
         <div className="  min-h-screen p-2">
+            {revalidator.state === 'loading' && (
+                <div
+                    className={`bg-colorOscuro/80 min-w-full min-h-screen fixed right-0 top-0 transition-all duration-500  px-3 bg-opacity-60 bg-clip-padding backdrop-blur-md max-h-full overflow-scroll py-5`}
+                >
+                    <div className="absolute top-1/2 right-1/2">
+                        <LoadingSpinner />
+                    </div>
+                </div>
+            )}
             {data.map((user) => (
                 <div key={user.id}>
                     <div className="flex flex-row justify-between border shadow-md mt-2 p-2">
