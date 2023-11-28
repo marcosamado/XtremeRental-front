@@ -192,7 +192,7 @@ const AddProductPage = () => {
                     className="block  text-gray-700 text-lg font-bold "
                     htmlFor="imgMain"
                 >
-                    Imagen del producto
+                    Imagenes del producto
                 </label>
                 <input
                     type="file"
@@ -203,8 +203,12 @@ const AddProductPage = () => {
                     onChange={handleChangeImg}
                     ref={imgRef}
                 />
-                <button type="button" onClick={handleClick}>
-                    subir imagen
+                <button
+                    type="button"
+                    onClick={handleClick}
+                    className="bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white p-3 border border-colorAgua hover:border-transparent rounded"
+                >
+                    subir imagenes
                 </button>
 
                 <label
@@ -226,7 +230,7 @@ const AddProductPage = () => {
 
                 <button
                     type="submit"
-                    className="m-5 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white py-3 px-20 border border-colorAgua hover:border-transparent rounde"
+                    className="m-5 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white py-3 px-20 border border-colorAgua hover:border-transparent rounded"
                 >
                     Agregar
                 </button>
