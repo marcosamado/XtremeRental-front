@@ -22,7 +22,7 @@ const ProductsPage = () => {
         filterData = data.filter((product) => product.categoria === 'agua');
 
     const itemsPerPage = 5;
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const totalPages = Math.ceil(filterData.length / itemsPerPage);
     const [pages, setPages] = useState(totalPages);
 
     const firstIndex = (active - 1) * itemsPerPage;
@@ -71,16 +71,6 @@ export const getProducts = async (args) => {
         };
 
     const data = await res.json();
-
-    // const req = args.request;
-
-    // const url = new URL(req.url);
-
-    // const params = url.searchParams;
-    // const tipo = params.get('tipo');
-    // console.log(tipo)
-
-    // let filterData = [];
 
     return { data };
 };

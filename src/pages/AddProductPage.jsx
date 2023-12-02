@@ -1,10 +1,22 @@
 import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router-dom';
 import { useRef } from 'react';
 
 const AddProductPage = () => {
-    const { data } = useLoaderData();
+    const { subCategories } = useLoaderData();
     const [imgFile, setImgFile] = useState([]);
+    const [subCategory, setSubCategory] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [datosForm, setDatosForm] = useState({
+        nombreProducto: '',
+        descripcionProducto: '',
+        stock: 0,
+        precioPorHora: 0,
+        imagenes: [],
+        categoria: 'nieve',
+        subcategorias: [],
+    });
+    const revalidator = useRevalidator();
 
     function validaciones(nombre, descripcion, cantidad, precio, imagen) {
         // if (nombre.trim().length < 4 || nombre.trim().length > 20 )  {
@@ -25,19 +37,10 @@ const AddProductPage = () => {
 
     const imgRef = useRef(null);
 
-    const [datosForm, setDatosForm] = useState({
-        nombreProducto: '',
-        descripcionProducto: '',
-        stock: 0,
-        precioPorHora: 0,
-        imagenes: [],
-        categoria: 'nieve',
-    });
-
     const handleChangeImg = (event) => {
         setImgFile(event.target.files);
     };
-    console.log(imgFile);
+
     const {
         nombreProducto,
         descripcionProducto,
@@ -45,6 +48,7 @@ const AddProductPage = () => {
         precioPorHora,
         imagenes,
         categoria,
+        subcategorias,
     } = datosForm;
     const postImage = async (imgFile) => {
         // if (!file) throw new Error("No hay ningúna imagen para subir");
@@ -77,6 +81,29 @@ const AddProductPage = () => {
         const array = [resImg];
         setDatosForm({ ...datosForm, imagenes: array });
     };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setDatosForm({
+            ...datosForm,
+            [name]: value,
+        });
+    };
+
+    const handleAddCategory = (event) => {
+        setSubCategory(event.target.value);
+    };
+
+    const handleCategories = (event) => {
+        const { name, value } = event.target;
+        console.log(name, value);
+        const categories = JSON.parse(value);
+
+        setSelectedCategories([...selectedCategories, categories]);
+
+        setDatosForm({ ...datosForm, subcategorias: selectedCategories });
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -96,6 +123,7 @@ const AddProductPage = () => {
                 precioPorHora,
                 imagenes,
                 categoria,
+                subcategorias,
             };
 
             const url = 'http://localhost:8080/productos';
@@ -119,13 +147,27 @@ const AddProductPage = () => {
             console.log('error submit');
         }
     };
+    const handleCreateCategory = () => {
+        const payload = {
+            nombre: subCategory,
+        };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setDatosForm({
-            ...datosForm,
-            [name]: value,
-        });
+        const url = 'http://localhost:8080/subcategoria';
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        };
+
+        fetch(url, settings)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    revalidator.revalidate();
+                }
+            });
     };
 
     return (
@@ -180,7 +222,7 @@ const AddProductPage = () => {
                     className="block  text-gray-700 text-lg font-bold "
                     htmlFor="precio"
                 >
-                    Precio por hora del producto
+                    Precio por dia del producto
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
@@ -215,7 +257,7 @@ const AddProductPage = () => {
                     className="block  text-gray-700 text-lg font-bold "
                     htmlFor="category"
                 >
-                    Categoria del producto
+                    Tipo de producto
                 </label>
                 <select
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"
@@ -227,7 +269,53 @@ const AddProductPage = () => {
                     <option value="montaña">montaña</option>
                     <option value="agua">Agua</option>
                 </select>
-
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="subcategories"
+                >
+                    Seleccionar categorias
+                </label>
+                <div className="flex flex-row max-h-60 items-start w-auto flex-wrap justify-around max-w-xs gap-3">
+                    {subCategories?.map((subCategory) => (
+                        <div
+                            key={subCategory.id}
+                            className="flex flex-row justify-start "
+                        >
+                            <input
+                                onChange={handleCategories}
+                                className=""
+                                type="checkbox"
+                                name="nombre"
+                                value={JSON.stringify(subCategory)}
+                            />
+                            <label htmlFor={subCategory.nombre}>
+                                {subCategory.nombre}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+                <label
+                    className="block  text-gray-700 text-lg font-bold "
+                    htmlFor="addCategory"
+                >
+                    Agregar categoria
+                </label>
+                <div className="flex flex-row w-full items-center gap-3 justify-center">
+                    <input
+                        className="bg-white self-center shadow  border rounded w-40 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        name="nombre"
+                        value={subCategory}
+                        onChange={handleAddCategory}
+                    />
+                    <button
+                        type="button"
+                        onClick={handleCreateCategory}
+                        className="text-sm p-2 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white border border-colorAgua hover:border-transparent rounded"
+                    >
+                        Crear
+                    </button>
+                </div>
                 <button
                     type="submit"
                     className="m-5 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white py-3 px-20 border border-colorAgua hover:border-transparent rounded"
@@ -239,8 +327,8 @@ const AddProductPage = () => {
     );
 };
 
-export const getProducts = async () => {
-    const res = await fetch('http://localhost:8080/productos');
+export const getSubCategories = async () => {
+    const res = await fetch('http://localhost:8080/subcategoria');
 
     if (!res.ok)
         throw {
@@ -248,9 +336,9 @@ export const getProducts = async () => {
             statusText: 'No Encontrado',
         };
 
-    const data = await res.json();
+    const subCategories = await res.json();
 
-    return { data };
+    return { subCategories };
 };
 
 export default AddProductPage;

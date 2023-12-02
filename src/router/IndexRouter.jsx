@@ -9,7 +9,7 @@ import ItemDetailPage, { getProductById } from '../pages/ItemDetailPage';
 import CartPage from '../pages/CartPage';
 import LayoutAdmin from '../layouts/LayoutAdmin';
 import ManageProductsPage from '../pages/ManageProductsPage';
-import AddProductPage from '../pages/AddProductPage';
+import AddProductPage, { getSubCategories } from '../pages/AddProductPage';
 import RegisterPage from '../pages/RegisterPage';
 import ManageUsersPage, { getUsers } from '../pages/ManageUsersPage';
 import ProtectedRoute from '../pages/ProtectedRoute';
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
                             {
                                 path: 'agregarproducto',
                                 element: <AddProductPage />,
-                                loader: getProducts,
+                                loader: getSubCategories,
                             },
                             {
                                 path: 'usuarios',
