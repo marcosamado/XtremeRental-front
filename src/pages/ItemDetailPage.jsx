@@ -7,6 +7,7 @@ import { GiRolledCloth } from 'react-icons/gi';
 import ProductPictures from '../components/products/ProductPictures';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { FaRegHeart } from 'react-icons/fa';
 const ItemDetailPage = () => {
     const { data } = useLoaderData();
 
@@ -15,6 +16,7 @@ const ItemDetailPage = () => {
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
     const [currentPicture, setCurrentPicture] = useState(0);
+    const [isFavorite, setIsFavorite] = useState(false);
     const [bookingDate, setBookingDate] = useState({
         startDate: '',
         endDate: '',
@@ -29,7 +31,14 @@ const ItemDetailPage = () => {
         setBookingDate({ ...bookingDate, [name]: value });
     };
 
-    console.log(bookingDate);
+    const handleClick = () => {
+        setIsFavorite(!isFavorite);
+        // if (isFavorite == true) {
+        //     agregarFavorito(id, nombreProducto);
+        // } else {
+        //     eliminarFavorito(id);
+        // }
+    };
     return (
         <div className="">
             <div className="bg-gradient-to-r from-red-100 to-cyan-50 flex flex-col md:max-w-4xl mx-auto shadow-2xl shadow-black md:p-10">
@@ -64,6 +73,13 @@ const ItemDetailPage = () => {
                                 <span>Precio por Dia: </span>
                                 <span>${data.precioPorHora}</span>
                             </p>
+                            <FaRegHeart
+                                onClick={handleClick}
+                                className={`text-3xl md:text-5xl ${
+                                    isFavorite &&
+                                    'bg-deep-orange-800 text-white rounded-lg p-1 '
+                                }`}
+                            />
                             {data.stock > 1 && (
                                 <p className="text-sm font-semibold">
                                     Cantidad: {data.stock}

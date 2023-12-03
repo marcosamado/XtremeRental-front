@@ -3,6 +3,7 @@ import { ProductCard } from '../components/products/ProductCard';
 import { Pagination } from '../components/products/Pagination';
 import { useState } from 'react';
 import queryString from 'query-string';
+import { FaRegHeart } from 'react-icons/fa';
 
 const ProductsPage = () => {
     const [active, setActive] = useState(1);
