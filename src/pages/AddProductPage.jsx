@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router-dom';
 import { useRef } from 'react';
 
@@ -17,6 +17,8 @@ const AddProductPage = () => {
         subcategorias: [],
     });
     const revalidator = useRevalidator();
+
+    const formRef = useRef(null);
 
     function validaciones(nombre, descripcion, cantidad, precio, imagen) {
         // if (nombre.trim().length < 4 || nombre.trim().length > 20 )  {
@@ -95,14 +97,21 @@ const AddProductPage = () => {
     };
 
     const handleCategories = (event) => {
-        const { name, value } = event.target;
-        console.log(name, value);
+        const { value, checked } = event.target;
         const categories = JSON.parse(value);
 
-        setSelectedCategories([...selectedCategories, categories]);
-
-        setDatosForm({ ...datosForm, subcategorias: selectedCategories });
+        setSelectedCategories((prevInputs) =>
+            checked
+                ? [...prevInputs, categories]
+                : prevInputs.filter(
+                      (input) => input.nombre !== categories.nombre,
+                  ),
+        );
     };
+
+    useEffect(() => {
+        setDatosForm({ ...datosForm, subcategorias: selectedCategories });
+    }, [selectedCategories]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -143,6 +152,17 @@ const AddProductPage = () => {
                     // window.alert('Producto agregado correctamente');
                     console.log(data);
                 });
+
+            setDatosForm({
+                nombreProducto: '',
+                descripcionProducto: '',
+                stock: 0,
+                precioPorHora: 0,
+                imagenes: [],
+                categoria: 'nieve',
+                subcategorias: [],
+            });
+            formRef.current.reset();
         } else {
             console.log('error submit');
         }
@@ -176,6 +196,7 @@ const AddProductPage = () => {
                 Agregar Producto
             </h1>
             <form
+                ref={formRef}
                 onSubmit={handleSubmit}
                 className="container flex flex-col gap-3 max-w-md mx-auto items-center"
             >
