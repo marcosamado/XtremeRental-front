@@ -18,8 +18,8 @@ import { Link } from 'react-router-dom';
 export function LoginModal() {
     const { authUser, setAuthUser, setUserAdmin, datosUser, setDatosUser } =
         useContext(UserContext);
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
