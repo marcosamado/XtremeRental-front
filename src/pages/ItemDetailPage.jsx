@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { MdLabel } from 'react-icons/md';
 import { TbColorSwatch } from 'react-icons/tb';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useNavigation } from 'react-router-dom';
 import { GiRolledCloth } from 'react-icons/gi';
 import ProductPictures from '../components/products/ProductPictures';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
+import { AddedToCartModal } from '../components/products/AddedToCartModal';
 const ItemDetailPage = () => {
     const { data } = useLoaderData();
 
     const navigation = useNavigation();
+    const navigate = useNavigate();
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
@@ -180,12 +182,10 @@ const ItemDetailPage = () => {
                                     value={endDate}
                                 />
                                 <div className="flex flex-col gap-2 mt-5 md:mt-10 md:justify-center md:items-center">
-                                    <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
-                                        Reservar
-                                    </button>
-                                    <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
+                                    <AddedToCartModal />
+                                    {/* <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
                                         Agregar al carrito
-                                    </button>
+                                    </button> */}
                                 </div>
                             </form>
                         </div>

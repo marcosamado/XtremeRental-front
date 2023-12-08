@@ -3,7 +3,7 @@ import { Pagination } from '../components/products/Pagination';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import FilterProducts from '../components/products/filterProducts';
+import FilterProducts from '../components/products/FilterProducts';
 
 const SearchedProductsPage = () => {
     const { search } = queryString.parse(location.search);
