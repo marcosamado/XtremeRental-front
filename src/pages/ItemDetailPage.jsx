@@ -33,16 +33,14 @@ const ItemDetailPage = () => {
         return diasDeDiferencia;
     };
 
-    const [reserve, setReserve] = useState([
-        // {
-        //     id: '',
-        //     nombreProducto: '',
-        //     precioTotalDias: '',
-        //     imagen: '',
-        //     fechaDeInicio: '',
-        //     fechaDeDevolucion: '',
-        // },
-    ]);
+    const [reserve, setReserve] = useState({
+        id: '',
+        nombreProducto: '',
+        precioTotalDias: '',
+        imagen: '',
+        fechaDeInicio: '',
+        fechaDeDevolucion: '',
+    });
 
     console.log(calcularDiasDeAlquiler(startDate, endDate));
 
@@ -53,21 +51,36 @@ const ItemDetailPage = () => {
 
     const handleSubmitReserve = (e) => {
         e.preventDefault();
-        // console.log('hola');
-        // if (!startDate && !endDate) {
-        //     let datosReserva = {
-        //         id: data.id,
-        //         nombreProducto: data.nombreProducto,
-        //         precioTotalDias:
-        //             data.precioPorHora *
-        //             calcularDiasDeAlquiler(startDate, endDate),
-        //         imagen: data.imagenes[0],
-        //         fechaDeInicio: startDate,
-        //         fechaDeDevolucion: endDate,
-        //     };
 
-        //     setReserve([...reserve, datosReserva]);
-        // }
+        if (startDate !== '' && endDate !== '') {
+            let datosReserva = {
+                id: data.id,
+                nombreProducto: data.nombreProducto,
+                precioTotalDias:
+                    data.precioPorHora *
+                    calcularDiasDeAlquiler(startDate, endDate),
+                imagen: data.imagenes[0],
+                fechaDeInicio: startDate,
+                fechaDeDevolucion: endDate,
+                cantidad: 1,
+            };
+
+            let arrayReservas =
+                JSON.parse(localStorage.getItem('reserves')) || [];
+
+            let reservaExistente = arrayReservas.find(
+                (reserva) => reserva.id === datosReserva.id,
+            );
+
+            if (reservaExistente) {
+                reservaExistente.cantidad++;
+            } else {
+                arrayReservas.push(datosReserva);
+            }
+
+            localStorage.setItem('reserves', JSON.stringify(arrayReservas));
+            setReserve(datosReserva);
+        }
     };
 
     const [minDate, setMinDate] = useState(getFormattedDate());
