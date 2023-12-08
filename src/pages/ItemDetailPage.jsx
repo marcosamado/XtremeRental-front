@@ -22,14 +22,64 @@ const ItemDetailPage = () => {
         endDate: '',
     });
     const { startDate, endDate } = bookingDate;
-    // const hoy = new Date().toISOString().split('T')[0];
-    // const fechaMaxima = new Date();
-    // fechaMaxima.setDate(fechaMaxima.getDate() + 30);
-    // const maximo = fechaMaxima.toISOString().split('T')[0];
+
+    const calcularDiasDeAlquiler = (fechaInicio, fechaFin) => {
+        const inicio = new Date(fechaInicio);
+        const fin = new Date(fechaFin);
+        const diferenciaEnMilisegundos = fin - inicio;
+        const diasDeDiferencia = Math.floor(
+            diferenciaEnMilisegundos / (1000 * 60 * 60 * 24),
+        );
+        return diasDeDiferencia;
+    };
+
+    const [reserve, setReserve] = useState([
+        // {
+        //     id: '',
+        //     nombreProducto: '',
+        //     precioTotalDias: '',
+        //     imagen: '',
+        //     fechaDeInicio: '',
+        //     fechaDeDevolucion: '',
+        // },
+    ]);
+
+    console.log(calcularDiasDeAlquiler(startDate, endDate));
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setBookingDate({ ...bookingDate, [name]: value });
     };
+
+    const handleSubmitReserve = (e) => {
+        e.preventDefault();
+        // console.log('hola');
+        // if (!startDate && !endDate) {
+        //     let datosReserva = {
+        //         id: data.id,
+        //         nombreProducto: data.nombreProducto,
+        //         precioTotalDias:
+        //             data.precioPorHora *
+        //             calcularDiasDeAlquiler(startDate, endDate),
+        //         imagen: data.imagenes[0],
+        //         fechaDeInicio: startDate,
+        //         fechaDeDevolucion: endDate,
+        //     };
+
+        //     setReserve([...reserve, datosReserva]);
+        // }
+    };
+
+    const [minDate, setMinDate] = useState(getFormattedDate());
+
+    // Función para obtener la fecha actual en formato YYYY-MM-DD
+    function getFormattedDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+        const day = today.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
 
     const handleClick = () => {
         setIsFavorite(!isFavorite);
@@ -85,40 +135,46 @@ const ItemDetailPage = () => {
                                     Cantidad: {data.stock}
                                 </p>
                             )}
-                            <label
-                                className="text-sm font-bold"
-                                htmlFor="startDate"
+                            <form
+                                onSubmit={handleSubmitReserve}
+                                className="flex flex-col"
                             >
-                                Fecha de retiro
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
-                                type="date"
-                                name="startDate"
-                                value={startDate}
-                            />
-                            <label
-                                className="text-sm font-bold"
-                                htmlFor="endDate"
-                            >
-                                Fecha de devolucion
-                            </label>
-                            <input
-                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
-                                onChange={handleChange}
-                                type="date"
-                                name="endDate"
-                                value={endDate}
-                            />
-                            <div className="flex flex-col gap-2 md:mt-10 md:justify-center md:items-center">
-                                <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
-                                    Reservar
-                                </button>
-                                <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
-                                    Agregar al carrito
-                                </button>
-                            </div>
+                                <label
+                                    className="text-sm font-bold"
+                                    htmlFor="startDate"
+                                >
+                                    Fecha de retiro
+                                </label>
+                                <input
+                                    onChange={handleChange}
+                                    className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                    type="date"
+                                    name="startDate"
+                                    min={minDate}
+                                    value={startDate}
+                                />
+                                <label
+                                    className="text-sm font-bold"
+                                    htmlFor="endDate"
+                                >
+                                    Fecha de devolucion
+                                </label>
+                                <input
+                                    className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                    onChange={handleChange}
+                                    type="date"
+                                    name="endDate"
+                                    value={endDate}
+                                />
+                                <div className="flex flex-col gap-2 mt-5 md:mt-10 md:justify-center md:items-center">
+                                    <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
+                                        Reservar
+                                    </button>
+                                    <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
+                                        Agregar al carrito
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
+import { LoginRequireModal } from './LoginRequireModal';
 
 export const ProductCard = ({
     precioPorHora,
@@ -22,12 +23,6 @@ export const ProductCard = ({
         // } else {
         //     eliminarFavorito(id);
         // }
-    };
-
-    const handleReserve = () => {
-        if (!user) {
-        } else {
-        }
     };
 
     // const agregarFavorito = async (id, nombreProducto) => {
@@ -102,12 +97,15 @@ export const ProductCard = ({
                         'bg-deep-orange-800 text-white rounded-lg p-1'
                     }`}
                 />
-                <button
-                    onClick={handleReserve}
-                    className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md"
-                >
-                    Reservar
-                </button>
+                {user ? (
+                    <Link to={`/productos/${id}`}>
+                        <button className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md">
+                            Reservar
+                        </button>
+                    </Link>
+                ) : (
+                    <LoginRequireModal />
+                )}
             </div>
         </div>
     );
