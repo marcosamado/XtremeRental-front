@@ -10,27 +10,19 @@ export const CartProductCard = ({
     imagen,
     nombreProducto,
     cantidad,
-    setReserve,
+    setReserves,
 }) => {
     const deleteReserveFromCart = () => {
-        // Paso 1: Obtén el array de objetos desde el localStorage
         let reservas = JSON.parse(localStorage.getItem('reserves'));
-
-        // Paso 2: Encuentra el índice del elemento que deseas eliminar (supongamos que tienes el id del objeto a eliminar)
-        let idElementoAEliminar = id; // Reemplaza con el valor correcto
+        let idElementoAEliminar = id;
         let indiceElementoAEliminar = reservas.findIndex(function (objeto) {
             return objeto.id === idElementoAEliminar;
         });
-
-        // Paso 3: Elimina el elemento del array
         if (indiceElementoAEliminar !== -1) {
             reservas.splice(indiceElementoAEliminar, 1);
         }
-
-        // Paso 4: Guarda el array actualizado en el localStorage
         localStorage.setItem('reserves', JSON.stringify(reservas));
-
-        setReserve(JSON.parse(localStorage.getItem('reserves')));
+        setReserves(JSON.parse(localStorage.getItem('reserves')));
     };
 
     return (

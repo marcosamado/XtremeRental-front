@@ -71,6 +71,7 @@ export function LoginModal() {
 
             const data = await response.json();
             setDatosUser({
+                id: data.id,
                 username: data.username,
                 nombre: data.nombre,
                 apellido: data.apellido,
@@ -80,6 +81,7 @@ export function LoginModal() {
             localStorage.setItem(
                 'user',
                 JSON.stringify({
+                    id: data.id,
                     username: data.username,
                     nombre: data.nombre,
                     apellido: data.apellido,
