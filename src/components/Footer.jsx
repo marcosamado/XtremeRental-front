@@ -12,7 +12,7 @@ const Footer = () => {
                 <div className="flex h-28">
                     <img src="/logo.png" className=" mr-2" />
                     <p className=" text-white self-center text-sm">
-                        2023 Extreme Rental
+                        2023 Xtreme Rental
                     </p>
                 </div>
                 <div className="flex self-center">

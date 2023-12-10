@@ -1,5 +1,6 @@
 import React from 'react';
 import Carrusel from '../components/Home/Carrusel';
+import WhatsAppButton from '../components/whatsApp/whatsAppButton';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
@@ -61,6 +62,7 @@ const HomePage = () => {
             </h2>
             <section className="p-5">
                 <Carrusel />
+                <WhatsAppButton/>
             </section>
         </div>
     );
