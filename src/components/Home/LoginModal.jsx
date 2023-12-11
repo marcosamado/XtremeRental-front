@@ -91,7 +91,7 @@ export function LoginModal() {
             );
             localStorage.setItem('jwt', JSON.stringify(data.token));
             setAuthUser(true);
-
+            alert('Login Exitoso');
             return data;
         } catch (error) {
             console.error('Error en la autenticación:', error);

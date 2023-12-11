@@ -16,8 +16,6 @@ const ItemDetailPage = () => {
     const navigation = useNavigation();
     const navigate = useNavigate();
 
-    if (navigation.state === 'loading') return <p>Cargado...</p>;
-
     const [isValid, setIsValid] = useState(false);
     const [currentPicture, setCurrentPicture] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -25,6 +23,7 @@ const ItemDetailPage = () => {
         startDate: '',
         endDate: '',
     });
+    const [minDate, setMinDate] = useState(getFormattedDate());
     const { startDate, endDate } = bookingDate;
 
     const calcularDiasDeAlquiler = (fechaInicio, fechaFin) => {
@@ -86,12 +85,11 @@ const ItemDetailPage = () => {
 
             localStorage.setItem('reserves', JSON.stringify(arrayReservas));
             setReserve(datosReserva);
+            alert('producto agregado al carrito');
         } else {
             setIsValid(true);
         }
     };
-
-    const [minDate, setMinDate] = useState(getFormattedDate());
 
     // Función para obtener la fecha actual en formato YYYY-MM-DD
     function getFormattedDate() {
@@ -110,6 +108,8 @@ const ItemDetailPage = () => {
         //     eliminarFavorito(id);
         // }
     };
+
+    if (navigation.state === 'loading') return <p>Cargado...</p>;
     return (
         <div className="">
             <div className="bg-gradient-to-r from-red-100 to-cyan-50 flex flex-col md:max-w-4xl mx-auto shadow-2xl shadow-black md:p-10">
@@ -139,7 +139,7 @@ const ItemDetailPage = () => {
                     </div>
 
                     <div className="flex-2 order-2 ">
-                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-5 md:h-[450px]">
+                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-5 md:h-[450px] md:max-w-[250px] md:min-w-[250px]">
                             <p className="text-sm font-semibold">
                                 <span>Precio por Dia: </span>
                                 <span>${data.precioPorHora}</span>
@@ -194,7 +194,9 @@ const ItemDetailPage = () => {
                                         <LoginRequireModal text="agregar" />
                                     )}
                                     {isValid && (
-                                        <p>Debes seleccionar fechas validas</p>
+                                        <p className="text-xs text-colorCalido mt-5">
+                                            Debes seleccionar fechas validas
+                                        </p>
                                     )}
                                 </div>
                             </form>

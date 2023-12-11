@@ -17,9 +17,9 @@ export function AddedToCartModal({ isValid }) {
             <Button
                 {...(isValid && `onClick=${handleOpen}`)}
                 type="submit"
-                className=" h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md text-center"
+                className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md"
             >
-                agregar al carrito
+                agregar
             </Button>
             <Dialog open={open} handler={handleOpen}>
                 <DialogBody>

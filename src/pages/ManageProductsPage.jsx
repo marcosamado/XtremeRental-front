@@ -25,9 +25,11 @@ const ManageProductsPage = () => {
                 settings,
             );
             if (!res.ok) {
+                alert(
+                    'No puedes eliminar un producto relacionado a una reserva',
+                );
                 const errorData = await res.json();
                 console.error('Error al eliminar producto:', errorData);
-
                 throw new Error('Error al eliminar producto');
             }
             revalidator.revalidate();

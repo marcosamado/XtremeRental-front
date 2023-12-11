@@ -31,7 +31,7 @@ export const CartProductCard = ({
                 <Link to={`/productos/${id}`}>
                     <img
                         className="w-full h-full "
-                        src={imagen.url}
+                        src={imagen?.url}
                         alt={nombreProducto}
                     />
                 </Link>

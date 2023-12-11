@@ -10,7 +10,7 @@ const HomePage = () => {
                 <Link to={`/productos?tipo=acuaticos`}>
                     <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                         <div className="h-44 w-full  md:flex">
-                            <div className="bg-[url('https://imagenes.elpais.com/resizer/r6ELDzucn7tMT9H9pkABv2TZWrA=/1960x1103/filters:focal(671x333:681x343)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SRYQACBQBBCO7ADQSE3A3GUSBI.jpg')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
+                            <div className="bg-[url('https://cdn.artphotolimited.com/images/59888232b0ba742a2efde168/1000x1000/kelly-slater-surf-a-tahiti.jpg')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
                         </div>
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
                         <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
@@ -26,7 +26,7 @@ const HomePage = () => {
                 <Link to={`/productos?tipo=montaña`}>
                     <div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
                         <div className="h-44 w-full  md:flex">
-                            <div className="bg-[url('https://img.freepik.com/foto-gratis/persona-pie-cima-exito-mochilero-cima-montana-generado-ia_188544-61274.jpg?w=1380&t=st=1698289368~exp=1698289968~hmac=d014b82c8d3fc9dd6928cab9d152ec84c03bb53598505e42f8cb2d279a7d04a8')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
+                            <div className="bg-[url('https://wordpress-network.prod.aws.skyscnr.com/wp-content/uploads/2018/05/hiking-5.jpg')] w-full h-52 bg-cover bg-no-repeat bg-center"></div>
                         </div>
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
                         <div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
@@ -62,7 +62,7 @@ const HomePage = () => {
             </h2>
             <section className="p-5">
                 <Carrusel />
-                <WhatsAppButton/>
+                <WhatsAppButton />
             </section>
         </div>
     );

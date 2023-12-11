@@ -62,7 +62,11 @@ export function ConfirmReserveModal({ reserves, precioTotal, setReserves }) {
             >
                 Confirmar
             </Button>
-            <Dialog open={open} handler={handleOpen}>
+            <Dialog
+                open={open}
+                handler={handleOpen}
+                className="overflow-y-auto h-[600px]"
+            >
                 <DialogHeader>
                     <h2>Confirmar reserva</h2>
                 </DialogHeader>

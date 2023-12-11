@@ -14,10 +14,10 @@ export const UserReservesCard = ({
                 <div className="flex flex-col gap-3 h-auto">
                     <div className="flex flex-row gap-2 flex-wrap">
                         {producto.map((product) => (
-                            <div className=" w-12 h-12">
+                            <div className=" w-12 h-12" key={product.id}>
                                 <img
                                     className="w-full h-full "
-                                    src={product.imagenes[0].url}
+                                    src={product.imagenes[0]?.url}
                                     alt={product.nombreProducto}
                                 />
                             </div>

@@ -15,7 +15,7 @@ export const ReserveProductCard = ({
             <div className="w-[155px] max-w-36 h-28">
                 <img
                     className="w-full h-full "
-                    src={imagen.url}
+                    src={imagen?.url}
                     alt={nombreProducto}
                 />
             </div>
