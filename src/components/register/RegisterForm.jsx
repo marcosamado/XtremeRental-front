@@ -78,32 +78,42 @@ export function RegisterForm() {
                 },
                 body: JSON.stringify(payload),
             };
+            try {
+                fetch(url, settings)
+                    .then((response) => {
+                        if (!response.ok) {
+                            alert('El nombre de usuario ya existe');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        setDatosUser({
+                            username: data.username,
+                            nombre: data.nombre,
+                            apellido: data.apellido,
+                            email: data.email,
+                            role: data.role,
+                        });
+                        localStorage.setItem('user', JSON.stringify(data));
+                        localStorage.setItem('jwt', JSON.stringify(data.token));
 
-            fetch(url, settings)
-                .then((response) => response.json())
-                .then((data) => {
-                    setDatosUser({
-                        username: data.username,
-                        nombre: data.nombre,
-                        apellido: data.apellido,
-                        email: data.email,
-                        role: data.role,
+                        setAuthUser(true);
+                        datosUser.role === 'ADMIN' && setUserAdmin(true);
+                        alert('Usuari creado con exito');
+
+                        navigate('/');
+                        setFormData({
+                            username: '',
+                            nombre: '',
+                            apellido: '',
+                            email: '',
+                            password: '',
+                            validarPassword: '',
+                        });
                     });
-                    localStorage.setItem('user', JSON.stringify(data));
-                    localStorage.setItem('jwt', JSON.stringify(data.token));
-                });
-            setAuthUser(true);
-            datosUser.role === 'ADMIN' && setUserAdmin(true);
-
-            navigate('/');
-            setFormData({
-                username: '',
-                nombre: '',
-                apellido: '',
-                email: '',
-                password: '',
-                validarPassword: '',
-            });
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 

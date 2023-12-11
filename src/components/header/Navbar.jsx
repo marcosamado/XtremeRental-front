@@ -44,8 +44,6 @@ const Navbar = () => {
 
         navigate(`/productos/busqueda?search=${searchData}`);
         setSearchData('');
-
-        location.reload();
     };
 
     useEffect(() => {
@@ -106,7 +104,7 @@ const Navbar = () => {
                     className={`${
                         filterProducts === 0 ||
                         (searchData.length < 3 && 'hidden')
-                    } bg-white fixed w-[170px] z-50  md:w-80 `}
+                    } bg-white fixed w-[170px] z-50  md:w-80 h-60 overflow-y-auto`}
                 >
                     {filterProducts?.map((product) => (
                         <Link
@@ -114,11 +112,11 @@ const Navbar = () => {
                             key={product.id}
                             to={`/productos/${product.id}`}
                         >
-                            <div className="flex flex-row items-center gap-2  border-b border-gray-400 shadow-md shadow-gray-300 md:hover:bg-blue-gray-100/50">
+                            <div className="flex flex-row items-center gap-2  border-b border-gray-400 shadow-md shadow-gray-300 md:hover:bg-blue-gray-100/50 ">
                                 <div className="w-11 h-11 p-2 md:w-16 md:h-16 ">
                                     <img
                                         className=""
-                                        src={product.imagenes[0].url}
+                                        src={product.imagenes[0]?.url}
                                         alt={product.nombreProducto}
                                     />
                                 </div>

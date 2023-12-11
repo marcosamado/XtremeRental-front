@@ -3,6 +3,7 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 export function Pagination({ pages, active, setActive }) {
     const next = () => {
+        if (pages === 0) return;
         if (active === pages) return;
 
         setActive(active + 1);
@@ -25,15 +26,22 @@ export function Pagination({ pages, active, setActive }) {
             >
                 <BiLeftArrowAlt strokeWidth={1} className="h-4 w-4" />
             </IconButton>
-            <Typography color="white" className="font-normal">
-                Page <strong className="text-white">{active}</strong> of{' '}
-                <strong className="text-white">{pages}</strong>
-            </Typography>
+            {pages !== 0 ? (
+                <Typography color="white" className="font-normal">
+                    Page <strong className="text-white">{active}</strong> of{' '}
+                    <strong className="text-white">{pages}</strong>
+                </Typography>
+            ) : (
+                <Typography color="white" className="font-normal">
+                    Page <strong className="text-white">{active}</strong>
+                </Typography>
+            )}
+
             <IconButton
                 size="sm"
                 variant="outlined"
                 onClick={next}
-                disabled={active === pages}
+                disabled={active === pages || pages === 0}
                 className="bg-white"
             >
                 <BiRightArrowAlt strokeWidth={1} className="h-4 w-4" />

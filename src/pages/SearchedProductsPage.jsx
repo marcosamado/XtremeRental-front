@@ -1,11 +1,9 @@
 import { ProductCard } from '../components/products/ProductCard';
-import { Pagination } from '../components/products/Pagination';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
 
 const SearchedProductsPage = () => {
     const { search } = queryString.parse(location.search);
-
     const [active, setActive] = useState(1);
     const [filterSearch, setFilterSearch] = useState([]);
 
@@ -41,33 +39,15 @@ const SearchedProductsPage = () => {
 
     return (
         <div className="w-full p-5 md:p-10 bg-gradient-to-r from-red-100 to-sky-100 min-h-screen flex items-center">
-            <div className="container flex flex-col justify-between bg-white  mx-auto max-w-3xl min-h-[729px] shadow-2xl shadow-black ">
+            <div className="container flex flex-col bg-white  mx-auto max-w-3xl min-h-[729px] shadow-2xl shadow-black ">
                 <h1 className="p-5 self-center text-2xl font-bold">
                     BUSQUEDA: {search.toUpperCase()}
                 </h1>
                 <section className="w-full mr-auto ml-auto max-w-3xl rounded-sm bg-white">
-                    {
-                        filterSearch?.map((product) => (
-                            <ProductCard key={product.id} {...product} />
-                        ))
-                        /*.slice(firstIndex, lastIndex)*/
-                    }
+                    {filterSearch?.map((product) => (
+                        <ProductCard key={product.id} {...product} />
+                    ))}
                 </section>
-                {/* <section>
-                    <div className="flex flex-col justify-center items-center gap-3 bg-colorOscuro">
-                        <Pagination
-                            pages={pages}
-                            active={active}
-                            setActive={setActive}
-                        />
-                        <button
-                            onClick={() => setActive(1)}
-                            className="text-white"
-                        >
-                            Volver
-                        </button>
-                    </div>
-                </section> */}
             </div>
         </div>
     );

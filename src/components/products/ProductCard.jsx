@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
+import { LoginRequireModal } from './LoginRequireModal';
 
 export const ProductCard = ({
     precioPorHora,
@@ -116,27 +117,16 @@ export const ProductCard = ({
                 </Link>
             </div>
             <div className="flex flex-col px-3 gap-2 w-80 md:w-full">
-                <h2 className=" text-sm font-light md:text-lg">
+                <h2 className=" text-sm font-bold md:text-lg">
                     <Link to={`/productos/${id}`}>{nombreProducto}</Link>
                 </h2>
                 <div className="flex flex-row items-center justify-normal gap-3">
-                    <select
-                        className="border border-gray-500 outline-none rounded-sm"
-                        onChange={handleValue}
-                        name="select"
-                    >
-                        <option defaultValue={1} value={1}>
-                            1 Día
-                        </option>
-                        <option value={2}>2 Días</option>
-                        <option value={3}>3 Días</option>
-                        <option value={4}>4 Días</option>
-                        <option value={5}>5 Días</option>
-                        <option value={6}>6 Días</option>
-                    </select>
                     <div>
-                        <span>$ </span>
-                        <span>{nuevoPrecio}</span>
+                        <span className="">Precio por dia: </span>
+                        <span className="text-colorCalido font-semibold">
+                            {' '}
+                            ${nuevoPrecio}
+                        </span>
                     </div>
                 </div>
                 <FaRegHeart
@@ -146,9 +136,15 @@ export const ProductCard = ({
                         'bg-deep-orange-800 text-white rounded-lg p-1'
                     }`}
                 />
-                <button className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md">
-                    Reservar
-                </button>
+                {user ? (
+                    <Link to={`/productos/${id}`}>
+                        <button className="w-20 h-8 bg-colorCalido text-xs text-white px-2 py-1 rounded-md">
+                            Reservar
+                        </button>
+                    </Link>
+                ) : (
+                    <LoginRequireModal text="reservar" />
+                )}
             </div>
         </div>
     );

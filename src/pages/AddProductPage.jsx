@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router-dom';
 import { useRef } from 'react';
 
@@ -7,6 +7,7 @@ const AddProductPage = () => {
     const [imgFile, setImgFile] = useState([]);
     const [subCategory, setSubCategory] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [errorDatos, setErrorDatos] = useState(false);
     const [datosForm, setDatosForm] = useState({
         nombreProducto: '',
         descripcionProducto: '',
@@ -18,21 +19,22 @@ const AddProductPage = () => {
     });
     const revalidator = useRevalidator();
 
+    const formRef = useRef(null);
+
     function validaciones(nombre, descripcion, cantidad, precio, imagen) {
-        // if (nombre.trim().length < 4 || nombre.trim().length > 20 )  {
-        //     return false;
-        // } else if (descripcion.length < 10 || descripcion.length >= 50) {
-        //     return false;
-        // } else if (cantidad <= 0) {
-        //     return false;
-        // } else if (precio <= 0) {
-        //     return false;
-        // } else if (imagen) {
-        //     return false;
-        // } else {
-        //     return true;
-        // }
-        return true;
+        if (nombre.trim().length < 4 || nombre.trim().length > 20) {
+            return false;
+        } else if (descripcion.length < 10 || descripcion.length >= 50) {
+            return false;
+        } else if (cantidad <= 0) {
+            return false;
+        } else if (precio <= 0) {
+            return false;
+        } else if (imagenes.length == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     const imgRef = useRef(null);
@@ -51,38 +53,50 @@ const AddProductPage = () => {
         subcategorias,
     } = datosForm;
     const postImage = async (imgFile) => {
-        // if (!file) throw new Error("No hay ningúna imagen para subir");
         const formData = new FormData();
-        // formData.append("bucketName", "1023c04-grupo3xr");
-        // formData.append("filePath", "/Users");
-        formData.append('file', imgFile[0]);
+
+        formData.append('file', imgFile);
         try {
             const res = await fetch(`http://localhost:8080/assets/upload`, {
                 method: 'POST',
                 body: formData,
             });
             if (!res.ok) {
-                // Crear un objeto de error personalizado con estado y ok
                 const error = new Error('Error en al subir las imagenes');
                 error.status = res.status;
                 error.ok = false;
                 throw error;
             }
             const data = await res.json();
-            console.log(data);
             return data;
         } catch (error) {
             throw new Error('Error al subir las imagenes');
         }
     };
 
+    const handlePostImages = async (images) => {
+        try {
+            const imagePromises = [];
+            for (const image of images) {
+                imagePromises.push(postImage(image));
+            }
+            const imageUrls = await Promise.all(imagePromises);
+            return imageUrls;
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleClick = async () => {
-        const resImg = await postImage(imgFile);
-        const array = [resImg];
-        setDatosForm({ ...datosForm, imagenes: array });
+        const resImg = await handlePostImages(imgFile);
+        setDatosForm({ ...datosForm, imagenes: resImg });
+        if (resImg.length > 0) {
+            alert('Imagenes cargadas correctamente');
+        }
     };
 
     const handleChange = (event) => {
+        setErrorDatos(false);
         const { name, value } = event.target;
         setDatosForm({
             ...datosForm,
@@ -95,14 +109,21 @@ const AddProductPage = () => {
     };
 
     const handleCategories = (event) => {
-        const { name, value } = event.target;
-        console.log(name, value);
+        const { value, checked } = event.target;
         const categories = JSON.parse(value);
 
-        setSelectedCategories([...selectedCategories, categories]);
-
-        setDatosForm({ ...datosForm, subcategorias: selectedCategories });
+        setSelectedCategories((prevInputs) =>
+            checked
+                ? [...prevInputs, categories]
+                : prevInputs.filter(
+                      (input) => input.nombre !== categories.nombre,
+                  ),
+        );
     };
+
+    useEffect(() => {
+        setDatosForm({ ...datosForm, subcategorias: selectedCategories });
+    }, [selectedCategories]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -143,14 +164,31 @@ const AddProductPage = () => {
                     // window.alert('Producto agregado correctamente');
                     console.log(data);
                 });
+
+            setDatosForm({
+                nombreProducto: '',
+                descripcionProducto: '',
+                stock: 0,
+                precioPorHora: 0,
+                imagenes: [],
+                categoria: 'nieve',
+                subcategorias: [],
+            });
+            alert('Producto Agregado');
+            formRef.current.reset();
+            setErrorDatos(false);
         } else {
-            console.log('error submit');
+            setErrorDatos(true);
         }
     };
     const handleCreateCategory = () => {
+        if (subCategory.length < 3) return null;
+
         const payload = {
             nombre: subCategory,
         };
+
+        setSubCategory('');
 
         const url = 'http://localhost:8080/subcategoria';
         const settings = {
@@ -176,6 +214,7 @@ const AddProductPage = () => {
                 Agregar Producto
             </h1>
             <form
+                ref={formRef}
                 onSubmit={handleSubmit}
                 className="container flex flex-col gap-3 max-w-md mx-auto items-center"
             >
@@ -318,11 +357,16 @@ const AddProductPage = () => {
                 </div>
                 <button
                     type="submit"
-                    className="m-5 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white py-3 px-20 border border-colorAgua hover:border-transparent rounded"
+                    className="my-3 bg-transparent hover:bg-colorAgua text-colorAgua font-semibold hover:text-white py-3 px-20 border border-colorAgua hover:border-transparent rounded"
                 >
                     Agregar
                 </button>
             </form>
+            {errorDatos && (
+                <p className="flex justify-center  text-colorCalido text-xl">
+                    Algunos de los datos ingresados no son correctos
+                </p>
+            )}
         </div>
     );
 };

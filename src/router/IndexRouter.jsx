@@ -45,6 +45,7 @@ export const router = createBrowserRouter([
                     {
                         path: 'busqueda',
                         element: <SearchedProductsPage />,
+                        loader: getSubCategories,
                     },
                 ],
             },

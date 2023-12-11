@@ -1,35 +1,104 @@
 import { useState } from 'react';
 import { MdLabel } from 'react-icons/md';
 import { TbColorSwatch } from 'react-icons/tb';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useNavigation } from 'react-router-dom';
 import { GiRolledCloth } from 'react-icons/gi';
 import ProductPictures from '../components/products/ProductPictures';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
+import { AddedToCartModal } from '../components/products/AddedToCartModal';
+import { LoginRequireModal } from '../components/products/LoginRequireModal';
 const ItemDetailPage = () => {
     const { data } = useLoaderData();
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const navigation = useNavigation();
+    const navigate = useNavigate();
 
-    if (navigation.state === 'loading') return <p>Cargado...</p>;
-
+    const [isValid, setIsValid] = useState(false);
     const [currentPicture, setCurrentPicture] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const [bookingDate, setBookingDate] = useState({
         startDate: '',
         endDate: '',
     });
+    const [minDate, setMinDate] = useState(getFormattedDate());
     const { startDate, endDate } = bookingDate;
-    // const hoy = new Date().toISOString().split('T')[0];
-    // const fechaMaxima = new Date();
-    // fechaMaxima.setDate(fechaMaxima.getDate() + 30);
-    // const maximo = fechaMaxima.toISOString().split('T')[0];
+
+    const calcularDiasDeAlquiler = (fechaInicio, fechaFin) => {
+        const inicio = new Date(fechaInicio);
+        const fin = new Date(fechaFin);
+        const diferenciaEnMilisegundos = fin - inicio;
+        const diasDeDiferencia = Math.floor(
+            diferenciaEnMilisegundos / (1000 * 60 * 60 * 24),
+        );
+        return diasDeDiferencia;
+    };
+
+    const [reserve, setReserve] = useState({
+        id: '',
+        nombreProducto: '',
+        precioTotalDias: '',
+        imagen: '',
+        fechaDeInicio: '',
+        fechaDeDevolucion: '',
+    });
+
+    console.log(calcularDiasDeAlquiler(startDate, endDate));
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setBookingDate({ ...bookingDate, [name]: value });
     };
+
+    const handleSubmitReserve = (e) => {
+        e.preventDefault();
+
+        if (startDate !== '' && endDate !== '') {
+            let datosReserva = {
+                id: data.id,
+                nombreProducto: data.nombreProducto,
+                precioTotalDias:
+                    data.precioPorHora *
+                    calcularDiasDeAlquiler(startDate, endDate),
+                imagen: data.imagenes[0],
+                fechaDeInicio: startDate,
+                fechaDeDevolucion: endDate,
+                cantidad: 1,
+            };
+
+            setIsValid(false);
+
+            let arrayReservas =
+                JSON.parse(localStorage.getItem('reserves')) || [];
+
+            let reservaExistente = arrayReservas.find(
+                (reserva) => reserva.id === datosReserva.id,
+            );
+
+            if (reservaExistente) {
+                reservaExistente.cantidad++;
+            } else {
+                arrayReservas.push(datosReserva);
+            }
+
+            localStorage.setItem('reserves', JSON.stringify(arrayReservas));
+            setReserve(datosReserva);
+            alert('producto agregado al carrito');
+        } else {
+            setIsValid(true);
+        }
+    };
+
+    // Función para obtener la fecha actual en formato YYYY-MM-DD
+    function getFormattedDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+        const day = today.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
 
     const handleClick = () => {
         setIsFavorite(!isFavorite);
@@ -39,6 +108,8 @@ const ItemDetailPage = () => {
         //     eliminarFavorito(id);
         // }
     };
+
+    if (navigation.state === 'loading') return <p>Cargado...</p>;
     return (
         <div className="">
             <div className="bg-gradient-to-r from-red-100 to-cyan-50 flex flex-col md:max-w-4xl mx-auto shadow-2xl shadow-black md:p-10">
@@ -68,7 +139,7 @@ const ItemDetailPage = () => {
                     </div>
 
                     <div className="flex-2 order-2 ">
-                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-5 md:h-[450px]">
+                        <div className="border-2 p-5 md:m-4 rounded-md flex flex-col gap-5 md:h-[450px] md:max-w-[250px] md:min-w-[250px]">
                             <p className="text-sm font-semibold">
                                 <span>Precio por Dia: </span>
                                 <span>${data.precioPorHora}</span>
@@ -85,40 +156,50 @@ const ItemDetailPage = () => {
                                     Cantidad: {data.stock}
                                 </p>
                             )}
-                            <label
-                                className="text-sm font-bold"
-                                htmlFor="startDate"
+                            <form
+                                onSubmit={handleSubmitReserve}
+                                className="flex flex-col"
                             >
-                                Fecha de retiro
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
-                                type="date"
-                                name="startDate"
-                                value={startDate}
-                            />
-                            <label
-                                className="text-sm font-bold"
-                                htmlFor="endDate"
-                            >
-                                Fecha de devolucion
-                            </label>
-                            <input
-                                className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
-                                onChange={handleChange}
-                                type="date"
-                                name="endDate"
-                                value={endDate}
-                            />
-                            <div className="flex flex-col gap-2 md:mt-10 md:justify-center md:items-center">
-                                <button className="md:w-28 h-8 bg-colorCalido text-white px-2 py-1 rounded-md">
-                                    Reservar
-                                </button>
-                                <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
-                                    Agregar al carrito
-                                </button>
-                            </div>
+                                <label
+                                    className="text-sm font-bold"
+                                    htmlFor="startDate"
+                                >
+                                    Fecha de retiro
+                                </label>
+                                <input
+                                    onChange={handleChange}
+                                    className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                    type="date"
+                                    name="startDate"
+                                    min={minDate}
+                                    value={startDate}
+                                />
+                                <label
+                                    className="text-sm font-bold"
+                                    htmlFor="endDate"
+                                >
+                                    Fecha de devolucion
+                                </label>
+                                <input
+                                    className="bg-blue-gray-100 p-2 rounded-sm border-black/50 border"
+                                    onChange={handleChange}
+                                    type="date"
+                                    name="endDate"
+                                    value={endDate}
+                                />
+                                <div className="flex flex-col gap-2 mt-5 md:mt-10 md:justify-center md:items-center">
+                                    {user ? (
+                                        <AddedToCartModal isValid={isValid} />
+                                    ) : (
+                                        <LoginRequireModal text="agregar" />
+                                    )}
+                                    {isValid && (
+                                        <p className="text-xs text-colorCalido mt-5">
+                                            Debes seleccionar fechas validas
+                                        </p>
+                                    )}
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

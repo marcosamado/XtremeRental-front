@@ -18,8 +18,8 @@ import { Link } from 'react-router-dom';
 export function LoginModal() {
     const { authUser, setAuthUser, setUserAdmin, datosUser, setDatosUser } =
         useContext(UserContext);
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
@@ -71,6 +71,7 @@ export function LoginModal() {
 
             const data = await response.json();
             setDatosUser({
+                id: data.id,
                 username: data.username,
                 nombre: data.nombre,
                 apellido: data.apellido,
@@ -80,6 +81,7 @@ export function LoginModal() {
             localStorage.setItem(
                 'user',
                 JSON.stringify({
+                    id: data.id,
                     username: data.username,
                     nombre: data.nombre,
                     apellido: data.apellido,
@@ -89,7 +91,7 @@ export function LoginModal() {
             );
             localStorage.setItem('jwt', JSON.stringify(data.token));
             setAuthUser(true);
-
+            alert('Login Exitoso');
             return data;
         } catch (error) {
             console.error('Error en la autenticación:', error);
