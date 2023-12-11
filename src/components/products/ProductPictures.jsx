@@ -25,7 +25,7 @@ const ProductPictures = ({ setCurrentPicture, data }) => {
             ],
         },
     ];
-    console.log(data.imagenes);
+    // console.log(data.imagenes);
 
     let newProducts = [];
     if (data.imagenes.length > 5) {

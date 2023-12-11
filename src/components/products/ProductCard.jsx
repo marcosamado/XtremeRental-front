@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
 
@@ -11,57 +11,93 @@ export const ProductCard = ({
     nombreProducto,
     categoria,
 }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
     const [nuevoPrecio, setNuevoPrecio] = useState(precioPorHora);
     const [isFavorite, setIsFavorite] = useState(false);
+    const favoritos = JSON.parse(localStorage.getItem('favs')) || [];
+    // const [data, setData] = useState();
+
     const handleValue = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         const nuevoPrecio = precioPorHora * event.target.value;
         setNuevoPrecio(nuevoPrecio);
     };
     const handleClick = () => {
-        setIsFavorite(!isFavorite);
-        // if (isFavorite == true) {
-        //     agregarFavorito(id, nombreProducto);
-        // } else {
-        //     eliminarFavorito(id);
-        // }
+        if (user != null) {
+            setIsFavorite(!isFavorite);
+        } else {
+            alert('tiene que estar registrado');
+        }
     };
 
-    // const agregarFavorito = async (id, nombreProducto) => {
+    useEffect(() => {
+        if (isFavorite) {
+            let product = {
+                id,
+                nombreProducto,
+                imagenes,
+                descripcionProducto,
+            };
+            favoritos.push(product);
+            localStorage.setItem('favs', JSON.stringify(favoritos));
+        } else {
+            let favoritosStorage =
+                JSON.parse(localStorage.getItem('favs')) || [];
+            let filteredFavoritos = favoritosStorage.filter(
+                (item) => item.id !== id,
+            );
+
+            localStorage.setItem('favs', JSON.stringify(filteredFavoritos));
+        }
+    }, [isFavorite]);
+
+    // const agregarFavorito = async () => {
     //     const settings = {
     //         method: 'POST',
     //     };
     //     try {
     //         const res = await fetch(
-    //             `http://localhost:8080/favoritos/${id}/${nombreProducto}`,
+    //             `http://localhost:8080/favoritos/${id}/${user.username}`,
     //             settings,
     //         );
+
     //         if (!res.ok) {
     //             const errorData = await res.json();
     //             console.error('Error al intentar cambiar el rol:', errorData);
-
     //             throw new Error('Error al cambiar el rol');
     //         }
+
+    //         const data = await res.json();
+    //         setData(data);
+    //         console.log(data);
     //         // revalidator.revalidate();
     //     } catch (error) {
     //         console.log('Error inesperado:', error);
     //     }
     // };
-    // const eliminarFavorito = async (id) => {
+
+    // const eliminarFavorito = async () => {
     //     const settings = {
     //         method: 'DELETE',
     //     };
     //     try {
     //         const res = await fetch(
-    //             `http://localhost:8080/favoritos/${id}`,
+    //             `http://localhost:8080/favoritos/${data}`,
     //             settings,
     //         );
     //         if (!res.ok) {
     //             const errorData = await res.json();
     //             console.error('Error al intentar cambiar el rol:', errorData);
-
     //             throw new Error('Error al cambiar el rol');
     //         }
+
+    //         // Captura los datos de respuesta si el servidor devuelve alguna información
+    //         const responseData = await res.json();
+    //         console.log(
+    //             'Datos devueltos por la solicitud DELETE:',
+    //             responseData,
+    //         );
+
     //         // revalidator.revalidate();
     //     } catch (error) {
     //         console.log('Error inesperado:', error);

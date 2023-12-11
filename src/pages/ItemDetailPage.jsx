@@ -73,13 +73,13 @@ const ItemDetailPage = () => {
                                 <span>Precio por Dia: </span>
                                 <span>${data.precioPorHora}</span>
                             </p>
-                            <FaRegHeart
+                            {/* <FaRegHeart
                                 onClick={handleClick}
                                 className={`text-3xl md:text-5xl ${
                                     isFavorite &&
                                     'bg-deep-orange-800 text-white rounded-lg p-1 '
                                 }`}
-                            />
+                            /> */}
                             {data.stock > 1 && (
                                 <p className="text-sm font-semibold">
                                     Cantidad: {data.stock}
