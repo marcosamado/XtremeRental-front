@@ -104,7 +104,7 @@ export const ProductCard = ({
                         </button>
                     </Link>
                 ) : (
-                    <LoginRequireModal />
+                    <LoginRequireModal text="reservar" />
                 )}
             </div>
         </div>

@@ -7,7 +7,7 @@ import {
     DialogFooter,
 } from '@material-tailwind/react';
 
-export function AddedToCartModal() {
+export function AddedToCartModal({ isValid }) {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => setOpen(!open);
@@ -15,7 +15,7 @@ export function AddedToCartModal() {
     return (
         <>
             <Button
-                onClick={handleOpen}
+                {...(isValid && `onClick=${handleOpen}`)}
                 type="submit"
                 className=" h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md text-center"
             >

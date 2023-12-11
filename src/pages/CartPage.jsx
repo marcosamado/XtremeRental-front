@@ -31,13 +31,17 @@ const CartPage = () => {
                             Total a pagar: ${precioTotal}
                         </h1>
                         <ConfirmReserveModal
+                            setReserves={setReserves}
                             precioTotal={precioTotal}
                             reserves={reserves}
                         />
                     </div>
                 </div>
             ) : (
-                <h2>Tu carrito esta vacio</h2>
+                <h2 className=" m-4 text-lg">
+                    Tu carrito esta vacio. Agrega productos para realizar una
+                    reserva.
+                </h2>
             )}
         </div>
     );

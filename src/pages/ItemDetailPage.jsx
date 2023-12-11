@@ -9,14 +9,16 @@ import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
 import { AddedToCartModal } from '../components/products/AddedToCartModal';
+import { LoginRequireModal } from '../components/products/LoginRequireModal';
 const ItemDetailPage = () => {
     const { data } = useLoaderData();
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const navigation = useNavigation();
     const navigate = useNavigate();
 
     if (navigation.state === 'loading') return <p>Cargado...</p>;
 
+    const [isValid, setIsValid] = useState(false);
     const [currentPicture, setCurrentPicture] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const [bookingDate, setBookingDate] = useState({
@@ -67,6 +69,8 @@ const ItemDetailPage = () => {
                 cantidad: 1,
             };
 
+            setIsValid(false);
+
             let arrayReservas =
                 JSON.parse(localStorage.getItem('reserves')) || [];
 
@@ -82,6 +86,8 @@ const ItemDetailPage = () => {
 
             localStorage.setItem('reserves', JSON.stringify(arrayReservas));
             setReserve(datosReserva);
+        } else {
+            setIsValid(true);
         }
     };
 
@@ -182,10 +188,14 @@ const ItemDetailPage = () => {
                                     value={endDate}
                                 />
                                 <div className="flex flex-col gap-2 mt-5 md:mt-10 md:justify-center md:items-center">
-                                    <AddedToCartModal />
-                                    {/* <button className="md:w-28 h-8 bg-teal-300 text-xs text-white px-2 py-1 rounded-md">
-                                        Agregar al carrito
-                                    </button> */}
+                                    {user ? (
+                                        <AddedToCartModal isValid={isValid} />
+                                    ) : (
+                                        <LoginRequireModal text="agregar" />
+                                    )}
+                                    {isValid && (
+                                        <p>Debes seleccionar fechas validas</p>
+                                    )}
                                 </div>
                             </form>
                         </div>

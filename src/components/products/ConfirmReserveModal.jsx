@@ -9,7 +9,7 @@ import {
 import { ReserveProductCard } from './ReserveProductCard';
 import { UserContext } from '../../context/UserContext';
 
-export function ConfirmReserveModal({ reserves, precioTotal }) {
+export function ConfirmReserveModal({ reserves, precioTotal, setReserves }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
     // const { datosUser } = useContext(UserContext);
@@ -45,6 +45,9 @@ export function ConfirmReserveModal({ reserves, precioTotal }) {
             }
             const data = await res.json();
             console.log(data);
+            alert('Tu reserva se ha realizado con exito');
+            localStorage.removeItem('reserves');
+            setReserves([]);
         } catch (error) {
             throw new Error('Error al reservar');
         }

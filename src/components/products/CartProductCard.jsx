@@ -22,7 +22,7 @@ export const CartProductCard = ({
             reservas.splice(indiceElementoAEliminar, 1);
         }
         localStorage.setItem('reserves', JSON.stringify(reservas));
-        setReserves(JSON.parse(localStorage.getItem('reserves')));
+        setReserves(reservas);
     };
 
     return (
